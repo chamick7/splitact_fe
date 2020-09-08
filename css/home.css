@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap');
+
+
+
+.home-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.home-calendar-container{
+    font-family: 'Prompt', sans-serif;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 500px;
+    color: #666666;
+}
+
+
+.calendar-container-left{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    justify-content: center;
+    align-items: center;
+}
+.calendar-container-left h1{
+    font-size: 2rem;
+
+}
+.calendar-container-left img{
+    width: 400px;
+    max-width: 85vw;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
+}
+
+.calendar-container-right{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-container-right h1{
+    font-size: 2.4rem;
+}
+.calendar-container-right h1 span:nth-child(1){
+    color: #644CC6;
+}
+.calendar-container-right h1 span:nth-child(2){
+    color: #FF672B;
+}
+.home-email-input {
+    width: 80%;
+    margin-top: 20px;
+}
+.home-email-input span{
+    font-weight: 700;
+}
+.home-email-input input{
+    font-family: 'Prompt', sans-serif;
+
+
+    border: none;
+    background: none;
+    background-color: #EDF2F7;
+    border-bottom: 1px solid #644CC6;
+    padding: 3px 15px;
+    outline: none;
+    border-radius: 5px 5px 0px 0px;
+    font-size: 1.2rem;
+    margin: 5px 15px;
+    width: 60%;
+}
+.home-email-input button{
+    font-family: 'Inter', sans-serif;
+
+    background: none;
+    padding: 10px 15px;
+    border: none;
+    background-color: #644CC6;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: .5s;
+}
+.home-email-input button:hover{
+    background-color: #8a6ef8;
+
+}
+
+
+@media only screen and (max-width:800px){
+    .calendar-container-left{
+        width: 100vw;
+    }
+    .calendar-container-right{
+        width: 100vw;
+        margin: 20px ;
+    }
+    .calendar-container-left h1{
+        font-size: 1.6rem;
+    }
+    .calendar-container-right h1{
+        font-size: 1.6rem;
+    }
+    .home-email-input {
+        width: 90%;
+    }
+    .home-email-input input{
+        width: 100%;
+        margin: 0;
+    }
+    .home-email-input button{    
+        font-size: 0.8rem;
+        padding: 10px 5px;
+        margin-top: 10px;
+    }
+
+    
+}
