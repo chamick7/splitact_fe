@@ -5,11 +5,10 @@ import Head from "next/head";
 //import css
 import "../css/login.css";
 import "../css/navbar.css";
-import "../css/dropdown.css";
 import "../css/register.css";
-import "../css/home.css";
 
 {/* */}
+
 
 
 import Navbar from "../Components/Navbar";

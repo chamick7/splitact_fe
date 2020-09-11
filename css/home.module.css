@@ -2,12 +2,12 @@
 
 
 
-.home-body{
+.home_body{
     display: flex;
     flex-direction: column;
 }
 
-.home-calendar-container{
+.home_calendar_container{
     font-family: 'Prompt', sans-serif;
     display: flex;
     flex-direction: row;
@@ -17,18 +17,18 @@
 }
 
 
-.calendar-container-left{
+.calendar_container_left{
     display: flex;
     flex-direction: column;
     width: 45%;
     justify-content: center;
     align-items: center;
 }
-.calendar-container-left h1{
+.calendar_container_left h1{
     font-size: 2rem;
 
 }
-.calendar-container-left img{
+.calendar_container_left img{
     width: 400px;
     max-width: 85vw;
     margin-top: 10px;
@@ -36,7 +36,7 @@
     box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
 }
 
-.calendar-container-right{
+.calendar_container_right{
     width: 55%;
     display: flex;
     flex-direction: column;
@@ -44,23 +44,23 @@
     align-items: center;
 }
 
-.calendar-container-right h1{
+.calendar_container_right h1{
     font-size: 2.4rem;
 }
-.calendar-container-right h1 span:nth-child(1){
+.calendar_container_right h1 span:nth-child(1){
     color: #644CC6;
 }
-.calendar-container-right h1 span:nth-child(2){
+.calendar_container_right h1 span:nth-child(2){
     color: #FF672B;
 }
-.home-email-input {
+.home_email_input {
     width: 80%;
     margin-top: 20px;
 }
-.home-email-input span{
+.home_email_input span{
     font-weight: 700;
 }
-.home-email-input input{
+.home_email_input input{
     font-family: 'Prompt', sans-serif;
 
 
@@ -75,7 +75,7 @@
     margin: 5px 15px;
     width: 60%;
 }
-.home-email-input button{
+.home_email_input button{
     font-family: 'Inter', sans-serif;
 
     background: none;
@@ -87,34 +87,34 @@
     cursor: pointer;
     transition: .5s;
 }
-.home-email-input button:hover{
+.home_email_input button:hover{
     background-color: #8a6ef8;
 
 }
 
 
 @media only screen and (max-width:800px){
-    .calendar-container-left{
+    .calendar_container_left{
         width: 100vw;
     }
-    .calendar-container-right{
+    .calendar_container_right{
         width: 100vw;
         margin: 20px ;
     }
-    .calendar-container-left h1{
+    .calendar_container_left h1{
         font-size: 1.6rem;
     }
-    .calendar-container-right h1{
+    .calendar_container_right h1{
         font-size: 1.6rem;
     }
-    .home-email-input {
+    .home_email_input {
         width: 90%;
     }
-    .home-email-input input{
+    .home_email_input input{
         width: 100%;
         margin: 0;
     }
-    .home-email-input button{    
+    .home_email_input button{    
         font-size: 0.8rem;
         padding: 10px 5px;
         margin-top: 10px;

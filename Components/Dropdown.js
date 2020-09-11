@@ -8,6 +8,9 @@ import { accountAtom } from "../atom";
 import Cookies from "js-cookies";
 import { useRecoilState } from "recoil";
 
+import styles from "../css/dropdown.module.css";
+
+
 export default function Dropdown() {
   const node = useRef();
   const [account, setAccount] = useRecoilState(accountAtom);
@@ -17,12 +20,11 @@ export default function Dropdown() {
   const handleLogout = () => {
     Cookies.removeItem("token");
     setAccount({});
-    localStorage.removeItem("recoil-persist");
   };
 
   function DropItem(props) {
     return (
-      <li className={"dropitem " + props.class}>
+      <li className={styles.dropitem+" "+props.class}>
         <Link href={props.to}>
           <a>
             {" "}
@@ -35,15 +37,15 @@ export default function Dropdown() {
 
   function DropdownMenu() {
     return (
-      <div className="dropdown">
-        <ul className="dropmenu">
+      <div className={styles.dropdown}>
+        <ul className={styles.dropmenu}>
           {account.name ? (
             //not Login
             <>
-              <li className={"dropitem logout-dropitem"} onClick={handleLogout}>
+              <li className={styles.dropitem,styles.logout_dropitem} onClick={handleLogout}>
                 {" "}
                 <FontAwesomeIcon
-                  className="logout-icon"
+                  className={styles.logout_icon}
                   icon={faPowerOff}
                 />{" "}
                 Logout
@@ -53,13 +55,13 @@ export default function Dropdown() {
             //logined
             <>
               <DropItem
-                class="login-dropitem"
+                class={styles.login_dropitem}
                 to="/login"
                 word="Login"
                 icon={faSignInAlt}
               />
               <DropItem
-                class="register-dropitem"
+                class={styles.register_dropitem}
                 to="/register"
                 word="Register"
                 icon={faAddressBook}
@@ -93,10 +95,10 @@ export default function Dropdown() {
   }, [open]);
 
   return (
-    <button ref={node} className="btn-nav" onClick={(e) => setOpen(!open)}>
-      <FontAwesomeIcon className="nav-icon1" icon={faUserAlt} />
+    <button ref={node} className={styles.btn_nav} onClick={(e) => setOpen(!open)}>
+      <FontAwesomeIcon className={styles.nav_icon1} icon={faUserAlt} />
       <span>{account.name ? account.name : "Member"}</span>
-      <FontAwesomeIcon className="nav-icon2" icon={faCaretDown} />
+      <FontAwesomeIcon className={styles.nav_icon2} icon={faCaretDown} />
 
       {open && <DropdownMenu />}
     </button>
