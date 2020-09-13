@@ -3,12 +3,9 @@ import Link from "next/link"
 
 import styles from "../css/home.module.css";
 
-export const getServerSideProps = async () => {
+// export const getServerSideProps = async () => {
   
-
-
-  
-}
+// }
 
 export default function Home({}) {
   
