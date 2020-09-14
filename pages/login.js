@@ -84,7 +84,7 @@ export default function login() {
             {errors.password && <h6 className="err_msg">This is Required</h6>}
   
             <button className="login-submit-btn">Sign in</button>
-  
+              <h4 className="resetpw">forgot password? <Link href="/resetpassword" ><a>click here</a></Link> </h4>
             <h6 className="middle-line">
               <span>or</span>
             </h6>

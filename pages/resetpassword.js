@@ -15,8 +15,8 @@ export default function resetpassword() {
     return (
         <div className={styles.reset_body} > 
             <div className={styles.header} >
-                <h1 className={styles.h1} >Forgot Password ?</h1>
-                <h3 className={styles.h3} >just <span>reset</span> it.</h3>
+                <p className={styles.h1} >Forgot Password ?</p>
+                <p className={styles.h3} >just <span>reset</span> it.</p>
             </div>
             <span className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)} >
@@ -24,6 +24,7 @@ export default function resetpassword() {
                     <input type="submit" value="Reset Password"/>
                 </form>
             </span>
+            <img src="/img/resetpassword.png" className={styles.img}/>
             <Footer_min />
         </div>
     )

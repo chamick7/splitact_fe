@@ -50,6 +50,7 @@
 }
 
 .login-form h1{
+    text-align: center;
     font-family: 'Inter', sans-serif;
     font-weight: 800;
     color: #666666;
@@ -114,6 +115,8 @@
 
 }
 
+
+
 button:focus{
     outline: none;
 }
@@ -150,6 +153,15 @@ button:focus{
      padding:0 10px; 
      color: #666666;
  }
+
+ .resetpw {
+     font-weight: 600;
+     color: rgba(0, 0, 0, 0.5);
+ }
+ .resetpw a{
+    color: #001A7A;
+
+}
 
 .err_msg{
     align-self: start;
