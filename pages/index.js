@@ -29,6 +29,24 @@ export default function Home({}) {
         </section>
       </div>
 
+      <div className={styles.bottom_calender}>
+        <section className={styles.bottom_calender_left} >
+          <button ><h3>What's Split</h3><span>ACT ?</span></button>
+        </section>
+        <section className={styles.bottom_calender_right}>
+          <button ><h3>Feature in Split</h3><span>ACT</span></button>
+        </section>
+      </div>
+
+      <div className={styles.recommend_container}>
+        <section className={styles.recommend_container_left}>
+            <h1>1111</h1>
+        </section>
+        <section className={styles.recommend_container_right}>
+            <h1>1111</h1>
+        </section>
+      </div>
+
     </div>
   )
 }
