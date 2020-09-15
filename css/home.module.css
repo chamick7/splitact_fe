@@ -92,7 +92,7 @@
 
 }
 
-
+/* ปุ่มด้านล่างหน้าโฮม */
 .bottom_calender{
     
     display: flex;
@@ -101,9 +101,6 @@
     align-items: center;
     height: 100px;
     
-    
-    
-
 }
 
 .bottom_calender_left button{
@@ -117,7 +114,8 @@
     border-radius: 5px;
 
     align-items: center;
-    
+    cursor: pointer;
+    transition: .5s;
 }
 
 .bottom_calender_left button:hover{
@@ -145,6 +143,8 @@
     border-radius: 5px;
 
     align-items: center;
+    cursor: pointer;
+    transition: .5s;
 }
 
 .bottom_calender_right button:hover{
@@ -163,32 +163,108 @@
     font-size: 16px;
 }
 
+/* หน้าล่างหน้าแรก */
 .recommend_container{
     margin-top: 10vh;
     font-family: 'Prompt', sans-serif;
     display: flex;
     flex-direction: row;
     height: 800px;
-    padding: 12vh 0px 6vh 0px;
+    padding: 18vh 0px 12vh 0px;
 }
 
 .recommend_container_left{
+    /* margin-left: 4vw; */
     display: flex;
-    width: 45%;
+    width: 60%;
     justify-content: center;
     align-items: center;
     background: #644CC6;
 }
 
 .recommend_container_right{
+    margin-left: 3vw;
     display: flex;
+    flex-direction: column;
+    
+    width: 65%;
+    justify-content: center;
+    align-items: left;
+
+}
+
+.recommend_container_right h1{
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    color: #8F8F8F;
+}
+
+.recommend_container_right h1:nth-of-type(2){
+    margin-left: 2vw;
+}
+
+
+.recommend_container_right span{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    margin-right: 0vw;
+}
+
+/* หน้าล่างหน้าสอง */
+.recommend_container_two_left{
+    margin-left: 3vw;
+    display: flex;
+    flex-direction: column;
     width: 65%;
     justify-content: center;
     align-items: center;
 
 }
 
+.recommend_container_two_left h1{
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    color: #8F8F8F;   
+}
 
+.recommend_container_two_left h1:first-child{
+    margin-right: 16vw;
+}
+
+.recommend_container_two_left h1:last-child{
+    margin-right: 8vw;
+}
+
+
+
+
+.recommend_container_two_left span{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.recommend_container_two_right{
+    /* margin-left: 4vw; */
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    background:#FF672B;
+}
+
+.endpage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 800px;
+    padding-left: 5vw;
+}
+
+.endpage img{
+    padding: 4vw;
+    max-width: 800px;
+}
 
 
 
