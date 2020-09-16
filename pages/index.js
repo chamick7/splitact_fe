@@ -44,19 +44,21 @@ export default function Home({}) {
         </section>
         <section className={styles.recommend_container_right}>
           <h1><span>Spilt ACT,</span>work with your team just got easier. </h1> 
-          <h1>By dividing work for each person and monitoring the work and</h1>
-          <h1> showing the progess of each part that the team members are responsible</h1>
+          <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          By dividing work for each person and monitoring the work and
+           showing the progess of each part that the team members are responsible</h1>
         </section>
       </div>
       
-      <div className={styles.recommend_container}>
+      <div className={styles.recommend_container_two}>
         <section className={styles.recommend_container_two_left}>
         <h1>use <span>'filter'</span> to categorize and prioritize you.</h1>
-        <h1>You can categorize tasks. And organize the sequence of </h1>
-        <h1>tasks that must be performed according to the needs</h1>
+        <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        You can categorize tasks. And organize the sequence of
+        tasks that must be performed according to the needs</h1>
         </section>
         <section className={styles.recommend_container_two_right}>
-
+          <img src="/img/calendar-preview.PNG" alt=""/>
         </section>
       </div>
 

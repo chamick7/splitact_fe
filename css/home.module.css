@@ -56,6 +56,7 @@
 .home_email_input {
     width: 80%;
     margin-top: 20px;
+    text-align: center;
 }
 .home_email_input span{
     font-weight: 700;
@@ -92,9 +93,9 @@
 
 }
 
+
 /* ปุ่มด้านล่างหน้าโฮม */
 .bottom_calender{
-    
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -102,7 +103,6 @@
     height: 100px;
     
 }
-
 .bottom_calender_left button{
     display: flex;
     flex-direction: row;
@@ -112,26 +112,23 @@
     padding: 10px 35px;
     border: none;
     border-radius: 5px;
-
     align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: .5s;
+    width: 220px;
 }
-
 .bottom_calender_left button:hover{
     background-color: #8a6ef8;
 }
-
 .bottom_calender_left h3 {
     font-weight: 1;
 }
-
 .bottom_calender_left span{
     margin-left: 5px;
     font-weight: 900;
     font-size: 16px;
 }
-
 .bottom_calender_right button{
     display: flex;
     flex-direction: row;
@@ -141,28 +138,25 @@
     padding: 10px 35px;
     border: none;
     border-radius: 5px;
-
+    justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: .5s;
+    width: 220px;
 }
-
 .bottom_calender_right button:hover{
     background-color:  #fc9a74; 
     /* มิวมั่วสี */
 }
-
 .bottom_calender_right h3 {
     font-weight: 1;
 
 }
-
 .bottom_calender_right span{
     margin-left: 5px;
     font-weight: 900;
     font-size: 16px;
 }
-
 /* หน้าล่างหน้าแรก */
 .recommend_container{
     margin-top: 10vh;
@@ -172,7 +166,6 @@
     height: 800px;
     padding: 18vh 0px 12vh 0px;
 }
-
 .recommend_container_left{
     /* margin-left: 4vw; */
     display: flex;
@@ -183,66 +176,51 @@
 }
 
 .recommend_container_right{
-    margin-left: 3vw;
+    margin-left: 2vw;
+    
     display: flex;
     flex-direction: column;
-    
     width: 65%;
     justify-content: center;
     align-items: left;
-
 }
-
 .recommend_container_right h1{
     font-family: 'Inter', sans-serif;
     font-weight: 100;
     color: #8F8F8F;
 }
-
-.recommend_container_right h1:nth-of-type(2){
-    margin-left: 2vw;
-}
-
-
 .recommend_container_right span{
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     margin-right: 0vw;
 }
-
 /* หน้าล่างหน้าสอง */
+.recommend_container_two{
+    margin-top: 10vh;
+    font-family: 'Prompt', sans-serif;
+    display: flex;
+    flex-direction: row;
+    height: 800px;
+    padding: 18vh 0px 12vh 0px;
+}
 .recommend_container_two_left{
-    margin-left: 3vw;
+    margin-left: 2vw;
+    
     display: flex;
     flex-direction: column;
     width: 65%;
     justify-content: center;
-    align-items: center;
-
+    align-items: left;
 }
-
 .recommend_container_two_left h1{
     font-family: 'Inter', sans-serif;
     font-weight: 100;
     color: #8F8F8F;   
 }
-
-.recommend_container_two_left h1:first-child{
-    margin-right: 16vw;
-}
-
-.recommend_container_two_left h1:last-child{
-    margin-right: 8vw;
-}
-
-
-
-
 .recommend_container_two_left span{
     font-family: 'Inter', sans-serif;
     font-weight: 700;
 }
-
 .recommend_container_two_right{
     /* margin-left: 4vw; */
     display: flex;
@@ -251,7 +229,6 @@
     align-items: center;
     background:#FF672B;
 }
-
 .endpage{
     display: flex;
     flex-direction: column;
@@ -260,14 +237,10 @@
     height: 800px;
     padding-left: 5vw;
 }
-
 .endpage img{
     padding: 4vw;
     max-width: 800px;
 }
-
-
-
 
 
 @media only screen and (max-width:800px){
@@ -291,13 +264,62 @@
         width: 100%;
         margin: 0;
     }
-    .home_email_input button{    
+    .home_email_input button{
         font-size: 0.8rem;
         padding: 10px 5px;
         margin-top: 10px;
     }
 
-
-
-    
+    .bottom_calender_left button{
+        width: 200px;
+        padding: 10px 30px;
+        font-size: 12px;
+    }
+    .bottom_calender_right button{
+        width: 200px;
+        padding: 10px 30px;
+        font-size: 12px;
+    }
+    .recommend_container{
+        flex-direction: column;
+        height: 600px;
+        padding-top: 12vh;
+        margin: 0px;
+    }
+    .recommend_container_left{
+        width: 100%;
+    }
+    .recommend_container_left img{
+        width: 80%;
+    }
+    .recommend_container_right{
+        width: 100%;
+        margin-top: 0px;
+        padding: 30px;
+        font-size: 10px;
+    }
+    .recommend_container_two{
+        flex-direction: column-reverse;
+        height: 600px;
+        padding-top: 12vh;
+        margin: 0px;
+    }
+    .recommend_container_two_right{
+        width: 100%;
+    }
+    .recommend_container_two_right img{
+        width: 80%;
+    }
+    .recommend_container_two_left{
+        width: 100%;
+        margin-top: 0px;
+        padding: 30px;
+        font-size: 10px;
+    }
+    .endpage{
+        padding-left: 0px;
+    }
+    .endpage img{
+        max-width: 600px;
+    }
 }
