@@ -4,6 +4,15 @@
     margin: 0;
     padding: 0;
 }
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: #FF672B;
+  }
+  
+  ::selection {
+    color: white;
+    background: #FF672B;
+  }
 
 .login{
     display: flex;

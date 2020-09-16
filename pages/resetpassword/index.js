@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Footer_min from "../Components/Footer_min";
+import Footer_min from "../../Components/Footer_min";
 import { useForm } from "react-hook-form";
 
-import styles from "../css/resetpassword.module.css";
+import styles from "../../css/resetpassword.module.css";
 
 export default function resetpassword() {
     const { register,handleSubmit } = useForm();
