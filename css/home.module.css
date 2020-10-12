@@ -163,8 +163,8 @@
     font-family: 'Prompt', sans-serif;
     display: flex;
     flex-direction: row;
-    height: 800px;
-    padding: 18vh 0px 12vh 0px;
+    height: 600px;
+    /* padding: 18vh 0px 0vh 0px; */
 }
 .recommend_container_left{
     /* margin-left: 4vw; */
@@ -196,12 +196,12 @@
 }
 /* หน้าล่างหน้าสอง */
 .recommend_container_two{
-    margin-top: 10vh;
+    /* margin-top: 10vh; */
     font-family: 'Prompt', sans-serif;
     display: flex;
     flex-direction: row;
-    height: 800px;
-    padding: 18vh 0px 12vh 0px;
+    height: 600px;
+    /* padding: 18vh 0px 12vh 0px; */
 }
 .recommend_container_two_left{
     margin-left: 2vw;
@@ -243,7 +243,7 @@
 }
 
 
-@media only screen and (max-width:800px){
+@media only screen and (max-width:480px){
     .calendar_container_left{
         width: 100vw;
     }
@@ -282,11 +282,14 @@
     }
     .recommend_container{
         flex-direction: column;
-        height: 600px;
-        padding-top: 12vh;
+        height: 300px;
+        /* padding-top: 12vh; */
         margin: 0px;
+        padding: 0vw 3vw 0vw 3vw;
     }
     .recommend_container_left{
+        margin-top: 10vh;
+        
         width: 100%;
     }
     .recommend_container_left img{
@@ -294,15 +297,16 @@
     }
     .recommend_container_right{
         width: 100%;
-        margin-top: 0px;
-        padding: 30px;
+        margin-top: 10px;
+        /* padding: 30px; */
         font-size: 10px;
     }
     .recommend_container_two{
         flex-direction: column-reverse;
-        height: 600px;
-        padding-top: 12vh;
+        height: 400px;
+        /* padding-top: 12vh; */
         margin: 0px;
+        padding: 0vw 3vw 0vw 3vw;
     }
     .recommend_container_two_right{
         width: 100%;
@@ -312,8 +316,93 @@
     }
     .recommend_container_two_left{
         width: 100%;
-        margin-top: 0px;
-        padding: 30px;
+        margin-top: 10px;
+        /* padding: 30px; */
+        font-size: 10px;
+    }
+    .endpage{
+        padding-left: 0px;
+    }
+    .endpage img{
+        max-width: 600px;
+    }
+}
+
+@media only screen and (max-width:1024px) and (min-width:480px){
+    .calendar_container_left{
+        width: 100vw;
+    }
+    .calendar_container_right{
+        width: 100vw;
+        margin: 20px ;
+    }
+    .calendar_container_left h1{
+        font-size: 1.6rem;
+    }
+    .calendar_container_right h1{
+        font-size: 1.6rem;
+    }
+    .home_email_input {
+        width: 90%;
+    }
+    .home_email_input input{
+        width: 100%;
+        margin: 0;
+    }
+    .home_email_input button{
+        font-size: 0.8rem;
+        padding: 10px 5px;
+        margin-top: 10px;
+    }
+
+    .bottom_calender_left button{
+        width: 200px;
+        padding: 10px 30px;
+        font-size: 12px;
+    }
+    .bottom_calender_right button{
+        width: 200px;
+        padding: 10px 30px;
+        font-size: 12px;
+    }
+    .recommend_container{
+        flex-direction: column;
+        height: 500px;
+        /* padding-top: 12vh; */
+        margin: 0px;
+        padding: 0vw 3vw 0vw 3vw;
+    }
+    .recommend_container_left{
+        margin-top: 10vh;
+        
+        width: 100%;
+    }
+    .recommend_container_left img{
+        width: 80%;
+    }
+    .recommend_container_right{
+        width: 100%;
+        margin-top: 10px;
+        /* padding: 30px; */
+        font-size: 10px;
+    }
+    .recommend_container_two{
+        flex-direction: column-reverse;
+        height: 500px;
+        /* padding-top: 12vh; */
+        margin: 0px;
+        padding: 0vw 3vw 0vw 3vw;
+    }
+    .recommend_container_two_right{
+        width: 100%;
+    }
+    .recommend_container_two_right img{
+        width: 80%;
+    }
+    .recommend_container_two_left{
+        width: 100%;
+        margin-top: 10px;
+        /* padding: 30px; */
         font-size: 10px;
     }
     .endpage{
