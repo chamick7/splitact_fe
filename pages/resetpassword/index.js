@@ -1,15 +1,30 @@
 import React from 'react';
 
 import Footer_min from "../../Components/Footer_min";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import getAxios from "../../utils/axios";
 
 import styles from "../../css/resetpassword.module.css";
 
 export default function resetpassword() {
     const { register,handleSubmit } = useForm();
+    const axios = getAxios();
+    const router = useRouter();
+
+
+    const sendMail = (email) => {
+        axios.post('/account/reset',email).then(res => {
+            if(res.data.status === 'Success'){
+                router.push({path: '/resetpassword/success'});
+            }
+        }).catch(err => {
+            console.log(err.response);
+        });
+    }
 
     const onSubmit = (data) => {
-        console.log(data.email);
+        sendMail(data.email)
     }
 
     return (

@@ -1,5 +1,6 @@
 import React,{ useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -8,13 +9,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from "react-google-login";
 import { useForm } from "react-hook-form";
+import getAxios from "../utils/axios";
 
 export default function Register() {
   const { handleSubmit, register, errors, watch } = useForm();
-  const responseGoogle = () => {};
+  const axios = getAxios();
+  const router = useRouter();
 
+
+
+  const responseGoogle = () => {};
+  
   const onSubmit = (account) => {
-    console.log(account);
+    axios.post('/account',account).then(res => {
+      if(res.data.status === 'Success'){
+        router.push({ path: '/login' });
+      }
+    }).catch(err => {
+      console.log(err.response);
+    })
   };
 
   useEffect(() => {

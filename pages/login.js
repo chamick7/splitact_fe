@@ -7,14 +7,14 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import { useRecoilState } from "recoil";
 import {accountAtom} from "../atom";
-import Axios from 'axios';
-import Cookies from "js-cookies";
+import getAxios from "../utils/axios";
 
 export default function login() {
   const router = useRouter();
   const {handleSubmit,register,errors} = useForm();
   const [Err, setErr] = React.useState("");
   const [account, setAccount] = useRecoilState(accountAtom);
+  const axios = getAxios();
 
 
 
@@ -24,19 +24,15 @@ export default function login() {
     const getLogin = async (ac) =>{
       console.log('login');
 
-      await Axios.post('http://localhost:5000/account/login',ac).then(
+      await axios.post('/account/login',ac).then(
         res => {
           setAccount({
             email:res.data.account.email,
-            name:res.data.account.firstName+" "+res.data.account.lastName,
+            name:res.data.account.name,
             role:res.data.account.role,
           });
-          Cookies.setItem('token',res.data.token);
-          console.log(account);
 
           router.push('/dashboard');
-
-          
         }).catch(err=>{
           console.log(err.response);
           setErr('Email or password is incorrect');
