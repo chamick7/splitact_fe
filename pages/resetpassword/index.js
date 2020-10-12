@@ -16,7 +16,7 @@ export default function resetpassword() {
     const sendMail = (email) => {
         axios.post('/account/reset',email).then(res => {
             if(res.data.status === 'Success'){
-                router.push({path: '/resetpassword/success'});
+                router.push({pathname: '/resetpassword/success',query:{email:email}});
             }
         }).catch(err => {
             console.log(err.response);

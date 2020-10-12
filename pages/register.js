@@ -23,7 +23,7 @@ export default function Register() {
   const onSubmit = (account) => {
     axios.post('/account',account).then(res => {
       if(res.data.status === 'Success'){
-        router.push({ path: '/login' });
+        router.push({ pathname: '/login' });
       }
     }).catch(err => {
       console.log(err.response);
