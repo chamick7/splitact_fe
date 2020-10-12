@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from "react-google-login";
@@ -18,11 +18,13 @@ export default function login() {
 
 
 
-    const responseSuccessGoogle = () => {};
+    const responseSuccessGoogle = (res) => {
+      const profile = res.profileObj;
+      console.log(profile);
+    };
     const responseFailGoogle = () => {};
 
     const getLogin = async (ac) =>{
-      console.log('login');
 
       await axios.post('/account/login',ac).then(
         res => {
@@ -84,9 +86,8 @@ export default function login() {
             <h6 className="middle-line">
               <span>or</span>
             </h6>
-  
             <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT}
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
               render={(renderProps) => (
                 <button
                   className="google-btn"
