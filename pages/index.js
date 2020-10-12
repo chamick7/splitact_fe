@@ -1,5 +1,6 @@
 
 import Link from "next/link"
+import Head from "next/head"
 
 import styles from "../css/home.module.css";
 
@@ -12,6 +13,9 @@ export default function Home({}) {
 
   return (
     <div className={styles.home_body}>
+      <Head>
+        <meta name="google-site-verification" content="EdI8bmn8nr0vMGx3aBe3KAu3P-tFFwI2IUoy76huzks" />
+      </Head>
       <div className={styles.home_calendar_container}>
         <section className={styles.calendar_container_left} >
           <section>
