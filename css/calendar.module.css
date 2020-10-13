@@ -1,0 +1,21 @@
+
+
+
+
+.carlendar{
+    display: flex;
+}
+
+.eventWrapper{
+    font-family: 'Prompt', sans-serif;
+    color: white;
+    /* background-color: #FF672B; */
+    border-radius: 3px;
+    margin: 3px 2px;
+    padding: 3px;
+}
+.event {
+    outline: none;
+    background-color: blue;
+    color: white;
+}

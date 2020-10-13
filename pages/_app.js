@@ -6,6 +6,7 @@ import Head from "next/head";
 import "../css/login.css";
 import "../css/navbar.css";
 import "../css/register.css";
+import "../css/global.css";
 
 {/* */}
 
