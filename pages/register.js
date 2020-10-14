@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React,{ useEffect,useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,14 +13,21 @@ import getAxios from "../utils/axios";
 
 export default function Register() {
   const { handleSubmit, register, errors, watch } = useForm();
-  const axios = getAxios();
   const router = useRouter();
+  const [email, setEmail] = useState(router.query.email);
+  const axios = getAxios();
 
+
+  
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  }
 
 
   const responseGoogle = () => {};
   
   const onSubmit = (account) => {
+    console.log(account);
     axios.post('/account',account).then(res => {
       if(res.data.status === 'Success'){
         router.push({ pathname: '/login' });
@@ -61,6 +68,8 @@ export default function Register() {
               name="email"
               type="email"
               placeholder="Email"
+              value={email || ''}
+              onChange={handleChangeEmail}
               ref={register({
                 required: "Required",
               })}

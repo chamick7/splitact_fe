@@ -3,12 +3,28 @@ import Link from "next/link"
 import Head from "next/head"
 
 import styles from "../css/home.module.css";
+import { useRouter } from "next/router";
 
 // export const getServerSideProps = async () => {
   
 // }
 
 export default function Home({}) {
+  const router = useRouter();
+
+
+  const handleEmail = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    console.log(email);
+
+    router.push({
+      pathname:"/register",
+      query:{
+        email:email,
+      }
+    })
+  }
   
 
   return (
@@ -25,11 +41,12 @@ export default function Home({}) {
         </section>
         <section className={styles.calendar_container_right} >
           <h1>Welcome to Split <span>A</span><span>C</span><span>T.</span></h1>
-          <label className={styles.home_email_input} htmlFor="email">
+
+          <form className={styles.home_email_input}  onSubmit={handleEmail} htmlFor="email">
             {/* <span>Get start</span> */}
             <input type="email" name="email" placeholder="E-mail" />
-            <button>Free - Register</button>
-          </label>
+            <button type="submit" >Free - Register</button>
+          </form>
         </section>
       </div>
 
@@ -69,11 +86,11 @@ export default function Home({}) {
       <div className={styles.endpage}>
       <section className={styles.calendar_container_right} >
           <h1>Join to Split <span>A</span><span>C</span><span>T.</span></h1>
-          <label className={styles.home_email_input} htmlFor="email">
+          <form className={styles.home_email_input} onSubmit={handleEmail} htmlFor="email">
             {/* <span>Get start</span> */}
             <input type="email" name="email" placeholder="E-mail" />
-            <button>Free - Register</button>
-          </label>        
+            <button type="submit" >Free - Register</button>
+          </form>        
       </section>
       <img src="/img/join.png" alt="" />
       </div>
