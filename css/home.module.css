@@ -238,8 +238,9 @@
     padding-left: 5vw;
 }
 .endpage img{
+    margin-top: 30px;
     padding: 4vw;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 
@@ -271,14 +272,14 @@
     }
 
     .bottom_calender_left button{
-        width: 200px;
+        width: 185px;
         padding: 10px 30px;
-        font-size: 12px;
+        font-size: 10px;
     }
     .bottom_calender_right button{
-        width: 200px;
+        width: 185px;
         padding: 10px 30px;
-        font-size: 12px;
+        font-size: 10px;
     }
     .recommend_container{
         flex-direction: column;
@@ -324,7 +325,7 @@
         padding-left: 0px;
     }
     .endpage img{
-        max-width: 600px;
+        max-width: 360px;
     }
 }
 
