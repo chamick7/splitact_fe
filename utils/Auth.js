@@ -1,9 +1,10 @@
-
-
 export const requirePageAuth = (res) => {
+  const isLogined = true;
 
-    
-    // res.writeHead(302, {Location: '/login'})
-    // res.end()
-    
-}
+  if (!isLogined) {
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
+
+  return;
+};

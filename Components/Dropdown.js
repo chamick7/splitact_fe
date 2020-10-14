@@ -24,7 +24,7 @@ export default function Dropdown() {
 
   function DropItem(props) {
     return (
-      <li className={styles.dropitem+" "+props.class}>
+      <li className={styles.dropitem+" "+props.class} onClick={(e) => {setOpen(false)}} >
         <Link href={props.to}>
           <a>
             {" "}
@@ -35,6 +35,7 @@ export default function Dropdown() {
     );
   }
 
+  
   function DropdownMenu() {
     return (
       <div className={styles.dropdown}>
@@ -76,6 +77,7 @@ export default function Dropdown() {
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       // inside click
+      console.log('click');
       return;
     }
     // outside click
@@ -83,23 +85,21 @@ export default function Dropdown() {
   };
 
   useEffect(() => {
-    if (open) {
+    
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
+      
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [open]);
+  }, []);
 
   return (
-    <button ref={node} className={styles.btn_nav} onClick={(e) => setOpen(!open)}>
-      <FontAwesomeIcon className={styles.nav_icon1} icon={faUserAlt} />
-      <span>{account.name ? account.name : "Member"}</span>
-      <FontAwesomeIcon className={styles.nav_icon2} icon={faCaretDown} />
-
+    <button ref={node} className={styles.btn_nav}  >
+      <div  onClick={() => setOpen(!open)}  >
+        <FontAwesomeIcon className={styles.nav_icon1} icon={faUserAlt} />
+        <span>{account.name ? account.name : "Member"}</span>
+        <FontAwesomeIcon className={styles.nav_icon2} icon={faCaretDown} />
+      </div>
       {open && <DropdownMenu />}
     </button>
   );
