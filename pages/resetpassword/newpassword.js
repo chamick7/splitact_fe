@@ -12,9 +12,9 @@ export default function newPassword() {
         </div>
         <span className={styles.container}>
                 <form className={styles.form}>
-                    <input type="password" id="pwd" name="pwd" placeholder="New-password"/>
-                    <input type="password" id="pwd" name="pwd" placeholder="Confirm-password"/>
-                    <button className={styles.reset}>Reset</button>
+                    <input type="password" id="pwd1" name="pwd" placeholder="New-password"/>
+                    <input type="password" id="pwd2" name="cf_pwd" placeholder="Confirm-password"/>
+                    <button type="submit" className={styles.reset}>Reset</button>
                 </form>
         </span>
         <img src="/img/newpassword.png" className={styles.img}/>
