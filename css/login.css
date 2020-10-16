@@ -178,7 +178,7 @@ button:focus{
     color: red;
 }
 
-@media only screen and (max-width:480px){
+@media only screen and (max-width:500px){
     .login-form h1,.register-form h1{
         font-size: 22px;
     }
@@ -186,7 +186,7 @@ button:focus{
     
 }
 
-@media only screen and (max-width:480px){
+@media only screen and (max-width:500px){
     .login-left{
         display: none;
     }
