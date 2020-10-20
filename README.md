@@ -2,7 +2,7 @@
 
 Split your act and complete you work.
 
-![SALogo](/public/img/S_A_logo.png)
+<p align="center" width="240px">![SALogo](/public/img/S_A_logo.png)</p>
 
 ## what is it?
 
