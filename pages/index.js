@@ -92,7 +92,7 @@ export default function Home({}) {
             <button type="submit" >Free - Register</button>
           </form>        
       </section>
-      <img src="/img/join.png" alt="" />
+      <img src="/img/join2.png" alt="" />
       </div>
 
     </div>
