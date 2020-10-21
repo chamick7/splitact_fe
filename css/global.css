@@ -1,2 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@400;600&display=swap'); 
+
+
+
+
+
+
+
+.me{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.me span span span:nth-child(1){
+     background-color: #F1F0F0;
+     color: black;
+}
+
+
+@media only screen and (max-width: 500px){
+    .none{
+        display: none !important;
+    }
+
+    .force_width{
+        width: 100vw;
+    }
+}
