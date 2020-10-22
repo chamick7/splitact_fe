@@ -15,7 +15,6 @@ export default function Calendar(props) {
   function evee(event, start, end, isSelected) {
     
 
-    console.log(event);
     var backgroundColor = '#' + event.hexColor;
     var style = {
         backgroundColor: backgroundColor,
@@ -38,7 +37,7 @@ export default function Calendar(props) {
         <BigCalendar
           className={styles.calendar}
           selectable
-          style={{ height: 350, width: "90%" }}
+          style={{ height: 350, width: "90%", }}
           localizer={localizer}
           defaultView="month"
           eventPropGetter = {evee}

@@ -1,6 +1,7 @@
 import "../styles/globals.css";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot,useRecoilState } from "recoil";
 import Head from "next/head";
+
 
 //import css
 import "../css/login.css";
@@ -10,12 +11,11 @@ import "../css/global.css";
 
 {/* */}
 
-
-
 import Navbar from "../Components/Navbar";
 
 function MyApp({ Component, pageProps }) {
 
+  
   return (
     <RecoilRoot >
       <Head>
