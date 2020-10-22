@@ -1,9 +1,12 @@
 
 
 
-
+.carlendar_container{
+    background-color: red;
+}
 .carlendar{
     display: flex;
+
 }
 
 .eventWrapper{

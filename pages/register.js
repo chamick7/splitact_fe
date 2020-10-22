@@ -37,9 +37,6 @@ export default function Register() {
     })
   };
 
-  useEffect(() => {
-    console.log('Load useEffect');
-  }, [])
 
   return (
     <div className="login">

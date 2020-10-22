@@ -18,6 +18,8 @@
     flex-direction: column;
     align-items: center;
     list-style: none;
+    background-color: white;
+    z-index: 99 !important;
 }
 .profile{
     width: 95%;
