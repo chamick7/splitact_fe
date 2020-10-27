@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../css/suggestion.css";
 import { RecoilRoot,useRecoilState } from "recoil";
 import Head from "next/head";
 

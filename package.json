@@ -24,6 +24,7 @@
     "moment": "^2.29.1",
     "next": "^9.5.5",
     "react": "^16.13.1",
+    "react-autosuggest": "^10.0.3",
     "react-big-calendar": "^0.28.1",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.21",
