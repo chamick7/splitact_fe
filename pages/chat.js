@@ -1,37 +1,37 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import {useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import { accountAtom } from "../atom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { useForm } from "react-hook-form";
-import { socket } from "../utils/socket";
+import getSocket from "../utils/socket";
 import styles from "../css/chat.module.css";
+import getAxios from "../utils/axios";
+import { requirePageAuth } from "../utils/Auth";
+import { wait } from "@testing-library/react";
+
+const axios = getAxios();
+const socket = getSocket();
 
 
-export function getServerSideProps({ query }) {
-  let activity;
+export async function getServerSideProps({res, query}) {
 
-  activity = query.activity || null;
-
-  return {
-    props: {
-      activity: activity,
-    },
-  };
+  
 }
 
-export default function chat({ activity }) {
+export default function chat({ activity,account }) {
   const { register, handleSubmit } = useForm();
   const [msg, setMsg] = useState([]);
   const [sideBarStyle, setSideBarStyle] = useState(true);
-  
-  const Account = useRecoilValue(accountAtom);  
+
+  const Account = useRecoilValue(accountAtom);
 
   useEffect(() => {
     socket.emit("join", { activity: activity });
     setMsg([]);
+    console.log(account);
   }, [activity]);
 
   useEffect(() => {
@@ -44,19 +44,15 @@ export default function chat({ activity }) {
       };
       setMsg((msg) => [...msg, newMsg]);
     });
-
-    
   }, []);
 
   useEffect(() => {
-    if(activity){
+    if (activity) {
       const view = document.querySelector("#view");
       view.scrollTop = view.scrollHeight;
     }
   }, [msg]);
-  
-  
-  
+
   const handleKeypress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -84,9 +80,12 @@ export default function chat({ activity }) {
   function ActTag(props) {
     return (
       <Link href={"/chat?activity=" + props.name}>
-        <a onClick={()=>{
-          setSideBarStyle(false);
-        }} className={styles.actTag}>
+        <a
+          onClick={() => {
+            setSideBarStyle(false);
+          }}
+          className={styles.actTag}
+        >
           <span className={styles.actColor}></span>
           <span className={styles.actName}> {props.name} </span>
         </a>
@@ -96,7 +95,12 @@ export default function chat({ activity }) {
 
   function SideBar() {
     return (
-      <section id="sideBar" className={sideBarStyle? styles.sideBar :styles.sideBar+ " " + 'none'} >
+      <section
+        id="sideBar"
+        className={
+          sideBarStyle ? styles.sideBar : styles.sideBar + " " + "none"
+        }
+      >
         <ActTag name="ACT" />
         <ActTag name="Active" />
       </section>
@@ -107,9 +111,12 @@ export default function chat({ activity }) {
     return (
       <div className={styles.header}>
         <span className={styles.header_navigate}>
-          <FontAwesomeIcon onClick={()=>{
-            setSideBarStyle(true);
-          }} icon={faAngleLeft} />
+          <FontAwesomeIcon
+            onClick={() => {
+              setSideBarStyle(true);
+            }}
+            icon={faAngleLeft}
+          />
           <span className={styles.actColor}></span>
           {activity}
         </span>
@@ -144,25 +151,26 @@ export default function chat({ activity }) {
   function Msg(props) {
     return (
       // <li className={styles.msg_li}>
-      Account.name? 
-      <li className={styles.msg_li + " me"}>
-        <span className={styles.msg_outside}>
-          <span className={styles.msg_container}>
-            <span className={styles.msg_wrapper}>{props.msg}</span>
-            <span className={styles.time}>{props.time}น.</span>
+      Account.name ? (
+        <li className={styles.msg_li + " me"}>
+          <span className={styles.msg_outside}>
+            <span className={styles.msg_container}>
+              <span className={styles.msg_wrapper}>{props.msg}</span>
+              <span className={styles.time}>{props.time}น.</span>
+            </span>
           </span>
-        </span>
-      </li>
-      :
-      <li className={styles.msg_li}>
-        <span className={styles.msg_outside}>
-          {props.sender}
-          <span className={styles.msg_container}>
-            <span className={styles.msg_wrapper}>{props.msg}</span>
-            <span className={styles.time}>{props.time}น.</span>
+        </li>
+      ) : (
+        <li className={styles.msg_li}>
+          <span className={styles.msg_outside}>
+            {props.sender}
+            <span className={styles.msg_container}>
+              <span className={styles.msg_wrapper}>{props.msg}</span>
+              <span className={styles.time}>{props.time}น.</span>
+            </span>
           </span>
-        </span>
-      </li>
+        </li>
+      )
     );
   }
 
@@ -187,7 +195,10 @@ export default function chat({ activity }) {
 
   function ChatCTN() {
     return activity ? (
-      <div id="chatCT" className={sideBarStyle? styles.chatCT+ " " + 'none':styles.chatCT} >
+      <div
+        id="chatCT"
+        className={sideBarStyle ? styles.chatCT + " " + "none" : styles.chatCT}
+      >
         <ChatHeader />
         <View />
         <Inbox />

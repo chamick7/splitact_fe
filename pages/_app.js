@@ -3,7 +3,6 @@ import "../css/suggestion.css";
 import { RecoilRoot,useRecoilState } from "recoil";
 import Head from "next/head";
 
-
 //import css
 import "../css/login.css";
 import "../css/navbar.css";
@@ -23,7 +22,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <title>Split Act</title>
       </Head>
-      <Navbar />
+      {/* <Navbar /> */}
       <Component {...pageProps} />
     </RecoilRoot>
   );

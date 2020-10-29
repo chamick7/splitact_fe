@@ -6,9 +6,22 @@ import {
   faUserTimes,
   faCode,
 } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
+import { useForm } from "react-hook-form";
 import styles from "../css/activityModal.module.css";
 import Autosuggest from "react-autosuggest";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
+import getAxios from "../utils/axios.js";
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from "react-day-picker/moment";
+
+import "moment/locale/en-au";
+import Axios from "axios";
 
 const users = [
   {
@@ -43,13 +56,18 @@ const getSuggestionValue = (suggestion) => {
 export default function ActivityModal(props) {
   const account = props.account;
   const [color, setColor] = useState("#FF672B");
+  const router = useRouter();
   const [colorModal, setColorModal] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const axios = getAxios();
+  const [dateState, setDateState] = useState(false);
+  const [date, setDate] = useState(new Date());
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [members, setMembers] = useState([
     { name: account.name, acID: account.acID },
   ]);
-
+  ``;
   const onSuggestionsFetchRequested = ({ value }) => {
     setSuggestions(getSuggestions(value));
   };
@@ -67,6 +85,34 @@ export default function ActivityModal(props) {
     setValue("");
   };
 
+  const onSubmit = (data) => {
+    let allData = {};
+
+    if (dateState) {
+      allData = {
+        atName: data.atName,
+        color: color,
+        members: members,
+        dueDate: date,
+      };
+    } else {
+      allData = {
+        atName: data.atName,
+        color: color,
+        members: members,
+      };
+    }
+
+    axios
+      .post("/activity", allData)
+      .then((res) => {
+        if(res.data.status === "Success") router.push('/activity?activity='+res.data.atID);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
   const onChange = (event, { newValue }) => {
     setValue(newValue);
   };
@@ -75,6 +121,11 @@ export default function ActivityModal(props) {
     placeholder: "Member",
     value,
     onChange: onChange,
+    onKeyPress: (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    },
   };
 
   function ColorModal() {
@@ -112,11 +163,9 @@ export default function ActivityModal(props) {
   }
 
   function MemberItem(props) {
-
     const delMember = (e) => {
-      console.log('haha');
-      const id = e.target.id; 
-      return setMembers(members.filter(member => member.acID !== id));
+      const id = e.target.id;
+      return setMembers(members.filter((member) => member.acID !== id));
     };
 
     //user ปัจจุบัน
@@ -141,7 +190,7 @@ export default function ActivityModal(props) {
 
   return (
     <div className={styles.modal_container}>
-      <form className={styles.modal}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.modal}>
         <span onClick={props.close} className={styles.close}>
           <FontAwesomeIcon icon={faTimes} />
         </span>
@@ -152,6 +201,8 @@ export default function ActivityModal(props) {
             placeholder="Activity name"
             name="atName"
             className={styles.input_name}
+            ref={register}
+            required
           />
 
           <div
@@ -195,6 +246,38 @@ export default function ActivityModal(props) {
               );
             })}
           </ul>
+
+          <div className={styles.date_container + " noselect"}>
+            <label htmlFor="date_select">
+              <input
+                type="checkbox"
+                id="date_select"
+                name="date_select"
+                onClick={() => {
+                  setDateState(!dateState);
+                }}
+                className={styles.date_select}
+              />
+              Add due date
+            </label>
+            {dateState && (
+              <div className={styles.day_picker}>
+                <FontAwesomeIcon icon={faCalendarAlt} />
+                <DayPickerInput
+                  format="DD/MM/YYYY"
+                  placeholder="Due date"
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  onDayChange={(day) => setDate(day)}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          <button type="input" className={styles.btn_submit}>
+            Create
+          </button>
         </div>
       </form>
     </div>

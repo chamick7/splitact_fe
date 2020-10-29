@@ -1,10 +1,23 @@
-export const requirePageAuth = (res) => {
-  const isLogined = true;
+import getAxios from "../utils/axios";
 
-  if (!isLogined) {
-    res.writeHead(302, { Location: "/login" });
-    res.end();
-  }
+const axios = getAxios();
 
-  return;
+export const requirePageAuth = async (res) => {
+
+  const account = await axios
+    .get("/account/auth")
+    .then((accountRes) => {
+      console.log(accountRes);
+      return accountRes.data;
+    })
+    .catch((err) => {
+      // console.log(err.response);
+    });
+
+
+    return account;
+
+
+
+  
 };

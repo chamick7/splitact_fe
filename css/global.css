@@ -38,3 +38,37 @@
         width: 100vw;
     }
 }
+
+.DayPicker-Month{
+    display: flex;
+    flex-direction: column;
+}
+
+.DayPicker-Weekdays{
+    width: 100%;
+}
+.DayPicker-WeekdaysRow{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.DayPicker-Week{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div.DayPicker-Day.DayPicker-Day--outside{
+    margin: 0 5px;
+}
+
+.DayPickerInput input{
+    padding: 5px 15px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+    color: darkorange;
+    font-size: 18px;
+    width: 150px;
+}

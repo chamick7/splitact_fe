@@ -32,6 +32,7 @@ export default function login() {
           setAccount({
             email:res.data.account.email,
             name:res.data.account.name,
+            acID: res.data.account.acID,
             role:res.data.account.role,
           });
 
