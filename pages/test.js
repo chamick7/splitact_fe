@@ -1,34 +1,15 @@
 import Axios from "axios"
 import { useEffect } from "react";
-import axios from "axios";
+import getAxios from "../utils/axios";
 
+const axios = getAxios()
 
+export default function Test({rp} ) {
+    
 
-
-export function getServerSideProps(ctx){
-
-
-    return{
-        props:{
-
-        }
-    }
-}
-
-
-export default function test({res,req}) {
     useEffect(() => {
-
-        axios.get('/api/hello').then(logg => {
-            // console.log(logg);
-        })
-
-
-
-
-
+        console.log(rp);
     }, [])
-
     return (
         <div>
             

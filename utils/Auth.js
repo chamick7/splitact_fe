@@ -2,20 +2,30 @@ import getAxios from "../utils/axios";
 
 const axios = getAxios();
 
-export const requirePageAuth = async (res) => {
+export const requirePageAuth = async (ctx) => {
 
-  const account = await axios
-    .get("/account/auth")
-    .then((accountRes) => {
-      console.log(accountRes);
-      return accountRes.data;
-    })
-    .catch((err) => {
-      // console.log(err.response);
-    });
+  console.log(ctx.req.heades);
 
+  try {
+    const cookie = ctx.req?.headers.cookie;
 
-    return account;
+    await axios
+      .get("/account/auth", {
+        headers: {
+          cookie: cookie,
+        },
+      })
+      .then()
+      .catch((err) => {
+        if (err.response.status === 401) {
+          ctx.res.writeHead(302, { Location: "/login" });
+          ctx.res.end();
+        }
+      });
+  } catch(err) {
+
+    
+  }
 
 
 

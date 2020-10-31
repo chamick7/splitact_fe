@@ -5,6 +5,7 @@ import { accountAtom, AccountAtom } from "../atom";
 import { useRecoilState } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import Router, { useRouter } from "next/router";
 import "react-circular-progressbar/dist/styles.css";
 import {
   faFileSignature,
@@ -13,24 +14,48 @@ import {
   faUsers,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faPlusSquare
-} from "@fortawesome/free-regular-svg-icons";
+import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
+import styles from "../css/dashboard.module.css";
+import { useState, useEffect } from "react";
+import getAxios from "../utils/axios";
+const axios = getAxios();
 
-export const getServerSideProps = ({ req, res }) => {
-  requirePageAuth(res);
+export const getServerSideProps = async (ctx) => {
+  try {
+    const cookie = ctx.req?.headers.cookie;
+
+    await axios
+      .get("/account/auth", {
+        headers: {
+          cookie: cookie,
+        },
+      })
+      .then()
+      .catch((err) => {
+        if (err.response.status === 401) {
+          ctx.res.writeHead(302, { Location: "/login" });
+          ctx.res.end();
+        }
+      });
+  } catch (err) {}
 
   return {
     props: {},
   };
 };
 
-import styles from "../css/dashboard.module.css";
-import { useState } from "react";
-
 export default function dashboard() {
   const [account, setAccount] = useRecoilState(accountAtom);
   const [activityModal, setActivityModal] = useState(false);
+  const [activities, setActivities] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    axios.get("/activity/amount").then((resp) => {
+      console.log(resp.data);
+      setActivities(resp.data.activities)
+    });
+  }, []);
 
   const onActivityModal = () => {
     setActivityModal(!activityModal);
@@ -39,10 +64,13 @@ export default function dashboard() {
   function ActivityItem(props) {
     return (
       <li className={styles.activity_item}>
-        <div style={{backgroundColor: props.color}} className={styles.act_header}>
+        <div
+          style={{ backgroundColor: props.color }}
+          className={styles.act_header}
+        >
           <span>
             <FontAwesomeIcon icon={faPencilAlt} />
-            { props.name.substring(0,22) + "..." }
+            {props.name.substring(0, 22) + "..."}
           </span>
           <button className={styles.act_menu}>
             <FontAwesomeIcon icon={faEllipsisV} />
@@ -79,14 +107,17 @@ export default function dashboard() {
           </div>
         </div>
 
-        <div style={{backgroundColor: props.color}} className={styles.act_bottom}>
+        <div
+          style={{ backgroundColor: props.color }}
+          className={styles.act_bottom}
+        >
           <span>
             <span className={styles.duedate_header}>Due Date: </span>
-            { props.dueDate }
+            {props.dueDate}
           </span>
           <span>
             <FontAwesomeIcon icon={faUsers} />
-            { props.amount }
+            {props.amount}
           </span>
         </div>
       </li>
@@ -99,7 +130,6 @@ export default function dashboard() {
       {activityModal && (
         <ActivityModal close={onActivityModal} account={account} />
       )}
-    
 
       <div className={styles.body}>
         <div className={styles.activity}>
@@ -113,10 +143,38 @@ export default function dashboard() {
             <span className={styles.plus_container}>
               <FontAwesomeIcon onClick={onActivityModal} icon={faPlusSquare} />
             </span>
-            <ActivityItem name="Test act" dueDate="10/11/2020" amount={8} color="#644CC6" />
+            <ActivityItem
+              name="Test act"
+              dueDate="10/11/2020"
+              amount={8}
+              color="#644CC6"
+            />
           </ul>
         </div>
       </div>
     </>
   );
 }
+
+// dashboard.getInitialProps = async (ctx) => {
+//   const cookie = ctx.req?.headers.cookie;
+//   const ac = {}
+
+//   const resp = await axios.get('/account/auth',{
+//     headers:{
+//       cookie:cookie
+//     }
+//   })
+
+//   if(resp.status === 401 && !ctx.req){
+//     Router.replace('/login')
+//   }
+
+//   if(resp.status === 401 && ctx.req){
+//     ctx.resp?.writeHead(302, {
+//       Location: '/login'
+//     })
+//   }
+
+//   return ac
+// }

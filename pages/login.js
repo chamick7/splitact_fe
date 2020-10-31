@@ -26,7 +26,6 @@ export default function login() {
 
     const getLogin = async (ac) =>{
 
-      console.log(ac);
       await axios.post('/account/login',ac).then(
         res => {
           setAccount({

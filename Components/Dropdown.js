@@ -33,13 +33,14 @@ export default function Dropdown() {
   const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
+    router.replace('/');
+
     axios
       .get("/account/logout")
       .then((res) => {
         if(res){
           console.log(res.data);
           setAccount({});
-          router.push('/')
         }
       })
       .catch((err) => {

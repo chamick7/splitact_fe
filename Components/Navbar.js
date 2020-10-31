@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo,useEffect } from "react";
 import { useRecoilState } from "recoil";
 import getAxios from "../utils/axios";
 
@@ -13,7 +13,7 @@ export default function Navbar() {
   const axios = getAxios();
   const [account, setAccount] = useRecoilState(accountAtom)
 
-  useMemo(() => {
+  useEffect(() => {
     axios.get('/account/auth')
     .then(res => {
         setAccount(res.data.account);

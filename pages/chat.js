@@ -15,23 +15,17 @@ import { wait } from "@testing-library/react";
 const axios = getAxios();
 const socket = getSocket();
 
-
-export async function getServerSideProps({res, query}) {
-
-  
-}
-
-export default function chat({ activity,account }) {
+export default function chat(ctx) {
   const { register, handleSubmit } = useForm();
   const [msg, setMsg] = useState([]);
   const [sideBarStyle, setSideBarStyle] = useState(true);
-
-  const Account = useRecoilValue(accountAtom);
+  const [activityList, setActivityList] = useState([]);
+  const [activity, setActivity] = useState({});
+  const account = useRecoilValue(accountAtom);
 
   useEffect(() => {
     socket.emit("join", { activity: activity });
     setMsg([]);
-    console.log(account);
   }, [activity]);
 
   useEffect(() => {
@@ -44,6 +38,16 @@ export default function chat({ activity,account }) {
       };
       setMsg((msg) => [...msg, newMsg]);
     });
+
+    axios
+      .get("/activity/amount")
+      .then((res) => {
+        if (res.data.status === "Success") {
+          console.log(res.data.activityList);
+          setActivityList(res.data.activityList);
+        }
+      })
+      .catch((err) => {});
   }, []);
 
   useEffect(() => {
@@ -79,7 +83,7 @@ export default function chat({ activity,account }) {
 
   function ActTag(props) {
     return (
-      <Link href={"/chat?activity=" + props.name}>
+      <Link href={"/chat?activity=" + props.link}>
         <a
           onClick={() => {
             setSideBarStyle(false);
@@ -101,8 +105,10 @@ export default function chat({ activity,account }) {
           sideBarStyle ? styles.sideBar : styles.sideBar + " " + "none"
         }
       >
-        <ActTag name="ACT" />
-        <ActTag name="Active" />
+        {activityList.map((activity,index) => {
+          return <ActTag key={index} name={activity.atName} link={activity.atID} />
+        })}
+        
       </section>
     );
   }
@@ -118,7 +124,7 @@ export default function chat({ activity,account }) {
             icon={faAngleLeft}
           />
           <span className={styles.actColor}></span>
-          {activity}
+          {activity.atName}
         </span>
         <span className={styles.member_span}>
           <FontAwesomeIcon icon={faUsers} />
@@ -194,6 +200,7 @@ export default function chat({ activity,account }) {
   }
 
   function ChatCTN() {
+    // return <View />
     return activity ? (
       <div
         id="chatCT"
