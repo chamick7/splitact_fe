@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap');
+
+
+.termofuse_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.termofuse_container{
+    font-family: 'Prompt', sans-serif;
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+    border: 2px solid;
+    word-wrap: break-word;
+    margin: 3em;
+
+}
+.termofuse_container h1{
+    padding: 10px 15px;
+    font-size: 56px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.termofuse_container h4{
+    padding: 10px 15px;
+    text-align: left;
+    font-weight: lighter;
+}
+
+
+@media only screen and (max-width:480px){
+    .termofuse_body h1{
+        font-size: 2rem;
+    }
+}
