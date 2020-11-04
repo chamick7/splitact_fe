@@ -21,6 +21,9 @@
 .about_body h1 span:nth-child(2){
     color: #FF672B;
 }
+.about_body img{
+    max-width: 640px;
+}
 
 .about_container{
     /* height: 400px; */
@@ -48,11 +51,12 @@
 .about_body hr{
     width: 90%;
     border-top: 2px solid black;
-    margin-top: 24vh;
+    margin-top: 20vh;
     padding: 0;
 }
 
 .about_logo{
+    width: 70%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -117,4 +121,80 @@
 }
 .about_email_input h4 a{
     color: #FF672B;
+}
+
+@media only screen and (max-width:480px){
+    .about_body h1{
+        font-size: 36px;
+    }
+    .about_body img{
+        max-width: 300px;
+    }
+    .about_body hr{
+        width: 90%;
+        border-top: 2px solid black;
+        margin-top: 8vh;
+        padding: 0;
+    }
+
+    .about_logo img{
+        margin-top: 2vh;
+        max-width: 120px;
+    }
+    .about_logo img:nth-child(2){
+        margin-top: 2vh;
+        max-width: 180px;
+        margin-bottom: 2vh;
+    }
+
+    .about_container{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+        font-family: 'Prompt', sans-serif;
+    }
+    .about_container_block{
+        margin-top: 2vh;
+        width: 80%;
+    }
+    .about_container img{
+        max-width: 240px;
+    }
+    .about_container h3{
+        padding: 0px 20px;
+        margin-top: 1vh;
+    }
+    .about_bottom{
+        width: 90%;
+    }
+    .about_bottom h1{
+        font-size: 1.7rem;
+    }
+    .about_bottom h2{
+        font-size: 1.3rem;
+    }
+    .about_email_input {
+        width: 90%;
+        margin-top: 2vh;
+    }
+    .about_email_input h4{
+        font-size: 0.9rem;
+    }
+}
+@media only screen and (max-width:1280px) and (min-width:1000px){
+    .about_logo{
+        width: 90%;
+    }
+    .about_logo img{
+        max-width: 120px;
+    }
+    .about_logo img:nth-child(2){
+        max-width: 260px;
+    }
+    .about_body hr{
+        width: 90%;
+        margin-top: 10vh;
+    }
 }

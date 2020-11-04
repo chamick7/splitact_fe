@@ -51,7 +51,7 @@ export default function about(){
             <Info />
             <hr/>
             <h1>Dev's Split <span>A</span><span>C</span>T</h1>
-
+            <img src="/img/allmember.png" alt="member"/>
         <div className={styles.about_logo}>
             <img src="/img/kmitl-logo.png" alt="kmitl_logo"/>
             <img src="/img/ite-logo.png" alt="ite_logo"/>
@@ -70,8 +70,9 @@ export default function about(){
             <h4>Already have an account?{" "}<Link href="/login"><a>Sign in now</a></Link></h4>
             </form>
         </div>
-        <Footer_min/>
+
         </div>
+        
     );
 
 }

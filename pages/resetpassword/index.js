@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import getAxios from "../../utils/axios";
 
 import styles from "../../css/resetpassword.module.css";
+import Progressbar from "../../Components/Progressbar";
+
 
 export default function resetpassword() {
     const { register,handleSubmit } = useForm();
@@ -28,7 +30,9 @@ export default function resetpassword() {
     }
 
     return (
-        <div className={styles.reset_body} > 
+        
+        <div className={styles.reset_body} >
+        <Progressbar/> 
             <div className={styles.header} >
                 <p className={styles.h1} >Forgot Password ?</p>
                 <p className={styles.h3} >just <span>reset</span> it.</p>
