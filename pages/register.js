@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from "react-google-login";
 import { useForm } from "react-hook-form";
-import getAxios from "../utils/axios";
+import { getAxios } from "../utils/axios";
 
 export default function Register() {
   const { handleSubmit, register, errors, watch } = useForm();

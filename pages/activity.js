@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import getAxios from "../utils/axios";
+import { getAxios }  from "../utils/axios";
 
 export default function activity() {
   const axios = getAxios();

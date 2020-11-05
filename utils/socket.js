@@ -2,7 +2,7 @@ import io from "socket.io-client";
 
 
 
-export default function getSocket () {
+export function getSocket () {
     
     if(process.env.NODE_ENV === 'production'){
         return io.connect('https://chat.splitact.com/')

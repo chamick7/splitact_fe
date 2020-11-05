@@ -5,6 +5,7 @@ COPY . .
 
 
 RUN npm install
+RUN npm run build
 
 
-CMD [ "npm","run","production" ]
+CMD [ "npm","run","start" ]

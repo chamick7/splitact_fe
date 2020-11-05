@@ -1,43 +1,43 @@
-import { requirePageAuth } from "../utils/Auth";
 import Calendar from "../Components/Calendar";
 import ActivityModal from "../Components/ActivityModal";
+import Link from "next/link";
 import { accountAtom, AccountAtom } from "../atom";
 import { useRecoilState } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import "react-circular-progressbar/dist/styles.css";
+import moment from "moment";
 import {
   faFileSignature,
   faPencilAlt,
   faEllipsisV,
   faUsers,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import styles from "../css/dashboard.module.css";
 import { useState, useEffect } from "react";
-import getAxios from "../utils/axios";
+import { getAxios } from "../utils/axios";
 const axios = getAxios();
 
 export const getServerSideProps = async (ctx) => {
-  try {
-    const cookie = ctx.req?.headers.cookie;
+  // try {
+  //   const cookie = ctx.req?.headers.cookie;
 
-    await axios
-      .get("/account/auth", {
-        headers: {
-          cookie: cookie,
-        },
-      })
-      .then()
-      .catch((err) => {
-        if (err.response.status === 401) {
-          ctx.res.writeHead(302, { Location: "/login" });
-          ctx.res.end();
-        }
-      });
-  } catch (err) {}
+  //   await axios
+  //     .get("/account/auth", {
+  //       headers: {
+  //         cookie: cookie,
+  //       },
+  //     })
+  //     .then()
+  //     .catch((err) => {
+  //       if (err.response.status === 401) {
+  //         ctx.res.writeHead(302, { Location: "/login" });
+  //         ctx.res.end();
+  //       }
+  //     });
+  // } catch (err) {}
 
   return {
     props: {},
@@ -51,10 +51,12 @@ export default function dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    axios.get("/activity/amount").then((resp) => {
-      console.log(resp.data);
-      setActivities(resp.data.activities)
-    });
+    axios
+      .get("/activity/amount")
+      .then((resp) => {
+        setActivities(resp.data.activities);
+      })
+      .catch((err) => {});
   }, []);
 
   const onActivityModal = () => {
@@ -62,6 +64,7 @@ export default function dashboard() {
   };
 
   function ActivityItem(props) {
+    console.log(props.dueDate);
     return (
       <li className={styles.activity_item}>
         <div
@@ -70,56 +73,65 @@ export default function dashboard() {
         >
           <span>
             <FontAwesomeIcon icon={faPencilAlt} />
-            {props.name.substring(0, 22) + "..."}
+            <Link href={"/activity?activity=" + props.link}>
+              <a>
+                {props.name.length > 22
+                  ? props.name.substring(0, 22) + "..."
+                  : props.name.substring(0, 22)}
+              </a>
+            </Link>
           </span>
           <button className={styles.act_menu}>
             <FontAwesomeIcon icon={faEllipsisV} />
           </button>
         </div>
 
-        <div className={styles.act_body}>
-          Body
-          <div className={styles.progress_container}>
-            <CircularProgressbar
-              className={styles.progressbar}
-              styles={buildStyles({
-                // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                strokeLinecap: "butt",
+        <Link href={"/activity?activity=" + props.link}>
+          <a>
+            <div className={styles.act_body}>
+              <div className={styles.progress_container}>
+                <CircularProgressbar
+                  className={styles.progressbar}
+                  styles={buildStyles({
+                    // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                    strokeLinecap: "butt",
 
-                // Text size
-                textSize: "30px",
+                    // Text size
+                    textSize: "30px",
 
-                // How long animation takes to go from one percentage to another, in seconds
-                pathTransitionDuration: 0.5,
+                    // How long animation takes to go from one percentage to another, in seconds
+                    pathTransitionDuration: 0.5,
 
-                // Can specify path transition in more detail, or remove it entirely
-                // pathTransition: 'none',
+                    // Can specify path transition in more detail, or remove it entirely
+                    // pathTransition: 'none',
 
-                // Colors
-                pathColor: props.color,
-                textColor: props.color,
-                trailColor: "#d6d6d6",
-                backgroundColor: "#3e98c7",
-              })}
-              value={80}
-              text={`${80}%`}
-            />
-          </div>
-        </div>
+                    // Colors
+                    pathColor: props.color,
+                    textColor: props.color,
+                    trailColor: "#d6d6d6",
+                    backgroundColor: "#3e98c7",
+                  })}
+                  value={80}
+                  text={`${80}%`}
+                />
+              </div>
+            </div>
 
-        <div
-          style={{ backgroundColor: props.color }}
-          className={styles.act_bottom}
-        >
-          <span>
-            <span className={styles.duedate_header}>Due Date: </span>
-            {props.dueDate}
-          </span>
-          <span>
-            <FontAwesomeIcon icon={faUsers} />
-            {props.amount}
-          </span>
-        </div>
+            <div
+              style={{ backgroundColor: props.color }}
+              className={styles.act_bottom}
+            >
+              <span>
+                <span className={styles.duedate_header}>Due Date: </span>
+                {props.dueDate != "Invalid date" ? props.dueDate : " - "}
+              </span>
+              <span>
+                <FontAwesomeIcon icon={faUsers} />
+                {props.amount}
+              </span>
+            </div>
+          </a>
+        </Link>
       </li>
     );
   }
@@ -143,12 +155,22 @@ export default function dashboard() {
             <span className={styles.plus_container}>
               <FontAwesomeIcon onClick={onActivityModal} icon={faPlusSquare} />
             </span>
-            <ActivityItem
-              name="Test act"
-              dueDate="10/11/2020"
-              amount={8}
-              color="#644CC6"
-            />
+
+            {activities.map((activityRes, index) => {
+              const activity = activityRes.atID;
+              console.log(activity);
+
+              return (
+                <ActivityItem
+                  key={index}
+                  link={activity._id}
+                  name={activity.atName}
+                  dueDate={moment(activity.dueDate).format("DD/MM/YYYY")}
+                  amount={5}
+                  color={activity.color}
+                />
+              );
+            })}
           </ul>
         </div>
       </div>

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import { useRecoilState } from "recoil";
 import {accountAtom} from "../atom";
-import getAxios from "../utils/axios";
+import { getAxios } from "../utils/axios";
 
 export default function login() {
   const router = useRouter();

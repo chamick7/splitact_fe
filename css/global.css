@@ -9,12 +9,13 @@
 
 
 .me{
+    font-family: "Mitr";
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.me span span span:nth-child(1){
+.me span span span:nth-child(2){
      background-color: #F1F0F0;
      color: black;
 }

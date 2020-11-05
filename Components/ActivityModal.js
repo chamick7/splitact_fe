@@ -14,27 +14,27 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-import getAxios from "../utils/axios.js";
+import { getAxios } from "../utils/axios.js";
 import MomentLocaleUtils, {
   formatDate,
   parseDate,
 } from "react-day-picker/moment";
 
 import "moment/locale/en-au";
-import Axios from "axios";
+const axios = getAxios();
 
-const users = [
-  {
-    name: "Mick",
-    acID: "2zxv4123124124",
-  },
-  {
-    name: "Supkit",
-    acID: "asdf214121512314",
-  },
-];
+let users = [];
+
+axios
+  .get("/account/users")
+  .then((data) => {
+    console.log(data.data)
+    users = data.data.users;
+  })
+  .catch((err) => {});
 
 const getSuggestions = (value) => {
+  console.log(users);
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
@@ -59,7 +59,6 @@ export default function ActivityModal(props) {
   const router = useRouter();
   const [colorModal, setColorModal] = useState(false);
   const { register, handleSubmit } = useForm();
-  const axios = getAxios();
   const [dateState, setDateState] = useState(false);
   const [date, setDate] = useState(new Date());
   const [value, setValue] = useState("");
@@ -68,6 +67,9 @@ export default function ActivityModal(props) {
     { name: account.name, acID: account.acID },
   ]);
   ``;
+
+  useEffect(() => {}, []);
+
   const onSuggestionsFetchRequested = ({ value }) => {
     setSuggestions(getSuggestions(value));
   };
@@ -78,7 +80,8 @@ export default function ActivityModal(props) {
   };
 
   const onSuggestionsSelected = (event, { suggestion }) => {
-    const newMember = { name: suggestion.name, acID: suggestion.acID };
+    const newMember = { name: suggestion.name, acID: suggestion._id };
+    console.log(newMember);
     if (!members.some((member) => member.acID === newMember.acID)) {
       setMembers((members) => [...members, newMember]);
     }
@@ -103,10 +106,13 @@ export default function ActivityModal(props) {
       };
     }
 
+    console.log(allData);
+
     axios
       .post("/activity", allData)
       .then((res) => {
-        if(res.data.status === "Success") router.push('/activity?activity='+res.data.atID);
+        if (res.data.status === "Success")
+          router.push("/activity?activity=" + res.data.atID);
       })
       .catch((err) => {
         console.log(err.response);

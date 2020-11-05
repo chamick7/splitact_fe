@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useMemo,useEffect } from "react";
 import { useRecoilState } from "recoil";
-import getAxios from "../utils/axios";
+import {getAxios} from "../utils/axios";
 
 import { accountAtom } from "../atom";
 

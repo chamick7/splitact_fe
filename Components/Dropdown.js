@@ -21,7 +21,7 @@ import { faUserAlt, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { accountAtom } from "../atom";
 import Cookies from "js-cookies";
 import { useRecoilState } from "recoil";
-import getAxios from "../utils/axios";
+import {getAxios} from "../utils/axios";
 
 import styles from "../css/dropdown.module.css";
 
@@ -52,7 +52,7 @@ export default function Dropdown() {
     if (account.name) {
       return (
         <li className={styles.profile} onClick={() => setOpen(false)}>
-          <Link href="/">
+          <Link href="/profile">
             <a>{account.name}</a>
           </Link>
         </li>
