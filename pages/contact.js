@@ -8,7 +8,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../css/contact.module.css"
 
-export default function resetSuccess() {
+export default function contact() {
     const router = useRouter();
     const email = router.query.email;
 
