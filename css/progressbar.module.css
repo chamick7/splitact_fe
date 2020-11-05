@@ -1,0 +1,98 @@
+.progress {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    margin-bottom: 6vh;
+}
+
+.progress li{
+    display: inline-block;
+    text-align: center;
+    line-height: 3em;
+    margin: 0px 4vw;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+.progress .step {
+    color: white;
+    border: 3px solid silver;
+    background-color: silver;
+    border-radius: 50%;
+    line-height: 2;
+    width: 2.5em;
+    height: 2.5em;
+    display: inline-block;
+    z-index: 2;
+}
+.progress .step:before {
+    content: "";
+    display: block;
+    background-color: silver;
+    height: 0.4em;
+    width: 7.75em;
+    position: absolute;
+    bottom: 1.2em;
+    left: -7.75em;
+    z-index: 1;
+}
+
+.progress li:first-of-type .step:before {
+    display: none;
+}
+
+.progress .done .step,
+.progress .done .step:before,
+.progress .active .step,
+.progress .active .step:before {
+    background-color:#8a6ef8;
+}
+.progress .done .step,
+.progress .active .step {
+    border: 3px solid #8a6ef8;
+}
+
+@media only screen and (max-width:480px){
+    .progress .step:before {
+        content: "";
+        display: block;
+        background-color: silver;
+        height: 0.4em;
+        width: 2em;
+        position: absolute;
+        bottom: 1.2em;
+        left: -2em;
+        z-index: 1;
+    }
+}
+@media only screen and (max-width:1024px) and (min-width:480px){
+    .progress .step:before {
+        content: "";
+        display: block;
+        background-color: silver;
+        height: 0.4em;
+        width: 5.1em;
+        position: absolute;
+        bottom: 1.2em;
+        left: -5.1em;
+        z-index: 1;
+    }
+}
+@media only screen and (max-width:1280px) and (min-width:1280px){
+    .progress .step:before {
+        content: "";
+        display: block;
+        background-color: silver;
+        height: 0.4em;
+        width: 6.5em;
+        position: absolute;
+        bottom: 1.2em;
+        left: -6.5em;
+        z-index: 1;
+    }
+}
