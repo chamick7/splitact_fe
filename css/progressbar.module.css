@@ -47,14 +47,25 @@
 }
 
 .progress .done .step,
-.progress .done .step:before,
-.progress .active .step,
-.progress .active .step:before {
+.progress .done .step:before{
     background-color:#8a6ef8;
 }
-.progress .done .step,
-.progress .active .step {
-    border: 3px solid #8a6ef8;
+.progress .active .step,
+.progress .active .step:before{
+    background-color: #644CC6;
+    font-size: 1.4rem;
+}
+.progress .active .step:before{
+    width: 5.50em;
+    left: -5.50em;
+    bottom: 1em;
+}
+
+.progress .done .step,{
+    border: 3px solid #8a6ef8
+}
+.progress .active .step{
+    border: 3px solid #644CC6
 }
 
 @media only screen and (max-width:480px){
@@ -69,6 +80,17 @@
         left: -2em;
         z-index: 1;
     }
+    .progress .active .step:before{
+        width: 1.50em;
+        left: -1.50em;
+        bottom: 1em;
+    }
+    .progress .active .step,
+    .progress .active .step:before{
+    background-color: #644CC6;
+    font-size: 1.4rem;
+    line-height: 2.3;
+    }
 }
 @media only screen and (max-width:1024px) and (min-width:480px){
     .progress .step:before {
@@ -82,6 +104,18 @@
         left: -5.1em;
         z-index: 1;
     }
+    .progress .active .step:before{
+        width: 3.65em;
+        left: -3.65em;
+        bottom: 1em;
+    }
+    .progress .active .step,
+    .progress .active .step:before{
+    background-color: #644CC6;
+    font-size: 1.4rem;
+    line-height: 2.3;
+    }
+
 }
 @media only screen and (max-width:1280px) and (min-width:1280px){
     .progress .step:before {
@@ -94,5 +128,16 @@
         bottom: 1.2em;
         left: -6.5em;
         z-index: 1;
+    }
+    .progress .active .step:before{
+        width: 4.65em;
+        left: -4.65em;
+        bottom: 1em;
+    }
+    .progress .active .step,
+    .progress .active .step:before{
+    background-color: #644CC6;
+    font-size: 1.4rem;
+    line-height: 2.3;
     }
 }
