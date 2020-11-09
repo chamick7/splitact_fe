@@ -4,6 +4,8 @@ import Link from "next/link"
 import Footer_min from "../../Components/Footer_min";
 
 import styles from "../../css/resetsuccess.module.css"
+import Progressbar from "../../Components/Progressbar";
+import progressstyles from "../../css/progressbar.module.css"
 
 export default function resetSuccess() {
     const router = useRouter();
@@ -12,6 +14,12 @@ export default function resetSuccess() {
 
     return (
         <div className={styles.resetsuccess_body}>
+        <Progressbar
+        classWait1={progressstyles.done}
+        classWait2={progressstyles.active}
+        classWait3={progressstyles.wait}
+        classWait4={progressstyles.wait}
+        />
             <div className={styles.header}>
                 <p className={styles.h1}>Password <span>Reset</span> Email Sent</p>
                 <p className={styles.h3}>An email has been sent to your rescue email address,

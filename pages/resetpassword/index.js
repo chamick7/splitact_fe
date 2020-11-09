@@ -7,6 +7,7 @@ import { getAxios } from "../../utils/axios";
 
 import styles from "../../css/resetpassword.module.css";
 import Progressbar from "../../Components/Progressbar";
+import progressstyles from "../../css/progressbar.module.css"
 
 
 export default function resetpassword() {
@@ -37,6 +38,12 @@ export default function resetpassword() {
 
   return (
     <div className={styles.reset_body}>
+      <Progressbar
+        classWait1={progressstyles.active}
+        classWait2={progressstyles.wait}
+        classWait3={progressstyles.wait}
+        classWait4={progressstyles.wait}
+        /> 
       <div className={styles.header}>
         <p className={styles.h1}>Forgot Password ?</p>
         <p className={styles.h3}>
