@@ -35,7 +35,6 @@ export default function resetpassword() {
     sendMail(data.email);
   };
 
-
   return (
     <div className={styles.reset_body}>
       <div className={styles.header}>
@@ -59,5 +58,4 @@ export default function resetpassword() {
       <Footer_min />
     </div>
   );
-
 }
