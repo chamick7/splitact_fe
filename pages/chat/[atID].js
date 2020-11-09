@@ -11,16 +11,33 @@ import { activityListAtom, activityAtom, accountAtom } from "../../atom";
 
 const socket = getSocket();
 
-export function getServerSideProps(ctx) {
-  // console.log(ctx.query);
+export async function getServerSideProps(ctx) {
+  try {
+    const cookie = ctx.req?.headers.cookie;
 
+    await axios
+      .get("/account/auth", {
+        headers: {
+          cookie: cookie,
+        },
+      })
+      .then()
+      .catch((err) => {
+        if (err.response.status === 401) {
+          ctx.res.writeHead(302, { Location: "/login" });
+          ctx.res.end();
+        }
+      });
+  } catch (err) {}
 
   return {
     props: {
-      atID: {},
+    
     },
   };
 }
+
+
 
 export default function chatPage() {
   const [sideBarStyle, setSideBarStyle] = useState(false);

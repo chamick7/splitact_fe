@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from "next/router";
+import Link from "next/link"
 import Footer_min from "../../Components/Footer_min";
 
 import styles from "../../css/resetsuccess.module.css"
@@ -14,10 +15,10 @@ export default function resetSuccess() {
             <div className={styles.header}>
                 <p className={styles.h1}>Password <span>Reset</span> Email Sent</p>
                 <p className={styles.h3}>An email has been sent to your rescue email address,
-                {email || ''}  Follow the directions in the email to reset password</p>
+                <span style={{ color: "#644cc6" }}>{email || ''} </span> Follow the directions in the email to reset password</p>
             </div>
             <div className={styles.container}>
-                <button className={styles.done}>Done</button>
+                <Link href="/" ><a><button className={styles.done}>Done</button></a></Link>
             </div>
             <img src="/img/succcesss.png" className={styles.img}/>
             <Footer_min />

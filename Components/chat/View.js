@@ -7,7 +7,7 @@ import styles from "../../css/chat.module.css";
 export default function View({ messages }) {
   const ROOT_CSS = css(
     ` width: 100%; padding: 10px 10px;height: calc(100% - 100px); 
-    max-height: 90vh; list-style:none;`
+    max-height: 90vh; list-style:none; z-index:0`
   );
 
   return (

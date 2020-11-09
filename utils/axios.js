@@ -6,9 +6,9 @@ export function getAxios(){
 
     if(process.env.NODE_ENV === 'production'){
         return Axios.create({
-            // baseURL: 'http://localhost:5000',
+            baseURL: 'http://localhost:5000',
 
-            baseURL: 'https://api.splitact.com',
+            // baseURL: 'https://api.splitact.com',
             withCredentials: true,
             credentials: 'include',
             timeout: 1000

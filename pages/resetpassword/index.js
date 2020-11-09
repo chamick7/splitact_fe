@@ -35,7 +35,7 @@ export default function resetpassword() {
     sendMail(data.email);
   };
 
-<<<<<<< HEAD
+
   return (
     <div className={styles.reset_body}>
       <div className={styles.header}>
@@ -59,28 +59,5 @@ export default function resetpassword() {
       <Footer_min />
     </div>
   );
-=======
-    const onSubmit = (data) => {
-        sendMail(data.email)
-    }
 
-    return (
-        
-        <div className={styles.reset_body} >
-        <Progressbar/> 
-            <div className={styles.header} >
-                <p className={styles.h1} >Forgot Password ?</p>
-                <p className={styles.h3} >just <span>reset</span> it.</p>
-            </div>
-            <span className={styles.container}>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)} >
-                    <input type="email" name="email" placeholder="E-mail" ref={register} />
-                    <input type="submit" value="Reset Password"/>
-                </form>
-            </span>
-            <img src="/img/resetpassword.png" className={styles.img}/>
-            <Footer_min />
-        </div>
-    )
->>>>>>> 64655585a7dd70a68082aa665cd48c14adaa0387
 }

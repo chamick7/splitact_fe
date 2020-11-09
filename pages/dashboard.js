@@ -21,23 +21,23 @@ import { getAxios } from "../utils/axios";
 const axios = getAxios();
 
 export const getServerSideProps = async (ctx) => {
-  // try {
-  //   const cookie = ctx.req?.headers.cookie;
+  try {
+    const cookie = ctx.req?.headers.cookie;
 
-  //   await axios
-  //     .get("/account/auth", {
-  //       headers: {
-  //         cookie: cookie,
-  //       },
-  //     })
-  //     .then()
-  //     .catch((err) => {
-  //       if (err.response.status === 401) {
-  //         ctx.res.writeHead(302, { Location: "/login" });
-  //         ctx.res.end();
-  //       }
-  //     });
-  // } catch (err) {}
+    await axios
+      .get("/account/auth", {
+        headers: {
+          cookie: cookie,
+        },
+      })
+      .then()
+      .catch((err) => {
+        if (err.response.status === 401) {
+          ctx.res.writeHead(302, { Location: "/login" });
+          ctx.res.end();
+        }
+      });
+  } catch (err) {}
 
   return {
     props: {},

@@ -21,7 +21,7 @@ import { faUserAlt, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { accountAtom } from "../atom";
 import Cookies from "js-cookies";
 import { useRecoilState } from "recoil";
-import {getAxios} from "../utils/axios";
+import { getAxios } from "../utils/axios";
 
 import styles from "../css/dropdown.module.css";
 
@@ -33,14 +33,12 @@ export default function Dropdown() {
   const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
-    router.replace('/');
-
     axios
       .get("/account/logout")
       .then((res) => {
-        if(res){
-          console.log(res.data);
+        if (res) {
           setAccount({});
+          router.replace("/");
         }
       })
       .catch((err) => {
