@@ -1,13 +1,40 @@
 
 import Link from "next/link"
 import Head from "next/head"
-
+import { getAxios } from "../utils/axios";
+const axios = getAxios();
 import styles from "../css/home.module.css";
 import { useRouter } from "next/router";
 
 // export const getServerSideProps = async () => {
   
 // }
+
+export const getServerSideProps = async (ctx) => {
+  try {
+    const cookie = ctx.req?.headers.cookie;
+
+    await axios
+      .get("/account/auth", {
+        headers: {
+          cookie: cookie,
+        },
+      })
+      .then((resp) => {
+        if(resp.status === 200){
+          ctx.res.writeHead(302, { Location: "/dashboard" });
+          ctx.res.end();
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  } catch (err) {}
+
+  return {
+    props: {},
+  };
+};
 
 export default function Home({}) {
   const router = useRouter();

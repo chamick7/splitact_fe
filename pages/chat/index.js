@@ -1,34 +1,32 @@
 import { getAxios } from "../../utils/axios";
 const axios = getAxios();
 import { useState, useEffect } from "react";
-
+import ProtectRoute from "../../utils/ProtectRoute";
 import SideBar from "../../Components/chat/SideBar";
 
 export async function getServerSideProps(ctx) {
-  try {
-    const cookie = ctx.req?.headers.cookie;
-
-    await axios
-      .get("/account/auth", {
-        headers: {
-          cookie: cookie,
-        },
-      })
-      .then()
-      .catch((err) => {
-        if (err.response.status === 401) {
-          ctx.res.writeHead(302, { Location: "/login" });
-          ctx.res.end();
-        }
-      });
-  } catch (err) {}
+  // try {
+  //   const cookie = ctx.req?.headers.cookie;
+  //   await axios
+  //     .get("/account/auth", {
+  //       headers: {
+  //         cookie: cookie,
+  //       },
+  //     })
+  //     .then()
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //       if (err.response.status === 401) {
+  //         ctx.res.writeHead(302, { Location: "/login" });
+  //         ctx.res.end();
+  //       }
+  //     });
+  // } catch (err) {}
 
   return {
-    props: {
-    },
+    props: {},
   };
 }
-
 
 export default function chat() {
   const [sideBarStyle, setSideBarStyle] = useState(true);
@@ -44,17 +42,17 @@ export default function chat() {
         });
       })
       .catch((err) => {});
-
-      
   }, []);
 
   return (
-    <div style={{ height: "calc(100vh - 80px)" }}>
-      <SideBar
-        sideBarStyle={sideBarStyle}
-        activityList={activityList}
-        setSideBarStyle={setSideBarStyle}
-      />
-    </div>
+    <ProtectRoute>
+      <div style={{ height: "calc(100vh - 80px)" }}>
+        <SideBar
+          sideBarStyle={sideBarStyle}
+          activityList={activityList}
+          setSideBarStyle={setSideBarStyle}
+        />
+      </div>
+    </ProtectRoute>
   );
 }

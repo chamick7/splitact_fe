@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Footer_min from "../../Components/Footer_min";
 import { useRouter } from "next/router";
@@ -8,14 +8,14 @@ import { getAxios } from "../../utils/axios";
 import styles from "../../css/resetpassword.module.css";
 import Progressbar from "../../Components/Progressbar";
 
-
 export default function resetpassword() {
   const { register, handleSubmit } = useForm();
+  const [err, setErr] = useState("");
   const axios = getAxios();
   const router = useRouter();
 
   const sendMail = (email) => {
-      console.log(email);
+    console.log(email);
     axios
       .post("/account/forgotpw", { email: email })
       .then((res) => {
@@ -27,7 +27,9 @@ export default function resetpassword() {
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        if (err.response.status === 404) {
+          setErr("No email address registered");
+        }
       });
   };
 
@@ -44,6 +46,7 @@ export default function resetpassword() {
         </p>
       </div>
       <span className={styles.container}>
+          {err && <div className={styles.err_msg} style={{ textAlign: "center"}}><span>{err}</span></div> }
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <input
             type="email"
