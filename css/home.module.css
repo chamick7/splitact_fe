@@ -332,6 +332,8 @@
     }
     .endpage img{
         max-width: 360px;
+        padding: 0%;
+        margin: 0%;
     }
 }
 
@@ -416,10 +418,13 @@
         padding-left: 0px;
     }
     .endpage .calendar_container_right{
+        margin: 0%;
         padding: 0%;
+        width: 90%;
     }
     .endpage img{
         max-width: 600px;
+        padding: 0%;
     }
 }
 
