@@ -19,7 +19,6 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faUserAlt, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { accountAtom } from "../atom";
-import Cookies from "js-cookies";
 import { useRecoilState } from "recoil";
 import { getAxios } from "../utils/axios";
 
