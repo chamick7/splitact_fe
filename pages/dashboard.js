@@ -2,6 +2,7 @@ import Calendar from "../Components/Calendar";
 import ActivityModal from "../Components/ActivityModal";
 import Link from "next/link";
 import { accountAtom, AccountAtom } from "../atom";
+import ProtectRoute from "../utils/ProtectRoute";
 import { useRecoilState } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -24,19 +25,20 @@ export const getServerSideProps = async (ctx) => {
   try {
     const cookie = ctx.req?.headers.cookie;
 
-    await axios
-      .get("/account/auth", {
-        headers: {
-          cookie: cookie,
-        },
-      })
-      .then()
-      .catch((err) => {
-        if (err.response.status === 401) {
-          ctx.res.writeHead(302, { Location: "/login" });
-          ctx.res.end();
-        }
-      });
+    // await axios
+    //   .get("/account/auth", {
+    //     headers: {
+    //       cookie: cookie,
+    //     },
+    //   })
+    //   .then()
+    //   .catch((err) => {
+    //     if (err.response.status === 401) {
+    //       console.log(err.response.status);
+    //       // ctx.res.writeHead(302, { Location: "/login" });
+    //       // ctx.res.end();
+    //     }
+    //   });
   } catch (err) {}
 
   return {
@@ -64,7 +66,6 @@ export default function dashboard() {
   };
 
   function ActivityItem(props) {
-    console.log(props.dueDate);
     return (
       <li className={styles.activity_item}>
         <div
@@ -137,7 +138,7 @@ export default function dashboard() {
   }
 
   return (
-    <>
+    <ProtectRoute>
       <Calendar />
       {activityModal && (
         <ActivityModal close={onActivityModal} account={account} />
@@ -158,8 +159,6 @@ export default function dashboard() {
 
             {activities.map((activityRes, index) => {
               const activity = activityRes.atID;
-              console.log(activity);
-
               return (
                 <ActivityItem
                   key={index}
@@ -174,7 +173,7 @@ export default function dashboard() {
           </ul>
         </div>
       </div>
-    </>
+    </ProtectRoute>
   );
 }
 

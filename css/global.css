@@ -5,7 +5,11 @@
 
 
 
-
+.err_msg{
+    font-family: "Mitr";
+    font-size: 13px;
+    color: red;
+}
 
 
 .me{
