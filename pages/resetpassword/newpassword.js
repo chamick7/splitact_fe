@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer_min from "../../Components/Footer_min";
 import { getAxios } from "../../utils/axios";
 const axios = getAxios();
@@ -19,8 +19,8 @@ export async function getServerSideProps(ctx) {
       })
       .catch((err) => {
         if (err.response.status === 406) {
-          // ctx.res.writeHead(302, { Location: "/login" });
-          // ctx.res.end();
+          ctx.res.writeHead(302, { Location: "/login" });
+          ctx.res.end();
         }
       });
   } catch (err) {
@@ -38,6 +38,7 @@ export async function getServerSideProps(ctx) {
 
 export default function newPassword({ email, rsToken }) {
   const { register, errors, handleSubmit, watch } = useForm();
+  const [err, setErr] = useState("");
   const router = useRouter();
 
   const onSubmit = (pwd) => {
@@ -47,12 +48,13 @@ export default function newPassword({ email, rsToken }) {
         newPassword: pwd.pwd,
       })
       .then((result) => {
-        if(result.status === 200){
-          router.replace('/resetpassword/complete?email='+email);
+        if (result.status === 200) {
+          router.replace("/resetpassword/complete?email=" + email);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
+        setErr("Somthing went wrong please try again later.");
       });
   };
 
@@ -65,6 +67,7 @@ export default function newPassword({ email, rsToken }) {
         <p className={styles.h3}>{email}</p>
       </div>
       <span className={styles.container}>
+        {err && <span className="err_msg">{err}</span>}
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           {errors.pwd && errors.pwd.type === "required" && (
             <span className="err_msg">This field is required</span>
