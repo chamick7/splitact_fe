@@ -124,9 +124,15 @@ svg.logout_icon{
 @media only screen and (max-width:480px){
     .dropdown{
         top: 9vh;
-        width: 100vw;
-        transform: translateX(-35%);
-
+        width: 96vw;
+        transform: translateX(-32%);
     }
     
+}
+@media only screen and (max-width:376px) and (min-width:359px){
+    .dropdown{
+        top: 9vh;
+        width: 94vw;
+        transform: translateX(-30%);
+    }
 }

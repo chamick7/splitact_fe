@@ -515,7 +515,8 @@
         width: 90%;
     }
     .endpage img{
-        max-width: 360px;
+        margin-top: 1vh;
+        max-width: 340px;
         padding: 0%;
     }
 }
