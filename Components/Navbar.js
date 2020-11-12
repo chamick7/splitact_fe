@@ -19,6 +19,7 @@ export default function Navbar() {
         setAccount(res.data.account);
     })
     .catch(err => {
+      setAccount({});
     })
 }, [])
   return (

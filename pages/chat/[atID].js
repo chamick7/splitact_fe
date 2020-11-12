@@ -6,6 +6,7 @@ import { getSocket } from "../../utils/socket";
 import SideBar from "../../Components/chat/SideBar";
 import ChatCTN from "../../Components/chat/ChatCTN";
 import styles from "../../css/chat.module.css";
+import ProtectRoute from "../../utils/ProtectRoute";
 import { useRecoilState } from "recoil";
 import { activityListAtom, activityAtom, accountAtom } from "../../atom";
 
@@ -31,13 +32,9 @@ export async function getServerSideProps(ctx) {
   } catch (err) {}
 
   return {
-    props: {
-    
-    },
+    props: {},
   };
 }
-
-
 
 export default function chatPage() {
   const [sideBarStyle, setSideBarStyle] = useState(false);
@@ -81,9 +78,11 @@ export default function chatPage() {
       axios
         .get("/activity/amount")
         .then((resData) => {
-           const statData = resData.data.activities.find((element) => element.atID._id == atID)
-            const newData = statData.atID;
-            setActivity(newData)
+          const statData = resData.data.activities.find(
+            (element) => element.atID._id == atID
+          );
+          const newData = statData.atID;
+          setActivity(newData);
         })
         .catch((err) => {
           router.replace("/dashboard");
@@ -106,22 +105,24 @@ export default function chatPage() {
   };
 
   return (
-    <div className={styles.chat}>
-      <SideBar
-        sideBarStyle={sideBarStyle}
-        activityList={activityList}
-        setSideBarStyle={setSideBarStyle}
-      />
-      <ChatCTN
-        atID={atID}
-        sideBarStyle={sideBarStyle}
-        setSideBarStyle={setSideBarStyle}
-        msg={msg}
-        setMsg={setMsg}
-        setMessages={setMessages}
-        messages={messages}
-        sendMessage={sendMessage}
-      />
-    </div>
+    <ProtectRoute>
+      <div className={styles.chat}>
+        <SideBar
+          sideBarStyle={sideBarStyle}
+          activityList={activityList}
+          setSideBarStyle={setSideBarStyle}
+        />
+        <ChatCTN
+          atID={atID}
+          sideBarStyle={sideBarStyle}
+          setSideBarStyle={setSideBarStyle}
+          msg={msg}
+          setMsg={setMsg}
+          setMessages={setMessages}
+          messages={messages}
+          sendMessage={sendMessage}
+        />
+      </div>
+    </ProtectRoute>
   );
 }
