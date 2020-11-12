@@ -4,22 +4,22 @@ import { getAxios } from "./axios";
 import { useRouter } from "next/router";
 const axios = getAxios();
 
-export default function ProtectRoute({ children }) {
+export default function PreventRoute({ children }) {
   const router = useRouter();
-  const [haveAccount, setHaveAccount] = useState(false);
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     axios
       .get("/account/auth")
       .then((resp) => {
-        setHaveAccount(true);
+        router.replace("/dashboard");
       })
       .catch((err) => {
-        router.replace("/login");
+        setRender(true);     
       });
   }, []);
 
-  if (haveAccount) {
+  if (render) {
     return children;
   } else {
     return <></>;
