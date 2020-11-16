@@ -8,6 +8,7 @@
     padding: 0;
     list-style-type: none;
     margin-bottom: 6vh;
+    z-index: 4;
 }
 
 .progress li{
@@ -28,7 +29,7 @@
     width: 2.5em;
     height: 2.5em;
     display: inline-block;
-    z-index: 2;
+    z-index: 1;
 }
 .progress .step:before {
     content: "";
@@ -39,7 +40,7 @@
     position: absolute;
     bottom: 1.2em;
     left: -7.75em;
-    z-index: 1;
+    z-index: -1;
 }
 
 .progress li:first-of-type .step:before {
@@ -49,11 +50,13 @@
 .progress .done .step,
 .progress .done .step:before{
     background-color:#8a6ef8;
+    z-index: 1;
 }
 .progress .active .step,
 .progress .active .step:before{
     background-color: #644CC6;
     font-size: 1.4rem;
+    z-index: 5;
 }
 .progress .active .step:before{
     width: 5.50em;
@@ -62,10 +65,11 @@
 }
 
 .progress .done .step,{
-    border: 3px solid #8a6ef8
+    border: 3px solid #8a6ef8;
 }
 .progress .active .step{
-    border: 3px solid #644CC6
+    border: 3px solid #644CC6;
+    z-index: 5;
 }
 
 @media only screen and (max-width:480px){
@@ -78,7 +82,7 @@
         position: absolute;
         bottom: 1.2em;
         left: -2em;
-        z-index: 1;
+        z-index: -1;
     }
     .progress .active .step:before{
         width: 1.50em;
@@ -102,7 +106,7 @@
         position: absolute;
         bottom: 1.2em;
         left: -5.1em;
-        z-index: 1;
+        z-index: -1;
     }
     .progress .active .step:before{
         width: 3.65em;
@@ -127,7 +131,7 @@
         position: absolute;
         bottom: 1.2em;
         left: -6.5em;
-        z-index: 1;
+        z-index: -1;
     }
     .progress .active .step:before{
         width: 4.65em;
