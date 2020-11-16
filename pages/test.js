@@ -1,16 +1,19 @@
-import Axios from "axios";
-import { useEffect } from "react";
-import { getAxios } from "../utils/axios";
-import ChatModule from "../Components/ChatModule";
-import Link from "next/link";
-import ProtectRoute from "../utils/ProtectRoute";
+import React from 'react'
 
-const axios = getAxios();
+import Loader from "../Components/loader"
+import styles from "../css/loader.module.css"
 
-export default function Test() {
-  return (
-    <ProtectRoute>
-      <h1>Hello</h1>
-    </ProtectRoute>
+export default function test() {
+
+  return(
+    <div className={styles.test}>
+      <h1>aaaaaaaaaa</h1>
+      <h1>aaaaaaaaaa</h1>
+      <h1>aaaaaaaaaa</h1>
+      <h1>aaaaaaaaaa</h1>
+      <h1>aaaaaaaaaa</h1>
+      <Loader/>
+    </div>
+    
   );
 }
