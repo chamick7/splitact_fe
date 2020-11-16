@@ -77,3 +77,9 @@ div.DayPicker-Day.DayPicker-Day--outside{
     font-size: 18px;
     width: 150px;
 }
+
+@media only screen and (max-width: 390px){
+    .DayPicker-Month{
+        top: 0;
+    }
+}
