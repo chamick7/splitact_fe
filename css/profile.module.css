@@ -1,9 +1,88 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap');
 
 .profile_body{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    font-family: 'Prompt', sans-serif;   
+}
+
+.top{
+    height: 8vh;
+    width: 100%;
+    background-color:  #644CC6;
+    padding: 2vh 8vw;
+    line-height: 4vh;
+    color: white;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.profile_info{
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.info_left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 40%;
+}
+.profile_container {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.profile_container img {
+    width: 200px;
+    height: 200px;
+}
+
+.info_left input{
+    display: none;
+}
+
+.info_left button{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: white;
+    color: #FF672B;
+    cursor: pointer;
+    transform:translateY(-7vh);
+    font-size: 1.2rem;
+}
+
+.info_right{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 8vw;
+    width: 69%;
+}
+.info_right span{
+    color:  #FF672B;
+    margin-bottom: 2vh;
+}
+.info_right button{
+    width: 10vw;
+    margin: 2vh 4vw;
+    font-family: 'Montserrat', sans-serif;
+    background: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #644CC6;
+    color: white;
+    font-size: 14px;
+    padding: 8px 30px;
+    font-weight: bold;
+    cursor: pointer;
 }
