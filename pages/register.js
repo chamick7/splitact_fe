@@ -47,6 +47,7 @@ export default function Register() {
         <section className="login-right">
           <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
             <h1>Register a new account</h1>
+            {errors.termOfUse && errors.termOfUse.type === "required" && <h6 className="err_msg">Please accept term of use</h6>}
 
             <div className="login-input name">
               <input
@@ -117,6 +118,13 @@ export default function Register() {
             {errors.cf_password && errors.cf_password.type === "validate" && (
               <h6 className="err_msg">Passwords not match</h6>
             )}
+
+            <label className="register_agree noselect" htmlFor="tou">
+              <input type="checkbox" name="termOfUse" id="tou" ref={register({
+                required:"Required",
+              })} />
+              I agree to the Splitact <Link href="/term_of_use"><a>term of use</a></Link>
+            </label>
 
             <button className="login-submit-btn">Register</button>
 

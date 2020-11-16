@@ -12,6 +12,18 @@
     font-size: 25px;
 }
 
+.register_agree{
+    
+}
+.register_agree input {
+    margin-right: 15px;
+    cursor: pointer;
+}
+.register_agree a{
+    text-decoration: underline;
+    color: blueviolet;
+}
+
 @media only screen and (max-width:480px){
     .register-form h1{
         font-size: 22px;
