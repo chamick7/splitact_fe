@@ -38,6 +38,7 @@
     height: 200px;
     overflow: hidden;
     border-radius: 50%;
+    border: 2px solid black;
 }
 .profile_container img {
     width: 200px;
@@ -47,7 +48,6 @@
 .info_left input{
     display: none;
 }
-
 .info_left button{
     width: 50px;
     height: 50px;
@@ -71,6 +71,13 @@
 .info_line{
     display: flex;
     flex-direction: row;
+}
+.info_line span{
+    color: #E6E6E6;
+}
+.info_line input{
+    margin-left: 1vw;
+    /* display: none; */
 }
 
 .info_right button{
