@@ -46,11 +46,11 @@ export default function Dropdown() {
   };
 
   function DropProfile() {
-    if (account.name) {
+    if (account.username) {
       return (
         <li className={styles.profile} onClick={() => setOpen(false)}>
           <Link href="/profile">
-            <a>{account.name}</a>
+            <a>{account.username}</a>
           </Link>
         </li>
       );
@@ -110,7 +110,7 @@ export default function Dropdown() {
         <ul className={styles.dropmenu}>
           <DropProfile />
 
-          {account.name ? (
+          {account.username ? (
             <>
               <DropItem icon={faAddressCard} word="Profile" to="/profile" />
               <DropItem icon={faComments} word="Chat" to="/chat" />
@@ -121,7 +121,7 @@ export default function Dropdown() {
 
           <hr className={styles.hr} />
 
-          {account.name ? (
+          {account.username ? (
             <>
               <DropItem icon={faEdit} word="Activity" to="/dashboard" />
               <DropItem icon={faUsers} word="Teams" to="/dashboard" />
@@ -137,7 +137,7 @@ export default function Dropdown() {
           <DropItem icon={faAddressBook} word="Contact" to="/contact" />
           <DropItem icon={faPager} word="About" to="/about" />
 
-          {account.name ? (
+          {account.username ? (
             <>
               <hr className={styles.hr} />
               <DropItem
@@ -176,7 +176,7 @@ export default function Dropdown() {
     <button ref={node} className={styles.btn_nav}>
       <div onClick={() => setOpen(!open)}>
         <FontAwesomeIcon className={styles.nav_icon1} icon={faUserAlt} />
-        <span>{account.name ? account.name : "Member"}</span>
+        <span>{account.username ? account.username : "Member"}</span>
         <FontAwesomeIcon className={styles.nav_icon2} icon={faCaretDown} />
       </div>
       {open && <DropdownMenu />}

@@ -64,7 +64,7 @@ export default function ActivityModal(props) {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [members, setMembers] = useState([
-    { name: account.name, acID: account.acID },
+    { username: account.username, acID: account.acID },
   ]);
   ``;
 

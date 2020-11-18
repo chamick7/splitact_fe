@@ -55,7 +55,7 @@ export default function login() {
       .then((res) => {
         setAccount({
           email: res.data.account.email,
-          name: res.data.account.name,
+          username: res.data.account.username,
           acID: res.data.account.acID,
           role: res.data.account.role,
         });
@@ -64,7 +64,7 @@ export default function login() {
       })
       .catch((err) => {
         console.log(err.response);
-        setErr("Email or password is incorrect");
+        setErr("Email username or password is incorrect");
       });
   };
 
@@ -84,9 +84,9 @@ export default function login() {
             {Err && <h6 className="err_msg">{Err}</h6>}
             <div className="login-input email">
               <input
-                name="email"
-                type="email"
-                placeholder="Email"
+                name="emailOrUsername"
+                type="text"
+                placeholder="Email or username"
                 ref={register({
                   required: "Required",
                 })}
