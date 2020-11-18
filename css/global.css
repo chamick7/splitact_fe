@@ -11,6 +11,15 @@
     color: red;
 }
 
+.background_modal{
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background-color: #f1f0f0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .me{
     font-family: "Mitr";
