@@ -129,7 +129,7 @@ export default function chat({ query }) {
 
   const sentToServer = (data) => {
     data.activity = query.activity;
-    data.sender = Account.name;
+    data.sender = Account.username;
     data.senderID = Account.acID;
     socket.emit("msgToServer", data);
   };

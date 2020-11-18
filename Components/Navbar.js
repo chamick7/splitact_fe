@@ -24,7 +24,7 @@ export default function Navbar() {
 }, [])
   return (
     <nav className="navbar">
-      <Link href={account.name? "/dashboard":"/"} >
+      <Link href={account.username? "/dashboard":"/"} >
         <a>
           <img src="/img/S_A_logo.png" alt="Loading LOGO" />{" "}
           <span>
