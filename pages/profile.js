@@ -12,18 +12,19 @@ import Link from 'next/link';
 import { accountAtom } from '../atom';
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/router";
-import { useState } from 'react';
-
+import { useState,useRef } from 'react';
+import { useForm } from "react-hook-form";
 
 export default function profile(){
 
     const router = useRouter();
+    const { handleSubmit, register, errors, watch } = useForm();
     const [account] = useRecoilState(accountAtom);
     const [name, setName] = useState(router.query.name)
     const [email, setEmail] = useState(router.query.email);
 
-    const uploadedImage = React.useRef(null);
-    const imageUploader = React.useRef(null);
+    const uploadedImage = useRef(null);
+    const imageUploader = useRef(null);
 
     const handleImageUpload = e => {
     const [file] = e.target.files;
@@ -38,12 +39,21 @@ export default function profile(){
     }
   };
 
-  const handleChangeName = (e) =>{
-        setName(e.target.value)
+
+  const ChangeName = useState(false)
+  const ChangeEmail = useState(false)
+
+  const handleChangeName = () =>{
+        setName(name)
   }
-  const handleChangeEmail = (e) => {
-        setEmail(e.target.value);
+  const handleChangeEmail = () => {
+        setEmail(email);
   };
+
+  const onSubmit = () =>{
+
+  }
+
 
     return (
         
@@ -69,30 +79,37 @@ export default function profile(){
                     onClick= {() => imageUploader.current.click()} >
                     <FontAwesomeIcon icon={faEdit} /></button>
                 </div>
-                <form className={styles.info_right}>
+                <form className={styles.info_right} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.info_line}>
                         
                         <button
-                        onClick= {() => ChangeName.click()}
-                        >
+                        onClick= {() => ChangeName.onclick()}>
                         <FontAwesomeIcon icon={faEdit}/></button>
-                        <h2>Name : <span>{account.name}</span></h2>
+                        <h2>Name : asff<span>{account.name}</span></h2>
                         
                         <input
+                        ref={ChangeName}
                         onChange = {handleChangeName}
+                        name="username"
+                        type="text"
+                        placeholder="Username"
                         />
 
                     </div>
                     <div className={styles.info_line}>
                         
                         <button
-                        onClick= {() => ChangeEmail.click()}>
+                        onClick= {() => ChangeEmail.onclick()}>
                         <FontAwesomeIcon icon={faEdit}/></button>
 
                         <h2>Email : {account.email}</h2>
                         
                         <input
+                        ref={ChangeEmail}
                         onChange = {handleChangeEmail}
+                        name="Email"
+                        type="email"
+                        placeholder="Email"
                         />
 
                     </div>

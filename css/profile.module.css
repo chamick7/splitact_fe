@@ -76,6 +76,7 @@
     color: #E6E6E6;
 }
 .info_line input{
+    width: 12vw;
     margin-left: 1vw;
     /* display: none; */
 }
