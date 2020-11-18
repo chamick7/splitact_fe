@@ -17,6 +17,7 @@ export default function Register() {
   const router = useRouter();
   const [email, setEmail] = useState(router.query.email);
   const axios = getAxios();
+  const [error, setError] = useState("");
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -29,12 +30,20 @@ export default function Register() {
     axios
       .post("/account", account)
       .then((res) => {
+        setError("");
         if (res.data.status === "Success") {
           router.push({ pathname: "/login" });
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err.response.data.already === "username");
+        if(err.response.status == 409){
+          if(err.response.data.already === "email"){
+            setError("This email address is already registered")
+          } else if (err.response.data.already === "username") {
+            setError("This username is already registered")
+          }
+        }
       });
   };
 
@@ -48,19 +57,19 @@ export default function Register() {
           <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
             <h1>Register a new account</h1>
             {errors.termOfUse && errors.termOfUse.type === "required" && <h6 className="err_msg">Please accept term of use</h6>}
-
+            {error && <h6 className="err_msg">{error}</h6>}
             <div className="login-input name">
               <input
-                name="name"
+                name="username"
                 type="text"
-                placeholder="Name"
+                placeholder="Username"
                 ref={register({
                   required: "Required",
                 })}
               />
               <FontAwesomeIcon icon={faUser} />
             </div>
-            {errors.name && <h6 className="err_msg">This is Required</h6>}
+            {errors.username && <h6 className="err_msg">This is Required</h6>}
 
             <div className="login-input email">
               <input

@@ -95,7 +95,7 @@ export default function chatPage() {
 
     if (msg !== "") {
       const activity = atID;
-      const sender = account.name;
+      const sender = account.username;
       const senderID = account.acID;
 
       socket.emit("msgToServer", { activity, sender, senderID, msg });
