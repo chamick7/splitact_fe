@@ -68,11 +68,21 @@
     padding: 8vw;
     width: 69%;
 }
-.info_right span{
-    color:  #FF672B;
-    margin-bottom: 2vh;
+.info_line{
+    display: flex;
+    flex-direction: row;
 }
+
 .info_right button{
+    border: none;
+    background-color: white;
+    color: #FF672B;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-right: 1vw;
+
+}
+.info_right button:last-child{
     width: 10vw;
     margin: 2vh 4vw;
     font-family: 'Montserrat', sans-serif;

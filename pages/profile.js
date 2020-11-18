@@ -7,30 +7,77 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../css/profile.module.css"
 
+import Cropper from 'react-easy-crop'
+import Link from 'next/link';
+import { accountAtom } from '../atom';
+import { useRecoilState } from "recoil";
+
+
 
 
 export default function profile(){
 
-    return(
-    
+
+    const [account] = useRecoilState(accountAtom);
+
+
+
+    const uploadedImage = React.useRef(null);
+    const imageUploader = React.useRef(null);
+
+    const handleImageUpload = e => {
+    const [file] = e.target.files;
+    if (file) {
+      const reader = new FileReader();
+      const { current } = uploadedImage;
+      current.file = file;
+      reader.onload = e => {
+        current.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+    return (
+        
+
         <div className={styles.profile_body}>
             <div className={styles.top}>INWZA007's Profile</div>
             <div className={styles.profile_info}>
                 <div className={styles.info_left}>
                     <div className={styles.profile_container}>
-                    <img id="profileImage" src="/img/miku_profile.jpg" />
+                    <img 
+                    ref={uploadedImage}
+                    id="uploadedImage" src="/img/profile.png" />
                     </div>
-                    <input type="file" id="imageUpload" name="profile" required="" capture/>
-                    <button><FontAwesomeIcon icon={faEdit} /></button>
+                    <input
+                    onChange={handleImageUpload}  
+                    ref={imageUploader}        
+                    type="file" id="imageUpload" name="profile" accept="image/png,image/jpeg" />
+                    <button 
+                    onClick= {() => imageUploader.current.click()} >
+                    <FontAwesomeIcon icon={faEdit} /></button>
                 </div>
-                <div className={styles.info_right}>
-                    <h2><span><FontAwesomeIcon icon={faEdit} /></span> Name : INWZA007</h2>
-                    <h2><span><FontAwesomeIcon icon={faEdit} /></span> Email : INWZA007@splitact.com</h2>
-                    <h2><span><FontAwesomeIcon icon={faEdit} /></span> Password</h2>
+                <form className={styles.info_right}>
+                    <div className={styles.info_line}>
+                        <button>
+                        
+                        <FontAwesomeIcon icon={faEdit}/></button>
+                        <h2>Name : {account.name}</h2>
+                    </div>
+                    <div className={styles.info_line}>
+                        <button>
+                        <FontAwesomeIcon icon={faEdit}/></button>
+                        <h2>Email : {account.email}</h2>
+                    </div>
+                    <div className={styles.info_line}>
+                        <Link href="/resetpassword"><button><FontAwesomeIcon icon={faEdit}/></button></Link>
+                        <h2>Password</h2>
+                    </div>
                     <button>Apply</button>
-                </div>
+                </form>
             </div>
         <Footer_min/>
         </div>
-    )
+    );
 }
