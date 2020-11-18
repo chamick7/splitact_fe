@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 import Footer_min from "../Components/Footer_min";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -12,16 +11,16 @@ import Cropper from 'react-easy-crop'
 import Link from 'next/link';
 import { accountAtom } from '../atom';
 import { useRecoilState } from "recoil";
-
-
+import { useRouter } from "next/router";
+import { useState } from 'react';
 
 
 export default function profile(){
 
-
+    const router = useRouter();
     const [account] = useRecoilState(accountAtom);
-
-
+    const [name, setName] = useState(router.query.name)
+    const [email, setEmail] = useState(router.query.email);
 
     const uploadedImage = React.useRef(null);
     const imageUploader = React.useRef(null);
@@ -39,6 +38,13 @@ export default function profile(){
     }
   };
 
+  const handleChangeName = (e) =>{
+        setName(e.target.value)
+  }
+  const handleChangeEmail = (e) => {
+        setEmail(e.target.value);
+  };
+
     return (
         
 
@@ -47,28 +53,48 @@ export default function profile(){
             <div className={styles.profile_info}>
                 <div className={styles.info_left}>
                     <div className={styles.profile_container}>
+
                     <img 
                     ref={uploadedImage}
-                    id="uploadedImage" src="/img/profile.png" />
+                    id="uploadedImage" src={uploadedImage} />
+
                     </div>
+
                     <input
                     onChange={handleImageUpload}  
                     ref={imageUploader}        
                     type="file" id="imageUpload" name="profile" accept="image/png,image/jpeg" />
+                    
                     <button 
                     onClick= {() => imageUploader.current.click()} >
                     <FontAwesomeIcon icon={faEdit} /></button>
                 </div>
                 <form className={styles.info_right}>
                     <div className={styles.info_line}>
-                        <button>
+                        
+                        <button
+                        onClick= {() => ChangeName.click()}
+                        >
                         <FontAwesomeIcon icon={faEdit}/></button>
                         <h2>Name : <span>{account.name}</span></h2>
+                        
+                        <input
+                        onChange = {handleChangeName}
+                        />
+
                     </div>
                     <div className={styles.info_line}>
-                        <button>
+                        
+                        <button
+                        onClick= {() => ChangeEmail.click()}>
                         <FontAwesomeIcon icon={faEdit}/></button>
+
                         <h2>Email : {account.email}</h2>
+                        
+                        <input
+                        onChange = {handleChangeEmail}
+                        />
+
                     </div>
                     <div className={styles.info_line}>
                         <Link href="/resetpassword"><button><FontAwesomeIcon icon={faEdit}/></button></Link>
