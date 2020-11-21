@@ -28,29 +28,32 @@ let users = [];
 axios
   .get("/account/users")
   .then((data) => {
-    console.log(data.data)
+    // console.log(data.data)
     users = data.data.users;
   })
   .catch((err) => {});
 
 const getSuggestions = (value) => {
-  console.log(users);
+  // console.log(users);
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
   return inputLength === 0
     ? []
-    : users.filter(
-        (user) => user.name.toLowerCase().slice(0, inputLength) === inputValue
-      );
+    : users.length > 0
+    ? users.filter(
+        (user) =>
+          user.username.toLowerCase().slice(0, inputLength) === inputValue
+      )
+    : [];
 };
 
 const renderSuggestion = (suggestion) => {
-  return <div>{suggestion.name}</div>;
+  return <div>{suggestion.username}</div>;
 };
 
 const getSuggestionValue = (suggestion) => {
-  return suggestion.name;
+  return suggestion.username;
 };
 
 export default function ActivityModal(props) {
@@ -60,7 +63,7 @@ export default function ActivityModal(props) {
   const [colorModal, setColorModal] = useState(false);
   const { register, handleSubmit } = useForm();
   const [dateState, setDateState] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [members, setMembers] = useState([
@@ -80,7 +83,7 @@ export default function ActivityModal(props) {
   };
 
   const onSuggestionsSelected = (event, { suggestion }) => {
-    const newMember = { name: suggestion.name, acID: suggestion._id };
+    const newMember = { username: suggestion.username, acID: suggestion._id };
     console.log(newMember);
     if (!members.some((member) => member.acID === newMember.acID)) {
       setMembers((members) => [...members, newMember]);
@@ -90,6 +93,8 @@ export default function ActivityModal(props) {
 
   const onSubmit = (data) => {
     let allData = {};
+
+    console.log(data);
 
     if (dateState) {
       allData = {
@@ -105,8 +110,6 @@ export default function ActivityModal(props) {
         members: members,
       };
     }
-
-    console.log(allData);
 
     axios
       .post("/activity", allData)
@@ -246,7 +249,7 @@ export default function ActivityModal(props) {
                 <MemberItem
                   key={index}
                   index={index}
-                  name={member.name}
+                  name={member.username}
                   acID={member.acID}
                 />
               );

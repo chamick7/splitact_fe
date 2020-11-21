@@ -132,7 +132,6 @@ export default function Dropdown() {
             <></>
           )}
 
-          <DropItem icon={faQuestionCircle} word="Help" to="/help" />
           <DropItem icon={faExclamationCircle} word="Report" to="/report" />
           <DropItem icon={faAddressBook} word="Contact" to="/contact" />
           <DropItem icon={faPager} word="About" to="/about" />

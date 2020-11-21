@@ -1,0 +1,62 @@
+
+
+.member_modal{
+    position: absolute;
+    width: 90%;
+    min-height: 200px;
+    margin-top: -40%;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 7px;
+    font-family: "Kanit";
+}
+
+.member_modal_header{
+    width: 100%;
+    border-radius: 7px 7px 0 0;
+    color: white;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.member_modal_header span{
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+.member_modal_body{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.member_view{
+    margin-top: 20px;
+    width: 80%;
+    min-height: 100px;
+    overflow-y: auto;
+    font-family: "Kanit";
+    list-style-type: disc;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.submit_btn{
+    align-self: flex-end;
+    margin-right: 20px;
+    background: none;
+    border: none;
+    font-family: "Kanit";
+    font-size: 16px;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}

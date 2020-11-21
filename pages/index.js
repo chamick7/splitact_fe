@@ -56,10 +56,8 @@ export default function Home({}) {
     <PreventRoute>
       <div className={styles.home_body}>
         <Head>
-          <meta
-            name="google-site-verification"
-            content="EdI8bmn8nr0vMGx3aBe3KAu3P-tFFwI2IUoy76huzks"
-          />
+          <meta name="robots" content="index" />
+          <meta name="googlebot" content="index" />
         </Head>
         <div className={styles.home_calendar_container}>
           <section className={styles.calendar_container_left}>
