@@ -7,6 +7,16 @@
     height: 35px;
     border-radius: 50%;
     cursor: pointer;
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.color_dot svg{
+    align-self: center;
+    justify-self: center;
+    font-size: 20px;
 }
 
 
@@ -20,6 +30,8 @@
     padding: 5px;
     border-radius: 4px;
     font-family: "Kanit";
+    color: black;
+    border: 1px solid black;
 
 }
 

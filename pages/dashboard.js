@@ -14,6 +14,8 @@ import {
   faPencilAlt,
   faEllipsisV,
   faUsers,
+  faDesktop,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import styles from "../css/dashboard.module.css";
@@ -50,13 +52,17 @@ export default function dashboard() {
   const [account, setAccount] = useRecoilState(accountAtom);
   const [activityModal, setActivityModal] = useState(false);
   const [activities, setActivities] = useState([]);
+  const [searchActivities, setSearchActivities] = useState([]);
+  const [search, setSearch] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     axios
       .get("/activity/amount")
       .then((resp) => {
+        // console.log(resp.data);
         setActivities(resp.data.activities);
+        setSearchActivities(resp.data.activities);
       })
       .catch((err) => {});
   }, []);
@@ -137,6 +143,16 @@ export default function dashboard() {
     );
   }
 
+  const onSubmitSearch = (e) => {
+    e.preventDefault();
+    setSearchActivities(
+      activities.filter((act) => {
+        return act.atId.atName.toLowerCase().includes(search.toLowerCase());
+      })
+    );
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
   return (
     <ProtectRoute>
       <Calendar />
@@ -146,10 +162,26 @@ export default function dashboard() {
 
       <div className={styles.body}>
         <div className={styles.activity}>
+          <div className={styles.search_container}>
+            <form onSubmit={onSubmitSearch} className={styles.form_search}>
+              <input
+                type="text"
+                name="search"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
+              <button type="submit">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            </form>
+          </div>
           <div className={styles.header}>
             <h1>
               {" "}
-              <FontAwesomeIcon icon={faFileSignature} /> Activity
+              <FontAwesomeIcon icon={faDesktop} /> Activity
             </h1>
           </div>
           <ul className={styles.activity_container}>
@@ -157,8 +189,8 @@ export default function dashboard() {
               <FontAwesomeIcon onClick={onActivityModal} icon={faPlusSquare} />
             </span>
 
-            {activities.map((activityRes, index) => {
-              const activity = activityRes.atID;
+            {searchActivities.map((activityRes, index) => {
+              const activity = activityRes.atId;
               return (
                 <ActivityItem
                   key={index}
@@ -176,26 +208,3 @@ export default function dashboard() {
     </ProtectRoute>
   );
 }
-
-// dashboard.getInitialProps = async (ctx) => {
-//   const cookie = ctx.req?.headers.cookie;
-//   const ac = {}
-
-//   const resp = await axios.get('/account/auth',{
-//     headers:{
-//       cookie:cookie
-//     }
-//   })
-
-//   if(resp.status === 401 && !ctx.req){
-//     Router.replace('/login')
-//   }
-
-//   if(resp.status === 401 && ctx.req){
-//     ctx.resp?.writeHead(302, {
-//       Location: '/login'
-//     })
-//   }
-
-//   return ac
-// }

@@ -15,8 +15,10 @@
     position: absolute;
     width: 100vw;
     height: calc(100vh - 60px);
+    max-height: fit-content;
     background-color: #f1f0f0e0;
     display: flex;
+    z-index: 7;
     align-items: center;
     justify-content: center;
 }
@@ -53,6 +55,8 @@
     }
 }
 
+
+
 .DayPicker-Month{
     display: flex;
     flex-direction: column;
@@ -80,6 +84,7 @@ div.DayPicker-Day.DayPicker-Day--outside{
     padding: 5px 15px;
     outline: none;
     border: none;
+    margin-top: 5px;
     border-bottom: 1px solid black;
     background: none;
     color: darkorange;
@@ -90,5 +95,17 @@ div.DayPicker-Day.DayPicker-Day--outside{
 @media only screen and (max-width: 390px){
     .DayPicker-Month{
         top: 0;
+    }
+}
+
+
+@media only screen and (max-width: 900px){
+
+    .resSideBar{
+        display: none !important;
+    }
+
+    .resAct{
+        width: 100% !important;
     }
 }

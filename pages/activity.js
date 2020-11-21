@@ -6,7 +6,12 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import update from "immutability-helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCog,
+  faPlusCircle,
+  faBars,
+  faDesktop,
+} from "@fortawesome/free-solid-svg-icons";
 
 import style from "../css/activity.module.css";
 
@@ -16,10 +21,13 @@ import CrListModal from "../Components/activity/ListModal/CrListModal";
 import EditListModal from "../Components/activity/ListModal/EditListModal";
 import CrCardModal from "../Components/activity/cardModal/crCardModal";
 import EditCardModal from "../Components/activity/cardModal/editCardModal";
+import EditactivityModal from "../Components/activity/editActivity/editactivityModal";
+import CrHotActModal from "../Components/activity/hotAct/crHotActModal";
+import DeleteCardModal from "../Components/activity/cardModal/DeleteCardModal";
 
 //modal
 
-export function getServerSideProps(ctx) {
+export function getServerSideProps() {
   return {
     props: {},
   };
@@ -30,89 +38,357 @@ export default function activity() {
   const router = useRouter();
   const activityId = router.query.activity;
 
+
   //modal open
+  const [editActivityModal, setEditActivityModal] = useState(false);
   const [newListModal, setNewListModal] = useState(false);
   const [editListModal, setEditListModal] = useState(false);
-  const [newCardModal, setNewCardModal] = useState(true);
+  const [newCardModal, setNewCardModal] = useState(false);
   const [editCardModal, setEditCardModal] = useState(false);
+  const [deleteCardModal, setDeleteCardModal] = useState(false);
+  const [newHotActModal, setNewHotActModal] = useState(false);
 
-  const [groupList, setGroupList] = useState([
-    {
-      name: "test1",
-      cardList: [
-        { cardName: "hello (1)", id: "2214123f" },
-        { cardName: "My name is (1)", id: "12ga4123f" },
-        { cardName: "mick (1)", id: "53zxvd123f" },
-      ],
-    },
-    {
-      name: "test2",
-      cardList: [
-        { cardName: "WOW (2)", id: "98zfvbd123f" },
-        { cardName: "Yes!! (2)", id: "43asqwd123f" },
-      ],
-    },
-  ]);
+  const [canMove, setCanMove] = useState(true);
+  const [worker, setWorker] = useState(null);
+  const [activity, setActivity] = useState({});
+  const [groupList, setGroupList] = useState([]);
+  const [members, setMembers] = useState([]);
+  const [sendGroup, setSendGroup] = useState();
+  const [hotAct, setHotAct] = useState([]);
 
-  const changeGroup = (card, oldGroup, newGroup) => {
-    let newGroupList = groupList.slice();
-    const oldGroupIndex = newGroupList.indexOf(oldGroup);
-    const newGroupIndex = newGroupList.indexOf(newGroup);
-    newGroupList[oldGroupIndex].cardList.splice(
-      newGroupList[oldGroupIndex].cardList.indexOf(card),
-      1
-    );
-    newGroupList[newGroupIndex].cardList.push(card);
-    setGroupList(newGroupList);
-  };
+  const [currentCard, setCurrentCard] = useState({});
+  const [currentList, setCurrentList] = useState({});
 
-  const moveCard = (group, oldIndex, newIndex, oldCard, newCard) => {
-    const { card, index } = findCard(group, oldIndex);
-    const oldGroupIndex = groupList.slice().indexOf(group);
-    const newGroupIndex = groupList.slice().indexOf();
-    const newGroupList = groupList.slice();
 
-    if (typeof oldCard !== "undefined") {
-      setGroupList(
-        update(newGroupList, {
-          [oldGroupIndex]: {
-            cardList: {
-              $splice: [
-                [index, 1],
-                [newIndex, 0, card],
-              ],
-            },
-          },
+
+  //card
+
+  const saveMoveCard = (groupIndex, toGroupIndex) => {
+    //moveCard
+    if (groupIndex === toGroupIndex) {
+      axios
+        .post("/activity/card/move", {
+          listId: groupList[groupIndex]._id,
+          cards: groupList[groupIndex].cards,
         })
-      );
-    } else {
-      return;
+        .then()
+        .catch((err) => {
+          router.push("/dashboard");
+        });
     }
   };
 
-  const findCard = (group, id) => {
-    const card = group.cardList.filter((c) => c.id === id)[0];
-    return {
-      card,
-      index: group.cardList.indexOf(card),
-    };
+  useEffect(() => {
+    if (sendGroup) {
+      saveChangeGroup(sendGroup.groupIndex, sendGroup.toGroupIndex);
+    }
+  }, [sendGroup]);
+
+  const saveChangeGroup = (groupIndex, toGroupIndex) => {
+    axios
+      .post("/activity/card/changelist", {
+        oldListId: groupList[groupIndex]._id,
+        oldCards: groupList[groupIndex].cards,
+        newListId: groupList[toGroupIndex]._id,
+        newCards: groupList[toGroupIndex].cards,
+      })
+      .then(() => {
+        console.log(groupList);
+      })
+      .catch((err) => {
+        router.push("/dashboard");
+      });
   };
 
-  useEffect(() => {}, [Router]);
+  const setCoolDown = () => {
+    setCanMove(false);
+    setTimeout(() => {
+      setCanMove(true);
+    }, 1000);
+  };
+
+  const changeGroup = (oldGroupIndex, oldIndex, toGroupIndex, card) => {
+    try {
+      if (canMove) {
+        setGroupList(
+          update(groupList, {
+            [oldGroupIndex]: {
+              cards: {
+                $splice: [[oldIndex, 1]],
+              },
+            },
+            [toGroupIndex]: {
+              cards: {
+                $push: [card],
+              },
+            },
+          })
+        );
+        setSendGroup({ groupIndex: oldGroupIndex, toGroupIndex: toGroupIndex });
+        setCoolDown();
+      }
+    } catch (error) {
+      console.log(error);
+      // router.push("/dashboard");
+    }
+  };
+
+  const moveCardList = (groupIndex, oldIndex, atIndex, card) => {
+    try {
+      if (canMove) {
+        setGroupList(
+          update(groupList, {
+            [groupIndex]: {
+              cards: {
+                $splice: [
+                  [oldIndex, 1],
+                  [atIndex, 0, card],
+                ],
+              },
+            },
+          })
+        );
+      }
+    } catch (error) {
+      router.push("/dashboard");
+    }
+  };
+
+  const createCard = (card) => {
+    console.log(groupList[0].cards[0]);
+    console.log(card);
+    setGroupList(
+      update(groupList, {
+        [0]: {
+          cards: {
+            $push: [card],
+          },
+        },
+      })
+    );
+    setNewCardModal(false);
+  };
+
+  useEffect(() => {
+    axios
+      .get("/activity?activity=" + activityId)
+      .then((resData) => {
+        setActivity(resData.data.activity);
+        setGroupList(resData.data.activity.list);
+        setMembers(resData.data.members);
+        setHotAct(resData.data.hotAct);
+      })
+      .catch((err) => {});
+  }, [Router]);
+
+  const openEditCard = (card) => {
+    setCurrentCard(card);
+    setEditCardModal(true);
+  };
+
+  const editCard = (cardId, newCard) => {
+    axios
+      .post("/activity/card/edit", {
+        cardId: cardId,
+        card_name: newCard.card_name,
+        card_description: newCard.card_description,
+        color: newCard.color,
+        dueDate: newCard.dueDate,
+        workerId: newCard.workerId,
+      })
+      .then((result) => {
+        const listId = newCard.listId;
+
+        // console.log(result.data.card);
+
+        const listIndex = groupList.findIndex((list) => list._id == listId);
+        const cardIndex = groupList[listIndex].cards.findIndex(
+          (card) => card._id == cardId
+        );
+
+        setGroupList(
+          update(groupList, {
+            [listIndex]: {
+              cards: {
+                [cardIndex]: {
+                  $set: result.data.card,
+                },
+              },
+            },
+          })
+        );
+      })
+      .catch((err) => {});
+
+    setEditCardModal(false);
+  };
+
+  const openDeleteCard = (card) => {
+    setCurrentCard(card);
+    setDeleteCardModal(true);
+  };
+
+  const deleteCard = (cardId) => {
+    setDeleteCardModal(false);
+    axios
+      .post("/activity/card/del", { cardId: cardId })
+      .then((result) => {
+        const cardId = result.data.cardId;
+        const listId = result.data.listId;
+
+        const listIndex = groupList.findIndex((group) => group._id == listId);
+        const cardIndex = groupList[listIndex].cards.findIndex(
+          (card) => card._id == cardId
+        );
+
+        setGroupList(
+          update(groupList, {
+            [listIndex]: {
+              cards: {
+                $splice: [[cardIndex, 1]],
+              },
+            },
+          })
+        );
+      })
+      .catch((err) => {});
+  };
+
+  //list
+
+  const openEditList = (list) => {
+    setCurrentList(list);
+    setEditListModal(true);
+  };
+
+  const editList = (listId, newName) => {
+    axios
+      .post("/activity/list/edit", { listId, newName })
+      .then((result) => {
+        const index = groupList.findIndex((list) => list._id == listId);
+        setGroupList(
+          update(groupList, {
+            [index]: {
+              $set: result.data.list,
+            },
+          })
+        );
+        // setGroupList(
+
+        // );
+      })
+      .catch((err) => {});
+
+    setEditListModal(false);
+  };
+
+  const toggleSideBar = () => {
+    const sideBar = document.querySelector("#sideBar");
+
+    sideBar.classList.toggle("resSideBar");
+  };
+
+  const addHotAct = (hotact) => {
+    setHotAct(
+      update(hotAct, {
+        $push: [hotact],
+      })
+    );
+
+    setNewHotActModal(false);
+  };
 
   return (
     <ProtectRoute>
       <div className={style.body}>
+        {editActivityModal && (
+          <EditactivityModal
+            activity={activity}
+            setEditActivityModal={setEditActivityModal}
+            members={members}
+            setMembers={setMembers}
+          />
+        )}
         {newListModal && <CrListModal setNewListModal={setNewListModal} />}
-        {editListModal && <EditListModal setEditListModal={setEditListModal} />}
-        {newCardModal && <CrCardModal setNewCardModal={setNewCardModal} />}
-        {editCardModal && <EditCardModal setEditCardModal={setEditCardModal} />}
+        {editListModal && (
+          <EditListModal
+            color={activity.color}
+            currentList={currentList}
+            editList={editList}
+            setEditListModal={setEditListModal}
+          />
+        )}
+        {newCardModal && (
+          <CrCardModal
+            worker={worker}
+            setWorker={setWorker}
+            members={members}
+            createCard={createCard}
+            setNewCardModal={setNewCardModal}
+            listId={groupList[0]._id}
+          />
+        )}
+        {editCardModal && (
+          <EditCardModal
+            members={members}
+            worker={worker}
+            currentCard={currentCard}
+            setWorker={setWorker}
+            setEditCardModal={setEditCardModal}
+            editCard={editCard}
+          />
+        )}
 
-        <div style={{ backgroundColor: "#644CC6" }} className={style.header}>
-          <span> Activity Name </span>
+        {deleteCardModal && (
+          <DeleteCardModal
+            currentCard={currentCard}
+            setDeleteCardModal={setDeleteCardModal}
+            deleteCard={deleteCard}
+          />
+        )}
+
+        {newHotActModal && (
+          <CrHotActModal
+            activity={activity}
+            setNewHotActModal={setNewHotActModal}
+            addHotAct={addHotAct}
+          />
+        )}
+
+        <div
+          style={{ backgroundColor: activity.color }}
+          className={style.header}
+        >
+          <span style={{ display: "flex", alignItems: "center" }}>
+            {" "}
+            <FontAwesomeIcon
+              style={{ fontSize: "24px", margin: "5px 15px" }}
+              icon={faDesktop}
+            />{" "}
+            {activity.atName}{" "}
+          </span>
+          <span className={style.header_right}>
+            <span
+              onClick={() => {
+                setEditActivityModal(true);
+              }}
+            >
+              <FontAwesomeIcon icon={faCog} />
+            </span>
+            <span>
+              <span
+                onClick={() => {
+                  toggleSideBar();
+                }}
+                className={style.toggleMenu}
+              >
+                <FontAwesomeIcon icon={faBars} />
+              </span>
+            </span>
+          </span>
         </div>
         <div className={style.view}>
-          <div className={style.work_table}>
+          <div className={style.work_table + " resAct"}>
             <DndProvider backend={HTML5Backend}>
               {groupList.map((group, index) => {
                 return (
@@ -120,16 +396,20 @@ export default function activity() {
                     key={index}
                     index={index}
                     group={group}
+                    color={activity.color}
+                    cardList={group.cards}
+                    groupIndex={index}
                     changeGroup={changeGroup}
-                    findCard={findCard}
-                    moveCard={moveCard}
-                    setEditListModal={setEditListModal}
+                    openEditList={openEditList}
                     setNewCardModal={setNewCardModal}
-                    setEditCardModal={setEditCardModal}
+                    moveCardList={moveCardList}
+                    saveMoveCard={saveMoveCard}
+                    openEditCard={openEditCard}
+                    openDeleteCard={openDeleteCard}
                   />
                 );
               })}
-              <a
+              {/* <a
                 className={style.addList_btn}
                 onClick={() => {
                   setNewListModal(true);
@@ -137,10 +417,14 @@ export default function activity() {
               >
                 {" "}
                 <FontAwesomeIcon icon={faPlusCircle} /> New list
-              </a>
+              </a> */}
             </DndProvider>
           </div>
-          <SideBar activityId={activityId} />
+          <SideBar
+            activityId={activityId}
+            setNewHotActModal={setNewHotActModal}
+            hotAct={hotAct}
+          />
         </div>
       </div>
     </ProtectRoute>

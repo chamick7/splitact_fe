@@ -54,17 +54,18 @@ export default function chatPage() {
       .then((resData) => {
         if (activityList.length > 0) setActivityList([]);
         resData.data.activities.forEach((element) => {
-          const newActivity = { data: element.atID, msg: {}, noti: 0 };
+          const newActivity = { data: element.atId, msg: {}, noti: 0 };
           setActivityList((activityList) => [...activityList, newActivity]);
         });
         const room = resData.data.activities.map(
-          (activity) => activity.atID._id
+          (activity) => activity.atId._id
         );
         socket.emit("join", room);
       })
       .catch((err) => {});
 
     socket.on("msgToClient", (data) => {
+      console.log(data);
       setMessages((messages) => [...messages, data]);
     });
   }, []);
@@ -79,12 +80,13 @@ export default function chatPage() {
         .get("/activity/amount")
         .then((resData) => {
           const statData = resData.data.activities.find(
-            (element) => element.atID._id == atID
+            (element) => element.atId._id == atID
           );
-          const newData = statData.atID;
+          const newData = statData.atId;
           setActivity(newData);
         })
         .catch((err) => {
+          console.log(err);
           router.replace("/dashboard");
         });
     }
@@ -97,7 +99,6 @@ export default function chatPage() {
       const activity = atID;
       const sender = account.username;
       const senderID = account.acID;
-
       socket.emit("msgToServer", { activity, sender, senderID, msg });
 
       setMsg("");

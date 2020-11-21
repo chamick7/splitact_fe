@@ -36,12 +36,13 @@ export default function Register() {
         }
       })
       .catch((err) => {
-        console.log(err.response.data.already === "username");
         if(err.response.status == 409){
-          if(err.response.data.already === "email"){
-            setError("This email address is already registered")
-          } else if (err.response.data.already === "username") {
-            setError("This username is already registered")
+          if(err.response.data.already){
+            if(err.response.data.already === "email"){
+              setError("This email address is already registered")
+            } else if (err.response.data.already === "username") {
+              setError("This username is already registered")
+            }
           }
         }
       });
@@ -65,11 +66,15 @@ export default function Register() {
                 placeholder="Username"
                 ref={register({
                   required: "Required",
+                  minLength: 6,
+                  maxLength: 12,
                 })}
               />
               <FontAwesomeIcon icon={faUser} />
             </div>
-            {errors.username && <h6 className="err_msg">This is Required</h6>}
+            {errors.username && errors.username.type === "required" && <h6 className="err_msg">This is Required</h6>}
+            {errors.username && errors.username.type === "minLength" && <h6 className="err_msg">This field required min length 6</h6>}
+            {errors.username && errors.username.type === "maxLength" && <h6 className="err_msg">This field max length is 12 </h6>}
 
             <div className="login-input email">
               <input

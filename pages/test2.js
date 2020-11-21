@@ -1,16 +1,62 @@
-import Axios from "axios";
-import { useEffect } from "react";
-import {getAxios} from "../utils/axios";
-import ChatModule from "../Components/ChatModule";
-import Link from "next/link"
+import Container from "../Components/testCard/Container";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { useState } from "react";
+import update from "immutability-helper";
 
 
-const axios = getAxios();
 
-export default function Test() {
-  return <ChatModule>
-     <h1>Hello my test2</h1>
-     <Link  href="/test"><a>Test</a></Link>
+export default function Test2() {
+  const [groupList, setGroupList] = useState([
+    {
+      name: "test1",
+      cardList: [
+        { cardName: "hello (1)", id: "2214123f" },
+        { cardName: "My name is (1)", id: "12ga4123f" },
+        { cardName: "mick (1)", id: "53zxvd123f" },
+      ],
+    },
+    {
+      name: "test2",
+      cardList: [
+        { cardName: "WOW (2)", id: "98zfvbd123f" },
+        { cardName: "Yes!! (2)", id: "43asqwd123f" },
+      ],
+    },
+  ]);
 
-  </ChatModule>;
+  const changeGroup = (oldGroupIndex, oldIndex, toGroupIndex, card) => {
+    setGroupList(
+      update(groupList, {
+        [oldGroupIndex]: {
+          cardList: {
+            $splice: [[oldIndex, 1]],
+          },
+        },
+        [toGroupIndex]: {
+          cardList: {
+            $push: [
+              card
+            ],
+          },
+        },
+      })
+    );
+    console.log(card);
+  };
+
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <div style={{ display: "flex" }}>
+        {groupList.map((group, index) => (
+          <Container
+            key={index}
+            cards={group.cardList}
+            groupIndex={index}
+            changeGroup={changeGroup}
+          />
+        ))}
+      </div>
+    </DndProvider>
+  );
 }

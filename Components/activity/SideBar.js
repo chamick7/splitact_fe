@@ -1,5 +1,5 @@
 
-import style from "../../css/activity.module.css";
+import style from "../../css/activitySidebar.module.css";
 
 import ChatBTN from "./ChatBTN";
 import Hotact from "./Hotact";
@@ -7,11 +7,18 @@ import Hotact from "./Hotact";
 
 
 
-export default function SideBar({ activityId }) {
-    return (
-        <div className={style.sideBar}>
-            <Hotact />
-            <ChatBTN activityId={activityId} />
-        </div>
-    );
+export default function SideBar({ activityId, setNewHotActModal, hotAct }) {
+
+
+
+    if(hotAct){
+        return (
+            <div id="sideBar" className={style.sideBar + " resSideBar"  }>
+                <Hotact hotAct={hotAct} setNewHotActModal={setNewHotActModal} />
+                <ChatBTN activityId={activityId} />
+            </div>
+        );
+    } else {
+        return null;
+    }
 }
