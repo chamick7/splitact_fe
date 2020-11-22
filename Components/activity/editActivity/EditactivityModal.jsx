@@ -39,7 +39,7 @@ export default function EditactivityModal({
   const [date, setDate] = useState();
   const [name, setName] = useState(activity.atName);
 
-  console.log(date);
+
 
   const leaveActivity = () => {
     axios
@@ -111,6 +111,7 @@ export default function EditactivityModal({
             >
               {members.map((member, index) => (
                 <span key={index} className={style.view_member}>
+                  <img src={member.img} alt=""/>
                   {member.username}
                   {activity.atCreaterID == member.id ? (
                     <FontAwesomeIcon style={{ color: color }} icon={faCode} />

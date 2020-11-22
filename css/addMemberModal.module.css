@@ -34,6 +34,19 @@
     align-items: center;
 }
 
+.user_item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.user_item img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+
 .member_view{
     margin-top: 20px;
     width: 80%;
@@ -43,7 +56,20 @@
     list-style-type: disc;
     display: flex;
     flex-direction: column;
+}
 
+.member_view li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.member_view li img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+    margin-left: 5px;
 }
 
 

@@ -1,15 +1,16 @@
 import style from "../../css/profile.module.css";
 
-export default function SideBar({ pageList, pageNum, setPageNum, account }) {
+export default function SideBar({ pageList, pageNum, setPageNum, account, toggleSideBar }) {
   const changePage = (pageId) => {
+    toggleSideBar();
     setPageNum(pageId);
   };
 
   return (
-    <div className={style.sideBar}>
+    <div id="sideBar" className={style.sideBar + " resSideBarProfile"}>
       <div className={style.data}>
         <div className={style.profile_sideBar}>
-          <img src="https://www.w3schools.com/w3images/avatar6.png" alt="" />
+          <img src={account.img} alt="" draggable="false" />
           <div>
             <h3>{account.username}</h3>
             <h5>{account.email}</h5>

@@ -36,7 +36,12 @@ const getSuggestions = (value) => {
 };
 
 const renderSuggestion = (suggestion) => {
-  return <div>{suggestion.username}</div>;
+  return (
+    <div className={style.user_item}>
+      <img src={suggestion.img} alt="" />
+      {suggestion.username}
+    </div>
+  );
 };
 
 const getSuggestionValue = (suggestion) => {
@@ -55,7 +60,6 @@ export default function AddmemberModal({
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    console.log(users);
     const filterMember = users.filter(
       (user_el) =>
         currentMembers.filter((member_el) => member_el.id == user_el._id)
@@ -75,7 +79,7 @@ export default function AddmemberModal({
   };
 
   const onSuggestionsSelected = (event, { suggestion }) => {
-    const newMember = { username: suggestion.username, acID: suggestion._id };
+    const newMember = { username: suggestion.username, acID: suggestion._id, img: suggestion.img };
 
     console.log(currentMembers);
     console.log(newMember);
@@ -108,16 +112,18 @@ export default function AddmemberModal({
           newMembers: members,
         })
         .then((result) => {
+          const memberList = result.data.members.map((member) => ({
+            id: member.acId._id,
+            username: member.acId.username,
+          }));
 
-          const memberList = result.data.members.map((member) => ({ id: member.acId._id, username: member.acId.username }))
-
-          setOriginalMembers(update(currentMembers, {
-            $push: memberList
-          }))
+          setOriginalMembers(
+            update(currentMembers, {
+              $push: memberList,
+            })
+          );
 
           setMemberModal(false);
-
-
         })
         .catch((err) => {
           console.log(err.response);
@@ -155,7 +161,7 @@ export default function AddmemberModal({
 
         <ul className={style.member_view}>
           {members.map((member, index) => (
-            <li key={index}> - {member.username}</li>
+            <li key={index}> - <img src={member.img} alt=""/> {member.username}</li>
           ))}
         </ul>
 

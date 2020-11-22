@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Progressbar from "../../Components/Progressbar";
 import progressstyles from "../../css/progressbar.module.css";
 import styles from "../../css/newpassword.module.css";
+import Router from "next/router";
 
 export async function getServerSideProps(ctx) {
   let email = null;
@@ -20,8 +21,8 @@ export async function getServerSideProps(ctx) {
       })
       .catch((err) => {
         if (err.response.status === 406) {
-          // ctx.res.writeHead(302, { Location: "/login" });
-          // ctx.res.end();
+          ctx.res.writeHead(302, { Location: "/resetpassword/failed" });
+          ctx.res.end();
         }
       });
   } catch (err) {
@@ -54,8 +55,7 @@ export default function newPassword({ email, rsToken }) {
         }
       })
       .catch((err) => {
-        console.log(err);
-        setErr("Somthing went wrong please try again later.");
+        Router.replace("/resetpassword/failed");
       });
   };
 
