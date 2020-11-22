@@ -68,7 +68,7 @@ export default function ImageModal({ account, setImageModal }) {
           position={position}
           onPositionChange={handlePosition}
           rotate={0}
-          borderRadius={100}
+          borderRadius={500}
           image={image}
           className={style.selection}
         />
