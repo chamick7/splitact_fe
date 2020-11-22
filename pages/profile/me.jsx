@@ -9,16 +9,24 @@ import Profile from "../../Components/profile/Profile";
 import Security from "../../Components/profile/Security";
 import { useEffect } from "react";
 import ImageModal from "../../Components/profile/ImageModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 export default function me() {
   const [pageNum, setPageNum] = useState(1);
   const [account, setAccount] = useState({});
-  const [imageModal, setImageModal] = useState(false)
+  const [imageModal, setImageModal] = useState(false);
 
   const pageList = [
     { id: 1, name: "Profile" },
     { id: 2, name: "Account & Security" },
   ];
+
+  const toggleSideBar = () => {
+    const sideBar = document.querySelector("#sideBar");
+
+    sideBar.classList.toggle("resSideBarProfile");
+  };
 
   useEffect(() => {
     axios
@@ -32,9 +40,18 @@ export default function me() {
   return (
     <ProtectRoute>
       <div className={style.body}>
-        { imageModal && <ImageModal account={account} setImageModal={setImageModal} /> }
+        {imageModal && (
+          <ImageModal account={account} setImageModal={setImageModal} />
+        )}
         <div className={style.navbar}>
-          <h1>{account.username}'s Profile</h1>
+          <span
+            onClick={() => {
+              toggleSideBar();
+            }}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </span>
+          <h2>{account.username}'s Profile</h2>
         </div>
         <div className={style.container}>
           <SideBar
@@ -42,10 +59,13 @@ export default function me() {
             pageNum={pageNum}
             setPageNum={setPageNum}
             account={account}
+            toggleSideBar={toggleSideBar}
           />
-          <div className={style.page}>
-            {pageNum == 1 && <Profile account={account} setImageModal={setImageModal} />}
-            {pageNum == 2 && <Security account={account} />}
+          <div className={style.page + " resProfile"}>
+            {pageNum == 1 && (
+              <Profile account={account} setImageModal={setImageModal} />
+            )}
+            {pageNum == 2 && <Security account={account}  />}
           </div>
         </div>
       </div>

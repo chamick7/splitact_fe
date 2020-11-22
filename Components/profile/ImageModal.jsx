@@ -3,6 +3,7 @@ import { getAxios } from "../../utils/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const axios = getAxios();
+import Router from "next/router";
 
 import ReactAvatarEditor from "react-avatar-editor";
 import { useState } from "react";
@@ -23,7 +24,12 @@ export default function ImageModal({ account, setImageModal }) {
 
           data.append("file", blob, account.acID + ".jpg");
 
-          axios.post("/file/img/upload", data);
+          axios
+            .post("/file/img/upload", data)
+            .then((result) => {
+              Router.reload(window.location.pathname);
+            })
+            .catch((err) => {});
         },
         "image/png",
         1

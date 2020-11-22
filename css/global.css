@@ -109,3 +109,14 @@ div.DayPicker-Day.DayPicker-Day--outside{
         width: 100% !important;
     }
 }
+
+@media only screen and (max-width: 700px){
+
+    .resSideBarProfile{
+        display: none !important;
+    }
+
+    .resProfile{
+        width: 100% !important;
+    }
+}

@@ -9,7 +9,7 @@ export default function Profile({ account, setImageModal }) {
         <div className={style.img_container}>
           <img
             draggable="false"
-            src="https://www.w3schools.com/w3images/avatar6.png"
+            src={account.img}
             alt=""
           />
         </div>

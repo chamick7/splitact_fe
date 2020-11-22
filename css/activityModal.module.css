@@ -148,6 +148,20 @@
     font-size: 16px;
 }
 
+.user_item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user_item img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
 
 .member_container{
     border: 1px solid #644CC6;
@@ -384,11 +398,19 @@
     border-bottom: 1px solid #644CC6;
     padding: 2px 10px;
     min-width: 60px;
-    max-width: 130px;
+    max-width: 150px;
     font-weight: 800;
     margin: 5px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.view_member img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .view_member svg{

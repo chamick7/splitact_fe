@@ -28,7 +28,7 @@ let users = [];
 axios
   .get("/account/users")
   .then((data) => {
-    // console.log(data.data)
+    console.log(data.data);
     users = data.data.users;
   })
   .catch((err) => {});
@@ -49,7 +49,12 @@ const getSuggestions = (value) => {
 };
 
 const renderSuggestion = (suggestion) => {
-  return <div>{suggestion.username}</div>;
+  return (
+    <div className={styles.user_item}>
+      <img src={suggestion.img} alt="" />
+      {suggestion.username}
+    </div>
+  );
 };
 
 const getSuggestionValue = (suggestion) => {

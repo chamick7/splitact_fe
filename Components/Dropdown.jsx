@@ -124,7 +124,6 @@ export default function Dropdown() {
           {account.username ? (
             <>
               <DropItem icon={faEdit} word="Activity" to="/dashboard" />
-              <DropItem icon={faUsers} word="Teams" to="/dashboard" />
 
               <hr className={styles.hr} />
             </>
@@ -173,8 +172,26 @@ export default function Dropdown() {
 
   return (
     <button ref={node} className={styles.btn_nav}>
-      <div onClick={() => setOpen(!open)}>
-        <FontAwesomeIcon className={styles.nav_icon1} icon={faUserAlt} />
+      <div
+        style={{ display: "flex", alignItems: "center" }}
+        onClick={() => setOpen(!open)}
+      >
+        {account.username ? (
+          <img
+            style={{
+              width: "30px",
+              height: "30px",
+              margin: "0 5px",
+              borderRadius: "50%",
+              
+            }}
+            src={account.img}
+            alt=""
+            draggable="false"
+          />
+        ) : (
+          <FontAwesomeIcon className={styles.nav_icon1} icon={faUserAlt} />
+        )}
         <span>{account.username ? account.username : "Member"}</span>
         <FontAwesomeIcon className={styles.nav_icon2} icon={faCaretDown} />
       </div>

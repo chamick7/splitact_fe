@@ -58,6 +58,7 @@ export default function login() {
           username: res.data.account.username,
           acID: res.data.account.acID,
           role: res.data.account.role,
+          img: res.data.account.img,
         });
 
         router.push("/dashboard");
