@@ -37,7 +37,7 @@ export default function chat() {
       .get("/activity/amount")
       .then((resData) => {
         resData.data.activities.forEach((element) => {
-          const newActivity = { data: element.atID, msg: {}, noti: 0 };
+          const newActivity = { data: element.atId, msg: {}, noti: 0 };
           setActivityList((activityList) => [...activityList, newActivity]);
         });
       })

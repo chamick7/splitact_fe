@@ -1,0 +1,30 @@
+
+
+.sideBar{
+    width: 30%;
+    background-color: #F1F1F1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    font-family: "Kanit";
+}
+
+
+@media only screen and (max-width: 900px){
+    .sideBar{
+        position: absolute;
+        height: calc(100% - 100px);
+        width: 50%;
+        right: 0;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .sideBar{
+        position: absolute;
+        height: calc(100% - 100px);
+        width: 80%;
+        right: 0;
+    }
+}

@@ -14,6 +14,31 @@
     padding: 0px 20px;
 }
 
+.header_right span:nth-child(2){
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    /* margin-right: 15px; */
+    margin-left: 20px;
+}
+
+.header_right span:nth-child(1){
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.toggleMenu{
+    display: none;
+}
+
+@media only screen and (max-width: 900px){
+    .toggleMenu{
+        display: inline-block;
+    }
+}
+
 .header span:nth-child(1){
     font-family: "Kanit";
     font-size: 23px;
@@ -23,6 +48,7 @@
 .view{
     display: flex;
     flex-direction: row;
+    max-height: calc(100vh - 100px);
 }
 
 .work_table{
@@ -85,10 +111,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
-
 }
-.card_header span{
+.card_name{
+    display: flex;
+    flex-direction: column;
+}
+.card_name span{
+    font-size: 14px;
+    color: #ececec;
+}
+.card_header span:nth-child(1){
     font-size: 20px;
     cursor: pointer;
     align-self: center;
@@ -106,17 +140,42 @@
     background-color: white;
     border-radius: 0 0 10px 10px;
 }
-
-.sideBar{
-    width: 20%;
-    background-color: #F1F1F1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 30px;
-    font-family: "Kanit";
+.worker{
+    padding: 5px 15px;
+    font-size: 16px;
+    
 }
 
+.menuCard_modal{
+    position: absolute;
+    border-radius: 5px;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: -20px;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgb(166, 166, 166);
+    padding: 0px 10px;
+}
+
+.menuCard_modal div{
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 14px;
+
+}
+
+.menuCard_modal div:nth-child(1){
+    width: 100%;
+    color: #6728BB;
+    text-align: center;
+    border-bottom: 1px solid slateblue;
+}
+.menuCard_modal div:nth-child(2){
+    width: 100%;
+    color: red;
+    text-align: center;
+    border-bottom: 1px solid red;
+}
 .hotact_container{
     width: 80%;
 }
@@ -128,6 +187,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
 .hotact_container_header span{
     align-self: center;
     font-size: 18px;
@@ -137,7 +197,25 @@
     background-color: white;
     min-height: 40px;
     max-height: 60vh;
+    overflow-y: auto;
     border-radius: 0 0 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hotact_add_btn{
+    margin: 10px 0;
+    font-family: "Kanit";
+    color: #919191;
+    cursor: pointer;
+    transition: .4s;
+}
+.hotact_add_btn:hover{
+    color: #4b4b4b;
+}
+.hotact_add_btn svg{
+    margin-right: 10px;
 }
 
 .chat_btn{

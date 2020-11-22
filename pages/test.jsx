@@ -7,8 +7,6 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../css/profile.module.css"
 
-import Cropper from 'react-easy-crop'
-
 export default function profile(){
 
     const uploadedImage = React.useRef(null);

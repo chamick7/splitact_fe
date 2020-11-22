@@ -1,0 +1,89 @@
+
+
+
+.worker_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.worker_wrapper{
+    padding: 0px 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+
+.worker_btn{
+    cursor: pointer;
+    padding: 5px 15px;
+    margin-left: 20px;
+    padding: 5px 15px;
+    border-bottom: 1px solid;
+}
+
+
+.worker_modal{
+    position: absolute;
+    width: 400px;
+    max-width: 90vw;
+    min-height: 100px;
+    max-height: 70vh;
+    margin-top: -300px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.worker_header{
+    width: 100%;
+    color: white;
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    padding: 5px 20px;
+    font-family: "Kanit";
+    font-size: 18px;
+}
+
+.worker_header span{
+    width: fit-content;
+    cursor: pointer;
+    font-size: larger;
+}
+
+.worker_body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.view{
+    width: 100%;
+    padding: 5px 15px;
+    height: 100%;
+    max-height: calc(70vh - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.member_container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: "Kanit";
+    font-size: 18px;
+}
+
+.select{
+    color: green;
+    font-size: 20px;
+    cursor: pointer;
+}

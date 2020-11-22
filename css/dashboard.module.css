@@ -10,6 +10,45 @@
     padding: 20px 10px;
 }
 
+.search_container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10vw;
+    margin: 10vh 0;
+}
+
+@media only screen and (max-width: 500px){
+    .search_container{
+        justify-content: center;
+    }
+}
+
+.form_search{
+    display: flex;
+    flex-direction: row;
+}
+
+.form_search input{
+    border: none;
+    background: none;
+    background-color: #EDF2F7;
+    border-bottom: 1px solid #644CC6;
+    outline: none;
+    padding: 5px 15px;
+    font-size: 18px;
+    font-family: "Kanit";
+}
+
+.form_search button{
+    padding: 5px 10px;
+    background: none;
+    border: none;
+    outline: none;
+    background-color: #BFBFBF;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 .header{
     margin-left: 5vw;
     margin-top: 20px;
