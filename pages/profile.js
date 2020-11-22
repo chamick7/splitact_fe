@@ -40,19 +40,22 @@ export default function profile(){
   };
 
 
-  const ChangeName = useState(false)
-  const ChangeEmail = useState(false)
+    const ChangeName = useRef(null)
+    const ChangeEmail = useRef(null)
+  
 
-  const handleChangeName = () =>{
+    const handleChangeName = (e) =>{
+        const name = e.target.value;
         setName(name)
-  }
-  const handleChangeEmail = () => {
+    }
+    const handleChangeEmail = (e) => {
+        const email = e.target.value;
         setEmail(email);
-  };
+    };
 
-  const onSubmit = () =>{
+    const onSubmit = () =>{
 
-  }
+    }
 
 
     return (
@@ -83,18 +86,21 @@ export default function profile(){
                     <div className={styles.info_line}>
                         
                         <button
-                        onClick= {() => ChangeName.onclick()}>
-                        <FontAwesomeIcon icon={faEdit}/></button>
+
+                        onClick= {clickChangeName}>
+                        <FontAwesomeIcon icon={faEdit}/>
+                        </button>
                         <h2>Name : asff<span>{account.name}</span></h2>
-                        
+
                         <input
                         ref={ChangeName}
                         onChange = {handleChangeName}
                         name="username"
                         type="text"
+                        value={account.name}
                         placeholder="Username"
                         />
-
+                        
                     </div>
                     <div className={styles.info_line}>
                         
@@ -104,11 +110,13 @@ export default function profile(){
 
                         <h2>Email : {account.email}</h2>
                         
+                        
                         <input
                         ref={ChangeEmail}
                         onChange = {handleChangeEmail}
                         name="Email"
                         type="email"
+                        value={account.email}
                         placeholder="Email"
                         />
 
