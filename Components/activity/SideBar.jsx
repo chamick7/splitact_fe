@@ -2,7 +2,7 @@
 import style from "../../css/activitySidebar.module.css";
 
 import ChatBTN from "./ChatBTN";
-import Hotact from "./Hotact";
+import Hotact from "./HotAct";
 
 
 

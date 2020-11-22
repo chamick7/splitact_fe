@@ -7,21 +7,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../css/profile.module.css"
 
-import Cropper from 'react-easy-crop'
-
-import Link from 'next/link';
-import { accountAtom } from '../atom';
-import { useRecoilState } from "recoil";
-
-
-
-
 export default function profile(){
-
-
-    const [account] = useRecoilState(accountAtom);
-
-
 
     const uploadedImage = React.useRef(null);
     const imageUploader = React.useRef(null);
@@ -39,11 +25,24 @@ export default function profile(){
     }
   };
 
+
+//   const onCropChange = (crop) => {
+//     this.setState({ crop })
+//   }
+
+//   const onCropComplete = (croppedArea, croppedAreaPixels) => {
+//     console.log(croppedAreaPixels.width / croppedAreaPixels.height)
+//   }
+
+//   const onZoomChange = (zoom) => {
+//     this.setState({ zoom })
+//   }
+
     return (
         
 
         <div className={styles.profile_body}>
-            <div className={styles.top}>{account.name}'s Profile</div>
+            <div className={styles.top}>INWZA007's Profile</div>
             <div className={styles.profile_info}>
                 <div className={styles.info_left}>
                     <div className={styles.profile_container}>
@@ -51,6 +50,17 @@ export default function profile(){
                     ref={uploadedImage}
                     id="uploadedImage" src="/img/profile.png" />
                     </div>
+                    {/* <Cropper
+                    image = {this.imageUploader}
+                    crop = {this.crop}
+                    zoom = {this.zoom}
+                    aspect = {this.aspect}
+                    cropShape = "round"
+                    showGrid = {false}
+                    onCropChange = {this.onCropChange}
+                    onCropComplete = {this.onCropComplete}
+                    onZoomChange = {this.onZoomChange}
+                    /> */}
                     <input
                     onChange={handleImageUpload}  
                     ref={imageUploader}        
@@ -59,23 +69,12 @@ export default function profile(){
                     onClick= {() => imageUploader.current.click()} >
                     <FontAwesomeIcon icon={faEdit} /></button>
                 </div>
-                <form className={styles.info_right}>
-                    <div className={styles.info_line}>
-                        <button>
-                        <FontAwesomeIcon icon={faEdit}/></button>
-                        <h2>Name : <span>{account.name}</span></h2>
-                    </div>
-                    <div className={styles.info_line}>
-                        <button>
-                        <FontAwesomeIcon icon={faEdit}/></button>
-                        <h2>Email : {account.email}</h2>
-                    </div>
-                    <div className={styles.info_line}>
-                        <Link href="/resetpassword"><button><FontAwesomeIcon icon={faEdit}/></button></Link>
-                        <h2>Password</h2>
-                    </div>
+                <div className={styles.info_right}>
+                    <h2><span><FontAwesomeIcon icon={faEdit} /></span> Name : INWZA007</h2>
+                    <h2><span><FontAwesomeIcon icon={faEdit} /></span> Email : INWZA007@splitact.com</h2>
+                    <h2><span><FontAwesomeIcon icon={faEdit} /></span> Password</h2>
                     <button>Apply</button>
-                </form>
+                </div>
             </div>
         <Footer_min/>
         </div>

@@ -49,7 +49,7 @@ export default function Dropdown() {
     if (account.username) {
       return (
         <li className={styles.profile} onClick={() => setOpen(false)}>
-          <Link href="/profile">
+          <Link href="/profile/me">
             <a>{account.username}</a>
           </Link>
         </li>
@@ -112,7 +112,7 @@ export default function Dropdown() {
 
           {account.username ? (
             <>
-              <DropItem icon={faAddressCard} word="Profile" to="/profile" />
+              <DropItem icon={faAddressCard} word="Profile" to="/profile/me" />
               <DropItem icon={faComments} word="Chat" to="/chat" />
             </>
           ) : (
