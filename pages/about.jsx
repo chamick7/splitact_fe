@@ -26,15 +26,15 @@ export default function about(){
         return(
             <div className={styles.about_container}>
             <section className={styles.about_container_block}>
-                <img src="/img/about_calender.PNG" alt=""/>
+                <img src="/img/about_calender.png" alt=""/>
                 <h3>Split-ACT is a web / app developed as a tool to assist in work / activites.</h3>
             </section>
             <section className={styles.about_container_block}>
-                <img src="/img/about_activity.PNG" alt=""/>
+                <img src="/img/about_activity.png" alt=""/>
                 <h3>Split-ACT helps to divide things that need to be meade into parts.</h3>
             </section>
             <section className={styles.about_container_block}>
-                <img src="/img/about_chat.PNG" alt=""/>
+                <img src="/img/about_chat.png" alt=""/>
                 <h3>And make members responsible for their own duties.</h3>
             </section>
             <section className={styles.about_container_block}>

@@ -63,7 +63,7 @@ export default function Home({}) {
           <section className={styles.calendar_container_left}>
             <section>
               <h1>Calendar</h1>
-              <img src="/img/home_calendar.PNG" alt="" />
+              <img src="/img/home_calendar.png" alt="" />
             </section>
           </section>
           <section className={styles.calendar_container_right}>
@@ -96,7 +96,7 @@ export default function Home({}) {
 
         <div className={styles.recommend_container} id={"preview1"}>
           <section className={styles.recommend_container_left}>
-            <img src="/img/home_preview1.PNG" alt="" />
+            <img src="/img/home_preview1.png" alt="" />
           </section>
           <section className={styles.recommend_container_right}>
             <h1>
@@ -122,7 +122,7 @@ export default function Home({}) {
             </h1>
           </section>
           <section className={styles.recommend_container_two_right}>
-            <img src="/img/home_preview2.PNG" alt="" />
+            <img src="/img/home_preview2.png" alt="" />
           </section>
         </div>
 
