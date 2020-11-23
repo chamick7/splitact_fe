@@ -39,7 +39,7 @@ export default function Security({ account }) {
           </div>
         </div>
         <h1>Security</h1>
-        <form onSubmit={handleSubmit(onChangePassword)}>
+        <form className={style.sec_data} onSubmit={handleSubmit(onChangePassword)}>
           {err ? <span style={{ color: "red" }}>{err}</span> : null}
           <div className={style.data_item}>
             <h3>Old password</h3>

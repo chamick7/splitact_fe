@@ -19,7 +19,8 @@ export default function ActivityGroup({
   saveMoveCard,
   openEditList,
   openEditCard,
-  openDeleteCard
+  openDeleteCard,
+  openCard
 }) {
   const moveCard = (id, atIndex) => {
     if (true) {
@@ -83,6 +84,7 @@ export default function ActivityGroup({
               changeGroup={changeGroup}
               openEditCard={openEditCard}
               openDeleteCard={openDeleteCard}
+              openCard={openCard}
             />
           );
         })}

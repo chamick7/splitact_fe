@@ -1,6 +1,6 @@
-FROM node:13.3.0-alpine
+FROM node:14.14.0-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 
 
@@ -10,9 +10,4 @@ RUN npm install
 
 
 
-
-
-RUN npm run build
-
-
-CMD [ "npm","start" ]
+CMD [ "npm","run","production" ]

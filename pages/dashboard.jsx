@@ -60,7 +60,6 @@ export default function dashboard() {
     axios
       .get("/activity/amount")
       .then((resp) => {
-        // console.log(resp.data);
         setActivities(resp.data.activities);
         setSearchActivities(resp.data.activities);
       })
@@ -118,8 +117,8 @@ export default function dashboard() {
                     trailColor: "#d6d6d6",
                     backgroundColor: "#3e98c7",
                   })}
-                  value={80}
-                  text={`${80}%`}
+                  value={props.percent}
+                  text={`${props.percent}%`}
                 />
               </div>
             </div>
@@ -191,6 +190,18 @@ export default function dashboard() {
 
             {searchActivities.map((activityRes, index) => {
               const activity = activityRes.atId;
+              let allCard = 0;
+              let successCard = 0;
+
+              activity.list.map((list, index) => {
+                allCard = allCard + list.cards.length;
+                if (index == 2) {
+                  successCard = successCard + list.cards.length;
+                }
+              });
+
+              const percent = Math.round(100 / (allCard / successCard));
+
               return (
                 <ActivityItem
                   key={index}
@@ -199,6 +210,7 @@ export default function dashboard() {
                   dueDate={moment(activity.dueDate).format("DD/MM/YYYY")}
                   amount={5}
                   color={activity.color}
+                  percent={percent}
                 />
               );
             })}

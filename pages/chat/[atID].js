@@ -13,23 +13,23 @@ import { activityListAtom, activityAtom, accountAtom } from "../../atom";
 const socket = getSocket();
 
 export async function getServerSideProps(ctx) {
-  try {
-    const cookie = ctx.req?.headers.cookie;
+  // try {
+  //   const cookie = ctx.req?.headers.cookie;
 
-    await axios
-      .get("/account/auth", {
-        headers: {
-          cookie: cookie,
-        },
-      })
-      .then()
-      .catch((err) => {
-        if (err.response.status === 401) {
-          ctx.res.writeHead(302, { Location: "/login" });
-          ctx.res.end();
-        }
-      });
-  } catch (err) {}
+  //   await axios
+  //     .get("/account/auth", {
+  //       headers: {
+  //         cookie: cookie,
+  //       },
+  //     })
+  //     .then()
+  //     .catch((err) => {
+  //       if (err.response.status === 401) {
+  //         ctx.res.writeHead(302, { Location: "/login" });
+  //         ctx.res.end();
+  //       }
+  //     });
+  // } catch (err) {}
 
   return {
     props: {},

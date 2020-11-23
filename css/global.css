@@ -11,16 +11,34 @@
     color: red;
 }
 
+.preview_card{
+    padding: 20px 40px;
+    border-radius: 5px;
+    font-family: "Kanit";
+    font-size: 18px;
+    border: 2px dashed rgb(150, 150, 150);
+    background-color: #f1f0f0c4;
+    min-width: 270px;
+    text-align: center;
+}
+
 .background_modal{
     position: absolute;
     width: 100vw;
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     max-height: fit-content;
     background-color: #f1f0f0e0;
     display: flex;
     z-index: 7;
     align-items: center;
     justify-content: center;
+}
+
+.dzu-dropzone{
+    max-height: 300px;
+    max-width: 95%;
+    text-align: center;
+
 }
 
 .me{

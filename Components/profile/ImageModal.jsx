@@ -15,7 +15,7 @@ export default function ImageModal({ account, setImageModal }) {
   const [accountData, setAccountData] = useState(accountAtom);
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-  const [image, setImage] = useState("/img/mikusan.jpg");
+  const [image, setImage] = useState();
   const [newImage, setNewImage] = useState();
   const [editor, setEditor] = useState();
 
