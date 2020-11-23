@@ -4,11 +4,14 @@ import { useForm } from "react-hook-form";
 import { getAxios } from "../../utils/axios";
 const axios = getAxios();
 import Router from "next/router";
+import { accountAtom } from "../../atom";
+import { useRecoilState } from "recoil";
 
 import style from "../../css/profile.module.css";
 
 export default function Security({ account }) {
   const { register, handleSubmit, errors } = useForm();
+  const [accountData, setAccountData] = useRecoilState(accountAtom)
   const [err, setErr] = useState("");
 
   const onChangePassword = (data) => {
@@ -20,6 +23,7 @@ export default function Security({ account }) {
           new_password: data.new_password,
         })
         .then((result) => {
+          setAccountData({});
           Router.replace("/login");
         })
         .catch((err) => {});
