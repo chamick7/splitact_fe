@@ -166,7 +166,7 @@ export default function dashboard() {
               <input
                 type="text"
                 name="search"
-                placeholder="Search"
+                placeholder="Search your Activity"
                 value={search}
                 onChange={(e) => {
                   setSearch(e.target.value);
