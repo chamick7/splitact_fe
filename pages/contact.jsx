@@ -26,7 +26,7 @@ export default function contact() {
             </form>
             <button type="submit" >Send</button>
             <h2><span> or </span></h2>
-            <div className={styles.link}> 
+            <div className={styles.link}>
             <Link href="/"><a><FontAwesomeIcon icon={faFacebookF} /></a></Link>
             <Link href="/"><a><FontAwesomeIcon icon={faInstagram} /></a></Link>
             <Link href="/"><a><FontAwesomeIcon icon={faTwitter} /></a></Link>

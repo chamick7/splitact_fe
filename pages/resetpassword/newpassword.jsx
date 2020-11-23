@@ -55,7 +55,8 @@ export default function newPassword({ email, rsToken }) {
         }
       })
       .catch((err) => {
-        Router.replace("/resetpassword/failed");
+        console.log(err.response);
+        // Router.replace("/resetpassword/failed");
       });
   };
 

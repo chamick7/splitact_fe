@@ -64,7 +64,6 @@ export default function login() {
         router.push("/dashboard");
       })
       .catch((err) => {
-        console.log(err.response);
         setErr("Email username or password is incorrect");
       });
   };
