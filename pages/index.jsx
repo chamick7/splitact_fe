@@ -28,7 +28,6 @@ export const getServerSideProps = async (ctx) => {
         }
       })
       .catch((err) => {
-        console.log(err.response);
       });
   } catch (err) {}
 

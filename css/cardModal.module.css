@@ -173,3 +173,189 @@
     background-color: #644CC6;
     
 }
+
+
+
+/* Data Card Modal */
+
+.data_modal{
+    width: 500px;
+    max-width: 95vw;
+    min-height: 300px;
+    border-radius: 10px;
+}
+
+.data_header{
+    font-family: "Montserrat";
+    border-radius: 10px 10px 0 0;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    color: white;
+}
+.data_header span{
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.data_body{
+    width: 100%;
+    min-height: 250px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat";
+}
+
+.data_top p{
+    padding: 10px 10%;
+    min-height: 80px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.data_info{
+    padding: 10px 7%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.data_date{
+    font-size: 16px;
+}
+
+.data_worker{
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.data_worker img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+
+}
+
+.data_file{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.data_file ul{
+    width: 80%;
+    min-height: 90px;
+    max-height: 130px;
+    overflow-y: auto;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px 20px;
+}
+
+.file_item{
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file_item span:nth-child(1){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    word-break: break-all;
+}
+
+.file_item span:nth-child(1) svg {
+    margin-left: 13px;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #FF672B;
+}
+
+.file_item a{
+    color: #93C706;
+    cursor: pointer;
+    font-size: larger;
+}
+
+.file_item img{
+    width: 30px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.data_btn_container{
+    padding-left: 10%;
+    width: 100%;
+}
+
+.data_file button{
+    font-family: "Kanit";
+    cursor: pointer;
+    margin: 10px 0;
+    background: none;
+    padding: 3px 15px;
+    border: none;
+    border-radius: 5px;
+    border: 2px solid rgb(0, 132, 255);
+    color: rgb(0, 132, 255);
+    transition: .4s;
+}
+
+.data_file button:hover{
+    background-color: rgb(0, 132, 255);
+    color: white;
+
+}
+
+.data_file button svg{
+    margin-right: 7px;
+}
+
+
+
+/* File upload modal */
+
+
+.data_modal_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.upload_modal{
+    width: 95%;
+    position: absolute;
+    margin-top: -30%;
+    min-height: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    
+}
+.upload_header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 5%;
+}
+.upload_header span{
+    cursor: pointer;
+}
+.upload_header svg{
+    font-size: 24px;
+}
+
+.upload_body{
+    padding: 10px 0;
+}

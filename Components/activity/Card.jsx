@@ -15,14 +15,23 @@ export default function Card({
   groupIndex,
   changeGroup,
   openEditCard,
-  openDeleteCard
+  openDeleteCard,
+  openCard,
 }) {
   const [menuModal, setMenuModal] = useState(false);
   const node = useRef();
 
   const originalIndex = findCard(id).index;
   const [{ isDragging }, drag] = useDrag({
-    item: { type: "card", card, id, groupIndex, originalIndex },
+    item: {
+      type: "card",
+      card,
+      id,
+      groupIndex,
+      originalIndex,
+      name: card.cardName,
+      color: card.color,
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -69,9 +78,9 @@ export default function Card({
   };
 
   const deleteCard = () => {
-    openDeleteCard(card)
+    openDeleteCard(card);
     setMenuModal(false);
-  }
+  };
 
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
@@ -96,6 +105,9 @@ export default function Card({
       ref={(node) => drag(drop(node))}
       style={{ opacity }}
       className={style.card}
+      onClick={() => {
+        openCard(card);
+      }}
     >
       <div
         style={{ backgroundColor: card.color }}
@@ -103,7 +115,12 @@ export default function Card({
       >
         <span className={style.card_name}>
           <h4>{card.cardName}</h4>
-          <span> {card.dueDate ? moment(card.dueDate).format("DD/MM/YYYY") : null } </span>
+          <span>
+            {" "}
+            {card.dueDate
+              ? moment(card.dueDate).format("DD/MM/YYYY")
+              : null}{" "}
+          </span>
         </span>
         <span style={{ display: "flex" }}>
           <FontAwesomeIcon style={{ cursor: "move" }} icon={faArrowsAlt} />
@@ -115,7 +132,9 @@ export default function Card({
             >
               <FontAwesomeIcon icon={faBars} />
             </span>
-            {menuModal && <MenuCardModal editCard={editCard} deleteCard={deleteCard} />}
+            {menuModal && (
+              <MenuCardModal editCard={editCard} deleteCard={deleteCard} />
+            )}
           </span>
         </span>
       </div>

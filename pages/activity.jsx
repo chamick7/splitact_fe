@@ -3,7 +3,8 @@ import { getAxios } from "../utils/axios";
 import ProtectRoute from "../utils/ProtectRoute";
 import Router, { useRouter } from "next/router";
 import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
+import { usePreview } from "react-dnd-preview";
 import update from "immutability-helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,11 +20,12 @@ import ActivityGroup from "../Components/activity/ActivityGroup";
 import SideBar from "../Components/activity/SideBar";
 import CrListModal from "../Components/activity/ListModal/CrListModal";
 import EditListModal from "../Components/activity/ListModal/EditListModal";
-import CrCardModal from "../Components/activity/cardModal/crCardModal";
-import EditCardModal from "../Components/activity/cardModal/editCardModal";
-import EditactivityModal from "../Components/activity/editActivity/editactivityModal";
-import CrHotActModal from "../Components/activity/hotAct/crHotActModal";
+import CrCardModal from "../Components/activity/cardModal/CrCardModal";
+import EditCardModal from "../Components/activity/cardModal/EditCardModal";
+import EditactivityModal from "../Components/activity/editActivity/EditactivityModal";
+import CrHotActModal from "../Components/activity/hotAct/CrHotActModal";
 import DeleteCardModal from "../Components/activity/cardModal/DeleteCardModal";
+import DataCardModal from "../Components/activity/cardModal/DataCardModal";
 
 //modal
 
@@ -38,7 +40,6 @@ export default function activity() {
   const router = useRouter();
   const activityId = router.query.activity;
 
-
   //modal open
   const [editActivityModal, setEditActivityModal] = useState(false);
   const [newListModal, setNewListModal] = useState(false);
@@ -47,6 +48,7 @@ export default function activity() {
   const [editCardModal, setEditCardModal] = useState(false);
   const [deleteCardModal, setDeleteCardModal] = useState(false);
   const [newHotActModal, setNewHotActModal] = useState(false);
+  const [dataCardModal, setDataCardModal] = useState(false);
 
   const [canMove, setCanMove] = useState(true);
   const [worker, setWorker] = useState(null);
@@ -58,8 +60,6 @@ export default function activity() {
 
   const [currentCard, setCurrentCard] = useState({});
   const [currentList, setCurrentList] = useState({});
-
-
 
   //card
 
@@ -92,9 +92,7 @@ export default function activity() {
         newListId: groupList[toGroupIndex]._id,
         newCards: groupList[toGroupIndex].cards,
       })
-      .then(() => {
-        console.log(groupList);
-      })
+      .then(() => {})
       .catch((err) => {
         router.push("/dashboard");
       });
@@ -173,6 +171,7 @@ export default function activity() {
     axios
       .get("/activity?activity=" + activityId)
       .then((resData) => {
+        console.log(resData.data.activity);
         setActivity(resData.data.activity);
         setGroupList(resData.data.activity.list);
         setMembers(resData.data.members);
@@ -254,6 +253,47 @@ export default function activity() {
       .catch((err) => {});
   };
 
+  const openCard = (card) => {
+    setCurrentCard(card);
+    setDataCardModal(true);
+  };
+
+  // upload files
+
+  const uploadCard = (filesRes) => {
+    console.log(currentCard);
+    const listIndex = activity.list.findIndex(
+      (list) => list._id == currentCard.listId
+    );
+    const cardIndex = activity.list[listIndex].cards.findIndex(
+      (card) => card._id == currentCard._id
+    );
+
+    setCurrentCard(update(currentCard, {
+      files:{
+        $set: filesRes
+      }
+    }))
+
+    // setActivity(
+    //   update(activity, {
+    //     list: {
+    //       [listIndex]: {
+    //         cards: {
+    //           [cardIndex]: {
+    //             files: {
+    //               $set: filesRes,
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   })
+    // );
+
+    
+  };
+
   //list
 
   const openEditList = (list) => {
@@ -298,6 +338,19 @@ export default function activity() {
     setNewHotActModal(false);
   };
 
+  const MyPreview = () => {
+    const { display, itemType, item, style } = usePreview();
+    if (!display) {
+      return null;
+    }
+
+    return (
+      <div className="preview_card" style={style}>
+        {item.name}
+      </div>
+    );
+  };
+
   return (
     <ProtectRoute>
       <div className={style.body}>
@@ -316,6 +369,13 @@ export default function activity() {
             currentList={currentList}
             editList={editList}
             setEditListModal={setEditListModal}
+          />
+        )}
+        {dataCardModal && (
+          <DataCardModal
+            currentCard={currentCard}
+            setDataCardModal={setDataCardModal}
+            uploadCard={uploadCard}
           />
         )}
         {newCardModal && (
@@ -389,7 +449,10 @@ export default function activity() {
         </div>
         <div className={style.view}>
           <div className={style.work_table + " resAct"}>
-            <DndProvider backend={HTML5Backend}>
+            <DndProvider
+              backend={TouchBackend}
+              options={{ enableMouseEvents: true }}
+            >
               {groupList.map((group, index) => {
                 return (
                   <ActivityGroup
@@ -406,6 +469,7 @@ export default function activity() {
                     saveMoveCard={saveMoveCard}
                     openEditCard={openEditCard}
                     openDeleteCard={openDeleteCard}
+                    openCard={openCard}
                   />
                 );
               })}
@@ -418,6 +482,7 @@ export default function activity() {
                 {" "}
                 <FontAwesomeIcon icon={faPlusCircle} /> New list
               </a> */}
+              <MyPreview />
             </DndProvider>
           </div>
           <SideBar

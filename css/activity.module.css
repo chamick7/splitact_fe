@@ -93,6 +93,11 @@
     padding: 15px 0;
 }
 
+.preview_card{
+    background-color: red;
+    font-family: "Kanit";
+}
+
 .card{
     width: 90%;
     min-height: 40px;

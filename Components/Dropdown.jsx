@@ -6,7 +6,6 @@ import {
   faSignInAlt,
   faPowerOff,
   faAddressCard,
-  faUsers,
   faExclamationCircle,
   faInfoCircle,
   faPager,
@@ -14,7 +13,6 @@ import {
 import {
   faComments,
   faEdit,
-  faQuestionCircle,
   faAddressBook,
 } from "@fortawesome/free-regular-svg-icons";
 import { faUserAlt, faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -133,7 +131,7 @@ export default function Dropdown() {
 
           <DropItem icon={faExclamationCircle} word="Report" to="/report" />
           <DropItem icon={faAddressBook} word="Contact" to="/contact" />
-          <DropItem icon={faPager} word="About" to="/about" />
+          <DropItem icon={faInfoCircle} word="About" to="/about" />
 
           {account.username ? (
             <>

@@ -115,6 +115,7 @@ export default function AddmemberModal({
           const memberList = result.data.members.map((member) => ({
             id: member.acId._id,
             username: member.acId.username,
+            img: member.acId.img,
           }));
 
           setOriginalMembers(

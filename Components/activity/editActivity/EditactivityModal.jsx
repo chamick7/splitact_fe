@@ -39,15 +39,17 @@ export default function EditactivityModal({
   const [date, setDate] = useState();
   const [name, setName] = useState(activity.atName);
 
-
-
   const leaveActivity = () => {
+    Router.replace("/dashboard");
+
     axios
       .post("/activity/leave", { activityId: activity._id })
       .then((result) => {
         Router.replace("/dashboard");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        Router.replace("/dashboard");
+      });
   };
 
   const onSubmit = () => {
@@ -111,7 +113,7 @@ export default function EditactivityModal({
             >
               {members.map((member, index) => (
                 <span key={index} className={style.view_member}>
-                  <img src={member.img} alt=""/>
+                  <img src={member.img} alt="" />
                   {member.username}
                   {activity.atCreaterID == member.id ? (
                     <FontAwesomeIcon style={{ color: color }} icon={faCode} />
