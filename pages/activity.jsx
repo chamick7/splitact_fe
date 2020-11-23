@@ -275,21 +275,21 @@ export default function activity() {
       }
     }))
 
-    // setActivity(
-    //   update(activity, {
-    //     list: {
-    //       [listIndex]: {
-    //         cards: {
-    //           [cardIndex]: {
-    //             files: {
-    //               $set: filesRes,
-    //             },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   })
-    // );
+    setActivity(
+      update(activity, {
+        list: {
+          [listIndex]: {
+            cards: {
+              [cardIndex]: {
+                files: {
+                  $set: filesRes,
+                },
+              },
+            },
+          },
+        },
+      })
+    );
 
     
   };
