@@ -35,6 +35,20 @@
     font-family: 'Prompt', sans-serif;
 
 }
+
+.about_container_block:nth-child(1) img{
+    max-width: 300px;
+    box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
+}
+.about_container_block:nth-child(2) img{
+    max-width: 300px;
+    box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
+}
+.about_container_block:nth-child(3) img{
+    max-width: 300px;
+    box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
+}
+
 .about_container_block{
     margin-top: 8vh;
     width: 25%;

@@ -1,3 +1,4 @@
+import React from 'react'
 import Link from "next/link";
 import Head from "next/head";
 import { getAxios } from "../utils/axios";
@@ -63,7 +64,7 @@ export default function Home({}) {
           <section className={styles.calendar_container_left}>
             <section>
               <h1>Calendar</h1>
-              <img src="/img/calendar-preview.PNG" alt="" />
+              <img src="/img/home_calendar.PNG" alt="" />
             </section>
           </section>
           <section className={styles.calendar_container_right}>
@@ -87,22 +88,16 @@ export default function Home({}) {
 
         <div className={styles.bottom_calender}>
           <section className={styles.bottom_calender_left}>
-            <button>
-              <h3>What's Split</h3>
-              <span>ACT ?</span>
-            </button>
+            <button><a href="#preview1">What's Split<span>ACT ?</span></a></button>
           </section>
           <section className={styles.bottom_calender_right}>
-            <button>
-              <h3>Feature in Split</h3>
-              <span>ACT</span>
-            </button>
+            <button><a href="#preview2">Feature in Split<span>ACT</span></a></button>
           </section>
         </div>
 
-        <div className={styles.recommend_container}>
+        <div className={styles.recommend_container} id={"preview1"}>
           <section className={styles.recommend_container_left}>
-            <img src="/img/calendar-preview.PNG" alt="" />
+            <img src="/img/home_preview1.PNG" alt="" />
           </section>
           <section className={styles.recommend_container_right}>
             <h1>
@@ -116,7 +111,7 @@ export default function Home({}) {
           </section>
         </div>
 
-        <div className={styles.recommend_container_two}>
+        <div className={styles.recommend_container_two } id={"preview2"}>
           <section className={styles.recommend_container_two_left}>
             <h1>
               use <span>'filter'</span> to categorize and prioritize you.
@@ -128,7 +123,7 @@ export default function Home({}) {
             </h1>
           </section>
           <section className={styles.recommend_container_two_right}>
-            <img src="/img/calendar-preview.PNG" alt="" />
+            <img src="/img/home_preview2.PNG" alt="" />
           </section>
         </div>
 
