@@ -38,7 +38,7 @@ export default function about(){
                 <h3>And make members responsible for their own duties.</h3>
             </section>
             <section className={styles.about_container_block}>
-                <img src="/img/mikusan.jpg" alt="かわいい"/>
+                <img src="/img/about_upload.png" alt=""/>
                 <h3>It can also track individual progress.</h3>
             </section>
             </div>
