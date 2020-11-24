@@ -24,9 +24,9 @@ export default function ChatHeader({ setSideBarStyle }) {
           ></span>
           {activity.atName}
         </span>
-        <span className={styles.member_span}>
+        {/* <span className={styles.member_span}>
           <FontAwesomeIcon icon={faUsers} />
-        </span>
+        </span> */}
       </div>
     );
   } else return null;

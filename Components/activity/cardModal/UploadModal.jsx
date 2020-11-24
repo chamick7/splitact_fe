@@ -8,7 +8,8 @@ const axios = getAxios();
 
 export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
   const getUploadParams = ({ meta }) => {
-    return { url: "https://httpbin.org/post" };
+    // return { url: "http://localhost:5000/file/upload" };
+    return { url: "https://httpbin.org/post" }
   };
 
   // called every time a file's `status` changes

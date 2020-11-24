@@ -42,7 +42,6 @@ export default function CrCardModal({
     data.color = color;
     data.activityId = activityId;
 
-    console.log(data.dueDate);
     axios
       .post("/activity/card", data)
       .then((resData) => {

@@ -22,16 +22,21 @@ export default function ImageModal({ account, setImageModal }) {
   const exportImage = async () => {
     if (image) {
       const img = editor.getImageScaledToCanvas();
+      const imageName = Date.now() + "-" + account._id + ".jpg"
       img.toBlob(
         (blob) => {
           const data = new FormData();
-
-          data.append("file", blob, account._id + ".jpg");
+          data.append('imageName', imageName);
+          data.append("file", blob, imageName);
 
           axios
-            .post("/file/img/upload", data)
+            .post("/file/img/upload", data, {
+              onUploadProgress: (progressEvent) =>
+                console.log(
+                  Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                ),
+            })
             .then((result) => {
-
               Router.reload(window.location.pathname);
             })
             .catch((err) => {});

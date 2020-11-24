@@ -164,8 +164,6 @@ export default function activity() {
   };
 
   const createCard = (card) => {
-    console.log(groupList[0].cards[0]);
-    console.log(card);
     setGroupList(
       update(groupList, {
         [0]: {
