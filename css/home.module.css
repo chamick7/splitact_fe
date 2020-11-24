@@ -258,7 +258,7 @@
     max-width: 1000px;
 }
 
-@media only screen and (max-width:376px) and (min-width:360px){
+@media only screen and (max-width:380px) and (min-width:1px){
     .calendar_container_left{
         width: 100vw;
     }
@@ -267,10 +267,10 @@
         margin: 0px ;
     }
     .calendar_container_left h1{
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     .calendar_container_right h1{
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     .home_email_input {
         width: 90%;
@@ -428,7 +428,7 @@
         width: 100%;
     }
     .recommend_container_left img{
-        width: 80%;
+        width: 360px;
     }
     .recommend_container_right{
         width: 100%;
@@ -447,7 +447,7 @@
         width: 100%;
     }
     .recommend_container_two_right img{
-        width: 80%;
+        width: 360px;
     }
     .recommend_container_two_left{
         width: 100%;
