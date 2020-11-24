@@ -11,6 +11,7 @@ import { GoogleLogin } from "react-google-login";
 import { useForm } from "react-hook-form";
 import { getAxios } from "../utils/axios";
 import PreventRoute from "../utils/PreventRoute";
+import Loader from "../Components/loader";
 
 export default function Register() {
   const { handleSubmit, register, errors, watch } = useForm();
@@ -18,6 +19,7 @@ export default function Register() {
   const [email, setEmail] = useState(router.query.email);
   const axios = getAxios();
   const [error, setError] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -26,22 +28,27 @@ export default function Register() {
   const responseGoogle = () => {};
 
   const onSubmit = (account) => {
+    setLoader(true);
     console.log(account);
     axios
       .post("/account", account)
       .then((res) => {
+        setLoader(false);
+
         setError("");
         if (res.data.status === "Success") {
           router.push({ pathname: "/login" });
         }
       })
       .catch((err) => {
-        if(err.response.status == 409){
-          if(err.response.data.already){
-            if(err.response.data.already === "email"){
-              setError("This email address is already registered")
+        setLoader(false);
+
+        if (err.response.status == 409) {
+          if (err.response.data.already) {
+            if (err.response.data.already === "email") {
+              setError("This email address is already registered");
             } else if (err.response.data.already === "username") {
-              setError("This username is already registered")
+              setError("This username is already registered");
             }
           }
         }
@@ -56,8 +63,11 @@ export default function Register() {
         </section>
         <section className="login-right">
           <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+            {loader && <Loader />}
             <h1>Register a new account</h1>
-            {errors.termOfUse && errors.termOfUse.type === "required" && <h6 className="err_msg">Please accept term of use</h6>}
+            {errors.termOfUse && errors.termOfUse.type === "required" && (
+              <h6 className="err_msg">Please accept term of use</h6>
+            )}
             {error && <h6 className="err_msg">{error}</h6>}
             <div className="login-input name">
               <input
@@ -72,9 +82,15 @@ export default function Register() {
               />
               <FontAwesomeIcon icon={faUser} />
             </div>
-            {errors.username && errors.username.type === "required" && <h6 className="err_msg">This is Required</h6>}
-            {errors.username && errors.username.type === "minLength" && <h6 className="err_msg">This field required min length 6</h6>}
-            {errors.username && errors.username.type === "maxLength" && <h6 className="err_msg">This field max length is 12 </h6>}
+            {errors.username && errors.username.type === "required" && (
+              <h6 className="err_msg">This is Required</h6>
+            )}
+            {errors.username && errors.username.type === "minLength" && (
+              <h6 className="err_msg">This field required min length 6</h6>
+            )}
+            {errors.username && errors.username.type === "maxLength" && (
+              <h6 className="err_msg">This field max length is 12 </h6>
+            )}
 
             <div className="login-input email">
               <input
@@ -134,10 +150,18 @@ export default function Register() {
             )}
 
             <label className="register_agree noselect" htmlFor="tou">
-              <input type="checkbox" name="termOfUse" id="tou" ref={register({
-                required:"Required",
-              })} />
-              I agree to the Splitact <Link href="/term_of_use"><a>term of use</a></Link>
+              <input
+                type="checkbox"
+                name="termOfUse"
+                id="tou"
+                ref={register({
+                  required: "Required",
+                })}
+              />
+              I agree to the Splitact{" "}
+              <Link href="/term_of_use">
+                <a>term of use</a>
+              </Link>
             </label>
 
             <button className="login-submit-btn">Register</button>
