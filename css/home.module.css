@@ -173,7 +173,7 @@
 .recommend_container_left img{
     box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
     border-radius: 10px;
-    width: 80%;
+    width: 70%;
 }
 
 .recommend_container_right{
@@ -239,7 +239,7 @@
 }
 .recommend_container_two_right img{
     box-shadow: 2px 2px 2px 2px rgba(177, 177, 177);
-    width: 80%;
+    width: 70%;
     border-radius: 10px;
 }
 .endpage{
