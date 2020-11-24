@@ -33,27 +33,27 @@ export default function DataCardModal({
 
   const imgType = [".jpg", ".png", ".jpeg"];
   const fileTyle = [".pdf", ".doc", ".docx", ".xls", ".ppt", ".pptx"];
-  let cloneImg = fileImg.slice();
-  let cloneFile = fileFile.slice();
 
   useEffect(() => {
-    //   console.log(currentCard.files);
     verifyFiles(currentCard.files);
   }, [currentCard]);
 
   const verifyFiles = (files) => {
+    let imglist = [];
+    let filelist = [];
     files.map((file) => {
       let fileNameArray = file.toLowerCase().split(".");
       let fileLast = fileNameArray[fileNameArray.length - 1];
 
       if (imgType.some((type) => type == "." + fileLast)) {
-        cloneImg.push(file);
-        setFileImg(cloneImg);
+        imglist.push(file);
       } else if (fileTyle.some((type) => type == "." + fileLast)) {
-        cloneFile.push(file);
-        setFileFile(cloneFile);
+        filelist.push(file);
       }
     });
+
+    setFileImg(imglist);
+    setFileFile(filelist);
   };
 
   return (

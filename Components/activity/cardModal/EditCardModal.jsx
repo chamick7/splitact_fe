@@ -17,25 +17,32 @@ import MomentLocaleUtils, {
   parseDate,
 } from "react-day-picker/moment";
 import { useForm } from "react-hook-form";
+import moment from "moment";
 
 import "moment/locale/en-au";
 
-export default function EditCardModal({ setEditCardModal, currentCard, editCard, members }) {
-  const [worker, setWorker] = useState(currentCard.workerId);
+export default function EditCardModal({
+  setEditCardModal,
+  currentCard,
+  editCard,
+  members,
+}) {
+  const [worker, setWorker] = useState({
+    img: currentCard.workerId.img,
+    username: currentCard.workerId.username,
+    id: currentCard.workerId._id,
+  });
   const [name, setName] = useState(currentCard.cardName);
   const [description, setDescription] = useState(currentCard.cardDescription);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(currentCard.dueDate);
   const [color, setColor] = useState(currentCard.color);
   const { register, handleSubmit } = useForm();
-
-  console.log(currentCard);
 
   const onSubmit = (data) => {
     data.dueDate = date;
     data.workerId = worker ? worker.id : null;
     data.color = color;
     data.listId = currentCard.listId;
-
 
     editCard(currentCard._id, data);
   };
@@ -106,6 +113,7 @@ export default function EditCardModal({ setEditCardModal, currentCard, editCard,
                   formatDate={formatDate}
                   parseDate={parseDate}
                   onDayChange={(day) => setDate(day)}
+                  value={date ? moment(date).format("DD/MM/YYYY") : null}
                 />
               </span>
             </div>

@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 require("react-big-calendar/lib/css/react-big-calendar.css");
 import { getAxios } from "../utils/axios";
 const axios = getAxios();
+import Link from "next/link";
 
 import styles from "../css/calendar.module.css";
 
@@ -31,12 +32,20 @@ export default function Calendar(props) {
     };
   }
 
+  const eventComponents = ({ event }) => {
+    return (
+      <Link href={"/activity?activity=" + event.activityId}>
+        <a>
+          <h4>{event.title}</h4>
+        </a>
+      </Link>
+    );
+  };
+
   useEffect(() => {
     axios
       .get("/activity/card/calendar")
       .then((result) => {
-        
-
         setEvents(
           result.data.cards.map((card, index) => ({
             id: card._id,
@@ -46,6 +55,7 @@ export default function Calendar(props) {
             hexColor: card.color.substring(1, 100),
             start: card.dueDate,
             end: card.dueDate,
+            activityId: card.atId,
           }))
         );
       })
@@ -65,6 +75,9 @@ export default function Calendar(props) {
           events={events}
           scrollToTime={new Date(1970, 1, 1, 6)}
           defaultDate={new Date()}
+          components={{
+            event: eventComponents,
+          }}
         />
       </center>
     </div>

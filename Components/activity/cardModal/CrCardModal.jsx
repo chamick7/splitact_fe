@@ -28,7 +28,8 @@ export default function CrCardModal({
   worker,
   setWorker,
   listId,
-  setNewCardModal
+  setNewCardModal,
+  activityId
 }) {
   const [date, setDate] = useState(null);
   const [color, setColor] = useState("#FF672B");
@@ -39,6 +40,7 @@ export default function CrCardModal({
     data.workerId = worker ? worker.id : null;
     data.listId = listId;
     data.color = color;
+    data.activityId = activityId;
 
     console.log(data.dueDate);
     axios

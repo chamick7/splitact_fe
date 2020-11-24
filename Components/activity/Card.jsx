@@ -82,6 +82,12 @@ export default function Card({
     setMenuModal(false);
   };
 
+  const onClickHandler = (e) => {
+    if (e.target.getAttribute("tag") == id) {
+      openCard(card);
+    }
+  };
+
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       // inside click
@@ -105,16 +111,17 @@ export default function Card({
       ref={(node) => drag(drop(node))}
       style={{ opacity }}
       className={style.card}
-      onClick={() => {
-        openCard(card);
+      onClick={(e) => {
+        onClickHandler(e);
       }}
     >
       <div
         style={{ backgroundColor: card.color }}
         className={style.card_header}
+        tag={id}
       >
-        <span className={style.card_name}>
-          <h4>{card.cardName}</h4>
+        <span tag={id} className={style.card_name}>
+          <h4 tag={id}>{card.cardName}</h4>
           <span>
             {" "}
             {card.dueDate

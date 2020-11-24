@@ -28,12 +28,17 @@ export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        onUploadProgress: (ProgressEvent) => {
+          console.log(
+            Math.round(100 * ProgressEvent.loaded) / ProgressEvent.total
+          );
+        },
       })
       .then((result) => {
-        sendToUpload(result.data.files)
+        console.log(result.data);
+        sendToUpload(result.data.files);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
 
     // console.log(allFiles);
     // allFiles.forEach((f) => f.remove());

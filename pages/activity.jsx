@@ -80,19 +80,24 @@ export default function activity() {
 
   useEffect(() => {
     if (sendGroup) {
-      saveChangeGroup(sendGroup.groupIndex, sendGroup.toGroupIndex);
+      saveChangeGroup(
+        sendGroup.groupIndex,
+        sendGroup.toGroupIndex,
+        currentCard
+      );
     }
   }, [sendGroup]);
 
-  const saveChangeGroup = (groupIndex, toGroupIndex) => {
+  const saveChangeGroup = (groupIndex, toGroupIndex, card) => {
     axios
       .post("/activity/card/changelist", {
         oldListId: groupList[groupIndex]._id,
         oldCards: groupList[groupIndex].cards,
         newListId: groupList[toGroupIndex]._id,
         newCards: groupList[toGroupIndex].cards,
+        card: card,
       })
-      .then(() => {})
+      .then((result) => {})
       .catch((err) => {
         router.push("/dashboard");
       });
@@ -106,8 +111,14 @@ export default function activity() {
   };
 
   const changeGroup = (oldGroupIndex, oldIndex, toGroupIndex, card) => {
+
+    card.listId = groupList[toGroupIndex]._id;
+
+    console.log(groupList[toGroupIndex].cards);
+
     try {
       if (canMove) {
+        setCurrentCard(card);
         setGroupList(
           update(groupList, {
             [oldGroupIndex]: {
@@ -171,7 +182,6 @@ export default function activity() {
     axios
       .get("/activity?activity=" + activityId)
       .then((resData) => {
-        console.log(resData.data.activity);
         setActivity(resData.data.activity);
         setGroupList(resData.data.activity.list);
         setMembers(resData.data.members);
@@ -261,7 +271,6 @@ export default function activity() {
   // upload files
 
   const uploadCard = (filesRes) => {
-    console.log(currentCard);
     const listIndex = activity.list.findIndex(
       (list) => list._id == currentCard.listId
     );
@@ -269,11 +278,13 @@ export default function activity() {
       (card) => card._id == currentCard._id
     );
 
-    setCurrentCard(update(currentCard, {
-      files:{
-        $set: filesRes
-      }
-    }))
+    setCurrentCard(
+      update(currentCard, {
+        files: {
+          $set: filesRes,
+        },
+      })
+    );
 
     setActivity(
       update(activity, {
@@ -290,8 +301,6 @@ export default function activity() {
         },
       })
     );
-
-    
   };
 
   //list
@@ -386,6 +395,7 @@ export default function activity() {
             createCard={createCard}
             setNewCardModal={setNewCardModal}
             listId={groupList[0]._id}
+            activityId={activityId}
           />
         )}
         {editCardModal && (

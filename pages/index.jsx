@@ -1,4 +1,4 @@
-import React from 'react'
+import { useRef } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { getAxios } from "../utils/axios";
@@ -27,8 +27,7 @@ export const getServerSideProps = async (ctx) => {
           ctx.res.end();
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   } catch (err) {}
 
   return {
@@ -38,6 +37,11 @@ export const getServerSideProps = async (ctx) => {
 
 export default function Home({}) {
   const router = useRouter();
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+
+  const scrollTo = (ref) =>
+    window.scrollTo(0, ref.current.offsetTop);
 
   const handleEmail = (e) => {
     e.preventDefault();
@@ -87,14 +91,30 @@ export default function Home({}) {
 
         <div className={styles.bottom_calender}>
           <section className={styles.bottom_calender_left}>
-            <button><a href="#preview1">What's Split<span>ACT ?</span></a></button>
+            <button>
+              <a
+                onClick={() => {
+                  scrollTo(ref1);
+                }}
+              >
+                What's Split<span>ACT ?</span>
+              </a>
+            </button>
           </section>
           <section className={styles.bottom_calender_right}>
-            <button><a href="#preview2">Feature in Split<span>ACT</span></a></button>
+            <button>
+              <a
+                onClick={() => {
+                  scrollTo(ref2);
+                }}
+              >
+                Feature in Split<span>ACT</span>
+              </a>
+            </button>
           </section>
         </div>
 
-        <div className={styles.recommend_container} id={"preview1"}>
+        <div ref={ref1} className={styles.recommend_container} id={"preview1"}>
           <section className={styles.recommend_container_left}>
             <img src="/img/home_preview1.png" alt="" />
           </section>
@@ -110,7 +130,11 @@ export default function Home({}) {
           </section>
         </div>
 
-        <div className={styles.recommend_container_two } id={"preview2"}>
+        <div
+          ref={ref2}
+          className={styles.recommend_container_two}
+          id={"preview2"}
+        >
           <section className={styles.recommend_container_two_left}>
             <h1>
               use <span>'filter'</span> to categorize and prioritize you.
