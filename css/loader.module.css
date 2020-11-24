@@ -1,14 +1,4 @@
 
-.test{
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    word-wrap: ;
-    border: 3px solid;
-    height: 400px;
-    width: 400px;
-    position: relative;
-}
 
 .load_body{
     display: flex;
@@ -16,13 +6,13 @@
     justify-content: center;
     height: 100%;
     width: 100%;
-    background-color:white;
+    background-color:rgba(255, 255, 255, 0.342);
     position: absolute;
 }
 .loader{
     position: relative;
-    height: 20vw;
-    width: 20vw;
+    height: 100px;
+    width: 100px;
     border: 3px solid transparent;
     border-top-color:red;
     border-bottom-color:red;

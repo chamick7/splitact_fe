@@ -19,6 +19,28 @@
     color: #FF672B;
 }
 
+.status_container{
+    min-width: 400px;
+    max-width: 90vw;
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 15px;
+    border-radius: 6px;
+    padding: 15px 0;
+}
+
+.status_success{
+    border: 1px solid #677C5E;
+    background-color: #DEF3D6;
+    color: #677C5E;
+}
+
+.status_error{
+    border: 1px solid #9e4744;
+    background-color: #ECC8C4;
+    color:  #9e4744;
+}
+
 .form{
     width: 50%;
     display: flex;

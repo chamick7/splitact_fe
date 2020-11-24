@@ -9,6 +9,8 @@ import { useRecoilState } from "recoil";
 import { accountAtom } from "../atom";
 import { getAxios } from "../utils/axios";
 import PreventRoute from "../utils/PreventRoute";
+import Loader from "../Components/loader";
+import { useState } from "react";
 const axios = getAxios();
 
 export const getServerSideProps = async (ctx) => {
@@ -42,14 +44,32 @@ export default function login() {
   const { handleSubmit, register, errors } = useForm();
   const [Err, setErr] = React.useState("");
   const [account, setAccount] = useRecoilState(accountAtom);
+  const [loader, setLoader] = useState(false);
 
   const responseSuccessGoogle = (res) => {
-    const profile = res.profileObj;
-    console.log(profile);
+    const tokenId = res.tokenId;
+
+    axios
+      .post("/account/google", {
+        tokenId,
+      })
+      .then((res) => {
+        setAccount({
+          email: res.data.account.email,
+          username: res.data.account.username,
+          acID: res.data.account.acID,
+          role: res.data.account.role,
+          img: res.data.account.img,
+        });
+
+        router.push("/dashboard");
+      })
+      .catch((err) => {});
   };
   const responseFailGoogle = () => {};
 
   const getLogin = async (ac) => {
+    setLoader(true);
     await axios
       .post("/account/login", ac)
       .then((res) => {
@@ -62,8 +82,10 @@ export default function login() {
         });
 
         router.push("/dashboard");
+        setLoader(false);
       })
       .catch((err) => {
+        setLoader(false);
         setErr("Email username or password is incorrect");
       });
   };
@@ -80,6 +102,7 @@ export default function login() {
         </section>
         <section className="login-right">
           <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+            {loader && <Loader />}
             <h1>Sign in to your account</h1>
             {Err && <h6 className="err_msg">{Err}</h6>}
             <div className="login-input email">
