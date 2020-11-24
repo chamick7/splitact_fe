@@ -88,7 +88,7 @@ export default function dashboard() {
             </Link>
           </span>
           <button className={styles.act_menu}>
-            <FontAwesomeIcon icon={faEllipsisV} />
+            {/* <FontAwesomeIcon icon={faEllipsisV} /> */}
           </button>
         </div>
 
@@ -131,10 +131,10 @@ export default function dashboard() {
                 <span className={styles.duedate_header}>Due Date: </span>
                 {props.dueDate != "Invalid date" ? props.dueDate : " - "}
               </span>
-              <span>
+              {/* <span>
                 <FontAwesomeIcon icon={faUsers} />
                 {props.amount}
-              </span>
+              </span> */}
             </div>
           </a>
         </Link>

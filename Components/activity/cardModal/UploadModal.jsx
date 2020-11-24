@@ -63,7 +63,7 @@ export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
           onChangeStatus={handleChangeStatus}
           onSubmit={handleSubmit}
           maxSizeBytes={10485760}
-          maxFiles={5}
+          maxFiles={2}
           accept="image/jpeg,image/png,.pdf,.docx,.doc,.xlsx,.xls"
           submitButtonContent="Upload"
         />
