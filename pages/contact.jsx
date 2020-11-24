@@ -93,7 +93,9 @@ export default function contact() {
             required: "Required",
           })}
         />
+        <div className={styles.bt}>
         <button type="submit">Send</button>
+        </div>
       </form>
 
       <h2>

@@ -59,12 +59,18 @@
     border-bottom: 1px solid #644CC6;
     border-radius: 5px 5px 0px 0px;
 }
-.form input[name="Body"]{
+.form input[name="data"]{
     width: 100%;
-    padding-bottom: 18vh;
+    padding-bottom: 20vh;
 }
 
-.contact_body button{
+.bt{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
+.form button{
+    align-items: center;
     padding: 4px 25px;
     margin-top: 3vh;
     font-family: 'Prompt', sans-serif;
@@ -76,7 +82,7 @@
     cursor: pointer;
     transition: .5s;
 }
-.contact_body button:hover{
+.form button:hover{
     background-color: #8a6ef8;
 }
 
