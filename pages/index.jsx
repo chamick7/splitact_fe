@@ -113,12 +113,10 @@ export default function Home({}) {
         <div className={styles.recommend_container_two } id={"preview2"}>
           <section className={styles.recommend_container_two_left}>
             <h1>
-              use <span>'filter'</span> to categorize and prioritize you.
+            Feature <span>'Chat'</span> and <span>'Upload'</span> for everyone who want to work together and making you feel easier and comfortable.
             </h1>
             <h1>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You can categorize tasks. And
-              organize the sequence of tasks that must be performed according to
-              the needs
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; without switching another service from another provider. By all of this, you can use all of that feature from us.
             </h1>
           </section>
           <section className={styles.recommend_container_two_right}>
