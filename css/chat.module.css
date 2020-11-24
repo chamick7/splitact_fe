@@ -22,10 +22,29 @@
     padding: 10px 20px;
 }
 
+.actTag_container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.actTag_link{
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
+    transition: .4s;
+}
+
+.actTag_link:hover{
+    color: black !important;
+}
+
 .actTag{
     font-family: 'Montserrat';
     font-weight: 700;
-    width: 90%;
+    width: 80%;
     background-color: white;
     font-size: 1rem;
     padding: 10px 5px;
@@ -69,6 +88,7 @@
     align-items: center;
     position: sticky;
     top: 80px;
+    z-index: 2 !important;
 }
 .header svg{
     font-size: 40px;
@@ -133,7 +153,7 @@
 .inbox_form span{
     margin: 0 13px;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 700;   
 }
 .submit_btn{
     cursor: pointer;
