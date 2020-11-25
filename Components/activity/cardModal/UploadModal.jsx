@@ -4,12 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-dropzone-uploader/dist/styles.css";
 import Dropzone from "react-dropzone-uploader";
 import { getAxios } from "../../../utils/axios";
+import Loader from "../../Loader";
+import { useState } from "react";
+
 const axios = getAxios();
 
 export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
+  const [loader, setLoader] = useState(false);
+
   const getUploadParams = ({ meta }) => {
     // return { url: "http://localhost:5000/file/upload" };
-    return { url: "https://httpbin.org/post" }
+    return { url: "https://httpbin.org/post" };
   };
 
   // called every time a file's `status` changes
@@ -17,6 +22,7 @@ export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
 
   // receives array of files that are done uploading when submit button is clicked
   const handleSubmit = (files, allFiles) => {
+    setLoader(true);
     const form = new FormData();
     form.append("cardId", cardId);
 
@@ -36,10 +42,13 @@ export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
         },
       })
       .then((result) => {
-        console.log(result.data);
+        setLoader(false);
+
         sendToUpload(result.data.files);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setLoader(false);
+      });
 
     // console.log(allFiles);
     // allFiles.forEach((f) => f.remove());
@@ -58,6 +67,7 @@ export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
         </span>
       </div>
       <div className={style.upload_body}>
+        {loader && <Loader />}
         <Dropzone
           getUploadParams={getUploadParams}
           onChangeStatus={handleChangeStatus}

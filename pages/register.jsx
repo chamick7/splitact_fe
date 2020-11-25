@@ -11,13 +11,17 @@ import { GoogleLogin } from "react-google-login";
 import { useForm } from "react-hook-form";
 import { getAxios } from "../utils/axios";
 import PreventRoute from "../utils/PreventRoute";
-import Loader from "../Components/loader";
+import Loader from "../Components/Loader";
+import { useRecoilState } from "recoil";
+import { accountAtom } from "../atom";
 
 export default function Register() {
   const { handleSubmit, register, errors, watch } = useForm();
   const router = useRouter();
   const [email, setEmail] = useState(router.query.email);
   const axios = getAxios();
+  const [account, setAccount] = useRecoilState(accountAtom);
+
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
 
@@ -25,7 +29,26 @@ export default function Register() {
     setEmail(e.target.value);
   };
 
-  const responseGoogle = () => {};
+  const responseGoogle = (res) => {
+    const tokenId = res.tokenId;
+
+    axios
+      .post("/account/google", {
+        tokenId,
+      })
+      .then((res) => {
+        setAccount({
+          email: res.data.account.email,
+          username: res.data.account.username,
+          acID: res.data.account.acID,
+          role: res.data.account.role,
+          img: res.data.account.img,
+        });
+
+        router.push("/dashboard");
+      })
+      .catch((err) => {});
+  };
 
   const onSubmit = (account) => {
     setLoader(true);

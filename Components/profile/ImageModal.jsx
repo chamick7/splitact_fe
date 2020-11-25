@@ -5,8 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const axios = getAxios();
 import Router from "next/router";
 import { accountAtom } from "../../atom";
-import { useRecoilState } from "recoil";
-import update from "immutability-helper";
+import Loader from "../Loader";
 
 import ReactAvatarEditor from "react-avatar-editor";
 import { useState } from "react";
@@ -18,15 +17,17 @@ export default function ImageModal({ account, setImageModal }) {
   const [image, setImage] = useState();
   const [newImage, setNewImage] = useState();
   const [editor, setEditor] = useState();
+  const [loader, setLoader] = useState(false);
 
   const exportImage = async () => {
+    setLoader(true);
     if (image) {
       const img = editor.getImageScaledToCanvas();
-      const imageName = Date.now() + "-" + account._id + ".jpg"
+      const imageName = Date.now() + "-" + account._id + ".jpg";
       img.toBlob(
         (blob) => {
           const data = new FormData();
-          data.append('imageName', imageName);
+          data.append("imageName", imageName);
           data.append("file", blob, imageName);
 
           axios
@@ -37,9 +38,13 @@ export default function ImageModal({ account, setImageModal }) {
                 ),
             })
             .then((result) => {
+              setLoader(false);
+
               Router.reload(window.location.pathname);
             })
-            .catch((err) => {});
+            .catch((err) => {
+              setLoader(false);
+            });
         },
         "image/png",
         1
@@ -75,50 +80,54 @@ export default function ImageModal({ account, setImageModal }) {
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </div>
-        <img src={newImage} alt="" />
-        <ReactAvatarEditor
-          ref={setRef}
-          scale={scale}
-          width={500}
-          height={500}
-          position={position}
-          onPositionChange={handlePosition}
-          rotate={0}
-          borderRadius={500}
-          image={image}
-          className={style.selection}
-        />
-        <div className={style.modal_bar}>
-          <input
-            type="range"
-            name="scale"
-            min="0.8"
-            max="2"
-            step="0.01"
-            defaultValue="1"
-            onChange={handleScale}
+        <div className={style.upload_container}>
+          {loader && <Loader />}
+
+          <ReactAvatarEditor
+            ref={setRef}
+            scale={scale}
+            width={500}
+            height={500}
+            position={position}
+            onPositionChange={handlePosition}
+            rotate={0}
+            borderRadius={500}
             image={image}
+            className={style.selection}
           />
-        </div>
-        <input
-          className={style.Uploader}
-          id="file"
-          type="file"
-          name="image"
-          onChange={handleImage}
-          accept="image/jpeg, image/png"
-        />
-        <label className={style.for_Uploader} htmlFor="file">
-          Upload
-        </label>
-        <div className={style.modal_tail}>
-          <button
-            onClick={() => {
-              exportImage();
-            }}
-          >
-            Apply
-          </button>
+          <div className={style.modal_bar}>
+            <input
+              type="range"
+              name="scale"
+              min="0.8"
+              max="2"
+              step="0.01"
+              defaultValue="1"
+              onChange={handleScale}
+              image={image}
+              style={{ zIndex: 1 }}
+            />
+          </div>
+          <input
+            className={style.Uploader}
+            id="file"
+            type="file"
+            name="image"
+            onChange={handleImage}
+            accept="image/jpeg, image/png"
+          />
+          <label className={style.for_Uploader} htmlFor="file">
+            Upload
+          </label>
+          <div className={style.modal_tail}>
+            <button
+              onClick={() => {
+                exportImage();
+              }}
+            >
+              Apply
+            </button>
+          </div>
         </div>
       </div>
     </div>

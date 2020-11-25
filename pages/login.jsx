@@ -9,30 +9,13 @@ import { useRecoilState } from "recoil";
 import { accountAtom } from "../atom";
 import { getAxios } from "../utils/axios";
 import PreventRoute from "../utils/PreventRoute";
-import Loader from "../Components/loader";
+import Loader from "../Components/Loader";
 import { useState } from "react";
 const axios = getAxios();
 
 export const getServerSideProps = async (ctx) => {
-  try {
-    const cookie = ctx.req?.headers.cookie;
-
-    await axios
-      .get("/account/auth", {
-        headers: {
-          cookie: cookie,
-        },
-      })
-      .then((resp) => {
-        if (resp.status === 200) {
-          ctx.res.writeHead(302, { Location: "/dashboard" });
-          ctx.res.end();
-        }
-      })
-      .catch((err) => {
-        // console.log(err.response);
-      });
-  } catch (err) {}
+ 
+  
 
   return {
     props: {},

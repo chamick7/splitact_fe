@@ -115,18 +115,17 @@
     font-family: "Montserrat";
     width: 60%;
     margin-left: 10%;
-
 }
 
 @media only screen and (max-width: 700px){
     .profile1_data{
-        width: 80%;
+        width: 90%;
     }
 
     .sideBar{
         position: fixed !important;
         height: 100vh;
-        width: 60% !important;
+        width: 80% !important;
     }
 
     .navbar{
@@ -184,6 +183,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media only screen and (max-width: 700px){
+    
+    .sec_data{
+        width: 100%;
+    }
+
+    .data_item{
+        width: 100%;
+    }
+
+    .current{
+        width: 100%;
+    }
+
 }
 
 
@@ -259,6 +274,15 @@
 
 }
 
+@media only screen and (max-width: 700px){
+    
+    .profile_sideBar{
+      
+        font-size: 80%;
+    
+    }
+}
+
 .profile_sideBar img{
     width: 40px;
     border-radius: 50%;
@@ -323,6 +347,16 @@
 }
 .modal_header h3{
     padding-left: 2vh;
+}
+
+.upload_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .modal_header span{

@@ -18,7 +18,7 @@ import { useState } from "react";
 
 export default function contact() {
   const router = useRouter();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const email = router.query.email;
   const [status, setStatus] = useState();
 
@@ -32,9 +32,11 @@ export default function contact() {
         data: data.data,
       })
       .then((result) => {
+        reset();
         setStatus("success");
       })
       .catch((err) => {
+        reset();
         setStatus("error");
       });
   };
