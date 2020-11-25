@@ -7,11 +7,7 @@ export default function Profile({ account, setImageModal }) {
     <div className={style.profile1_body}>
       <div className={style.profile1_img}>
         <div className={style.img_container}>
-          <img
-            draggable="false"
-            src={account.img}
-            alt=""
-          />
+          <img draggable="false" src={account.img} alt="" />
         </div>
         <button
           onClick={() => {
@@ -27,14 +23,6 @@ export default function Profile({ account, setImageModal }) {
           <div className={style.data_item}>
             <h3>Username</h3>
             <div className={style.current}>{account.username}</div>
-          </div>
-          <div className={style.data_item}>
-            <h3>Name</h3>
-            <div className={style.current}>{account.name}</div>
-          </div>
-          <div className={style.data_item}>
-            <h3>Tel.</h3>
-            <div className={style.current}>{account.tel}</div>
           </div>
         </div>
       </div>

@@ -52,7 +52,6 @@ export default function Register() {
 
   const onSubmit = (account) => {
     setLoader(true);
-    console.log(account);
     axios
       .post("/account", account)
       .then((res) => {
