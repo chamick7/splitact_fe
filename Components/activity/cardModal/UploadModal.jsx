@@ -42,12 +42,11 @@ export default function UploadModal({ setUploadModal, cardId, sendToUpload }) {
         },
       })
       .then((result) => {
-        setLoader(false);
-
         sendToUpload(result.data.files);
+        setLoader(false);
+        console.log(result.data.files);
       })
       .catch((err) => {
-        setLoader(false);
       });
 
     // console.log(allFiles);

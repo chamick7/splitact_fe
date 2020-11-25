@@ -18,6 +18,8 @@ export default function ImageModal({ account, setImageModal }) {
   const [newImage, setNewImage] = useState();
   const [editor, setEditor] = useState();
   const [loader, setLoader] = useState(false);
+  const [canUpload, setCanUpload] = useState(true);
+  const [err, setErr] = useState("");
 
   const exportImage = async () => {
     setLoader(true);
@@ -38,12 +40,11 @@ export default function ImageModal({ account, setImageModal }) {
                 ),
             })
             .then((result) => {
-              setLoader(false);
-
               Router.reload(window.location.pathname);
             })
             .catch((err) => {
-              setLoader(false);
+              Router.reload(window.location.pathname);
+              s;
             });
         },
         "image/png",
@@ -62,7 +63,15 @@ export default function ImageModal({ account, setImageModal }) {
   };
 
   const handleImage = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    setImage(file);
+    if (file.size > 5242880) {
+      setCanUpload(false);
+      setErr("Please upload a file smaller than 5 MB");
+    } else {
+      setCanUpload(true);
+      setErr();
+    }
   };
 
   const setRef = (editor) => setEditor(editor);
@@ -119,14 +128,19 @@ export default function ImageModal({ account, setImageModal }) {
           <label className={style.for_Uploader} htmlFor="file">
             Upload
           </label>
+          <div style={{ textAlign: "center" }}>
+            {err ? <h6 style={{ margin: "0px" }} className="err_msg">{err}</h6> : null}
+          </div>
           <div className={style.modal_tail}>
-            <button
-              onClick={() => {
-                exportImage();
-              }}
-            >
-              Apply
-            </button>
+            {canUpload && (
+              <button
+                onClick={() => {
+                  exportImage();
+                }}
+              >
+                Apply
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { getAxios } from "./axios";
 import { useRouter } from "next/router";
 const axios = getAxios();
+import Router from "next/router";
 
 export default function ProtectRoute({ children }) {
-  const router = useRouter();
   const [haveAccount, setHaveAccount] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function ProtectRoute({ children }) {
         setHaveAccount(true);
       })
       .catch((err) => {
-        router.replace("/login");
+        Router.replace("/login");
       });
   }, []);
 

@@ -21,6 +21,8 @@ export default function Card({
   const [menuModal, setMenuModal] = useState(false);
   const node = useRef();
 
+  // console.log(card);
+  
   const originalIndex = findCard(id).index;
   const [{ isDragging }, drag] = useDrag({
     item: {

@@ -22,6 +22,9 @@ export default function ActivityGroup({
   openDeleteCard,
   openCard
 }) {
+
+  useEffect(() => {
+  }, [cardList])
   const moveCard = (id, atIndex) => {
     if (true) {
       const { card, index } = findCard(id);
@@ -80,6 +83,7 @@ export default function ActivityGroup({
               name={card.cardName}
               moveCard={moveCard}
               findCard={findCard}
+              listIndex={index}
               groupIndex={groupIndex}
               changeGroup={changeGroup}
               openEditCard={openEditCard}

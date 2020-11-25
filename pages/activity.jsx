@@ -111,7 +111,6 @@ export default function activity() {
   };
 
   const changeGroup = (oldGroupIndex, oldIndex, toGroupIndex, card) => {
-
     card.listId = groupList[toGroupIndex]._id;
 
     console.log(groupList[toGroupIndex].cards);
@@ -268,6 +267,7 @@ export default function activity() {
 
   // upload files
 
+
   const uploadCard = (filesRes) => {
     const listIndex = activity.list.findIndex(
       (list) => list._id == currentCard.listId
@@ -284,15 +284,13 @@ export default function activity() {
       })
     );
 
-    setActivity(
-      update(activity, {
-        list: {
-          [listIndex]: {
-            cards: {
-              [cardIndex]: {
-                files: {
-                  $set: filesRes,
-                },
+    setGroupList(
+      update(groupList, {
+        [listIndex]: {
+          cards: {
+            [cardIndex]: {
+              files: {
+                $set: filesRes,
               },
             },
           },
